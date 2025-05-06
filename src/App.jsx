@@ -50,7 +50,7 @@ function App() {
           <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <h1 className="text-5xl md:text-6xl font-extrabold mb-6 animate-fade-in tracking-tight">
-              Desarrollador Web Full Stack
+              Desarrollador Web Front-end
             </h1>
             <p className="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
               Creando experiencias web únicas y funcionales con las últimas tecnologías
@@ -215,6 +215,7 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors duration-200 flex items-center"
+                aria-label="Visitar mi perfil de GitHub"
               >
                 <svg
                   className="w-6 h-6 mr-2"
