@@ -1,7 +1,7 @@
 const proyectos = [
     {
       titulo: "Juego de Pájaros",
-      descripcion: "Un juego intactivo donde tienes que superar obstáculos.",
+      descripcion: "Un juego interactivo donde tienes que superar obstáculos.",
       url: "https://flyingpolitics.netlify.app/",
       previewUrl: "https://flyingpolitics.netlify.app/"
     },
