@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import proyectos from "./proyectos";
 
 function App() {
-  const [activeSection, setActiveSection] = useState("proyectos");
   const [modalProyecto, setModalProyecto] = useState(null);
 
   const openModal = (proyecto) => setModalProyecto(proyecto);
@@ -40,21 +39,14 @@ function App() {
         {/* Cabecera y presentación */}
         <div id="introduccion" className="w-full flex flex-col items-center mb-12 scroll-mt-24">
           <div className="flex flex-col items-center">
-            <span className="text-2xl font-bold tracking-widest text-gray-700 mb-2">DESARROLLADOR FRONT-END</span>
+            <span className="text-2xl font-bold tracking-widest text-gray-700 mb-2">DESARROLLADOR Web</span>
             <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 leading-none mb-2">PORTFOLIO</h1>
             <span className="text-6xl md:text-7xl font-extrabold text-transparent stroke-gray-400 mb-6" style={{ WebkitTextStroke: '2px #d1d5db', color: 'transparent' }}>PORTFOLIO</span>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-8 mt-8">
             {/* Placeholder de foto */}
-            <div className="w-32 h-32 bg-gray-300 rounded-md flex items-center justify-center mb-4 md:mb-0">
-              <svg className="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M16 20c0-2.21-1.79-4-4-4s-4 1.79-4 4" />
-              </svg>
-            </div>
-            <div className="max-w-md text-gray-700 text-center md:text-left">
-              <p className="mb-2">Hola, soy Javier y soy un desarrollador web front-end. Mi objetivo principal es crear y desarrollar productos de calidad que aporten valor a las empresas. Mientras tanto, busco mejorar mis habilidades constantemente.</p>
-            </div>
+            
+            
           </div>
         </div>
 
