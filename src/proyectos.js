@@ -13,7 +13,7 @@ const proyectos = [
     },
     {
       titulo: "Relojería",
-      descripcion: "Página web muy básica para una relojería.",
+      descripcion: "Página web básica para una relojería.",
       url: "https://relojeriajavier.netlify.app/",
       previewUrl: "https://relojeriajavier.netlify.app/"
     }

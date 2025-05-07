@@ -39,7 +39,7 @@ function App() {
         {/* Cabecera y presentación */}
         <div id="introduccion" className="w-full flex flex-col items-center mb-12 scroll-mt-24">
           <div className="flex flex-col items-center">
-            <span className="text-2xl font-bold tracking-widest text-gray-700 mb-2">DESARROLLADOR Web</span>
+            <span className="text-2xl font-bold tracking-widest text-gray-700 mb-2">DESARROLLADOR WEB</span>
             <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 leading-none mb-2">PORTFOLIO</h1>
             <span className="text-6xl md:text-7xl font-extrabold text-transparent stroke-gray-400 mb-6" style={{ WebkitTextStroke: '2px #d1d5db', color: 'transparent' }}>PORTFOLIO</span>
           </div>
