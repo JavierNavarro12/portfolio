@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import proyectos from "./proyectos";
+import Tecnologias from "./Tecnologias";
 
 function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
@@ -131,13 +132,26 @@ function App() {
                   >
                     Ver proyecto
                   </a>
+                  <a
+                    href={proyecto.codigoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-[#444] border border-[#d1d5db] rounded px-3 py-1 bg-[#f3f3f3] hover:bg-[#e0e0e0] transition-colors duration-200 text-center"
+                  >
+                    Ver código
+                  </a>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Separador entre proyectos y contacto */}
+        {/* Barra separadora entre proyectos y tecnologías */}
+        <div className="border-t border-gray-300 w-full my-12" />
+
+        <Tecnologias />
+
+        {/* Separador entre tecnologías y contacto */}
         <div className="border-t border-gray-300 w-full my-16" />
 
         {/* Sección de contacto estilo imagen */}
