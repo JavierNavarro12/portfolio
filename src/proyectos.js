@@ -16,8 +16,14 @@ const proyectos = [
       descripcion: "Página web básica para una relojería.",
       url: "https://relojeriajavier.netlify.app/",
       previewUrl: "https://relojeriajavier.netlify.app/"
+    },
+    {
+      titulo: "Portolio",
+      descripcion: "Portolio con mis proyectos",
+      url: "https://portfoliojaviernavarro.netlify.app/",
+      previewUrl: "https://portfoliojaviernavarro.netlify.app/"
     }
   ];
-  
+
   export default proyectos;
   
