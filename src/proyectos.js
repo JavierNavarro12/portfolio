@@ -21,8 +21,8 @@ const proyectos = [
       codigoUrl: "https://github.com/JavierNavarro12/PruebaPractica/tree/main/Practica"
     },
     {
-      titulo: "Portolio",
-      descripcion: "Portolio con mis proyectos",
+      titulo: "Portfolio",
+      descripcion: "Portfolio con mis proyectos",
       url: "https://portfoliojaviernavarro.netlify.app/",
       previewUrl: "https://portfoliojaviernavarro.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/portfolio"
