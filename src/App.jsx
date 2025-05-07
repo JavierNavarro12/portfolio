@@ -69,6 +69,8 @@ function App() {
                   <li>Java</li>
                   <li>Python</li>
                   <li>SQL</li>
+                  <li>Git</li>
+                  <li>Figma</li>
                 </ul>
               </div>
               <div>
