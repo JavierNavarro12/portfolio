@@ -37,7 +37,7 @@ function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showCarousel, setShowCarousel] = useState(false);
-  const [openCards, setOpenCards] = useState([]); // array of open card indices
+  const [selectedCard, setSelectedCard] = useState(null);
   const [paused, setPaused] = useState(false);
 
   const closeModal = () => setModalProyecto(null);
@@ -51,21 +51,21 @@ function App() {
   }, [isDarkMode]);
 
   const handleCardClick = (index) => {
-    setOpenCards((prev) => prev.includes(index) ? prev : [...prev, index]);
+    setSelectedCard(index);
     setPaused(true);
   };
-  const handleCloseCard = (index) => {
-    setOpenCards((prev) => prev.filter(i => i !== index));
+  const handleCloseCard = () => {
+    setSelectedCard(null);
     setPaused(false);
   };
 
   // Fullscreen Projects Room
   if (showCarousel) {
     // Encuentra el índice de la tarjeta seleccionada (si hay una)
-    const selectedIndex = openCards.length > 0 ? openCards[openCards.length - 1] : null;
+    const selectedIndex = selectedCard;
     const handleCloseRoom = () => {
       setShowCarousel(false);
-      setOpenCards([]);
+      setSelectedCard(null);
       setModalProyecto(null);
       setPaused(false);
     };
@@ -83,24 +83,79 @@ function App() {
           Volver
         </button>
         <div className="wrapper fullscreen-carousel" style={{ minHeight: '100vh', height: '100vh', width: '100vw', animation: 'fadeInScale 0.7s' }}>
-          <div className={`inner${paused ? ' paused' : ''}${openCards.length > 0 ? ' has-selected' : ''}`} style={{ '--quantity': proyectos.length }}>
+          <div className={`inner${paused ? ' paused' : ''}${selectedCard !== null ? ' has-selected' : ''}`} style={{ '--quantity': proyectos.length }}>
             {proyectos.map((proyecto, index) => {
               // No renderizar la tarjeta seleccionada dentro del carrusel
               if (selectedIndex === index) return null;
               return (
                 <div
                   key={index}
-                  className={`card`}
+                  className={`card${selectedIndex === index ? ' selected' : ''}`}
                   style={{
                     '--index': index,
                     '--color-card': colorPalette[index % colorPalette.length],
                   }}
-                  onClick={() => handleCardClick(index)}
+                  onClick={() => selectedIndex === null && handleCardClick(index)}
                 >
-                  <div className="flex flex-col items-center justify-center h-full w-full p-4">
-                    <span className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 text-center">{proyecto.titulo}</span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400 text-center">Haz click para ver el proyecto</span>
-                  </div>
+                  {selectedIndex === index ? (
+                    <div className="card-content" onClick={e => e.stopPropagation()}>
+                      {/* Botón de cerrar tipo Uiverse */}
+                      <button
+                        className="close-btn"
+                        onClick={e => { e.stopPropagation(); handleCloseCard(); }}
+                        aria-label="Cerrar"
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      </button>
+                      <div className="preview-iframe">
+                        <iframe
+                          src={proyectos[index].previewUrl}
+                          title={proyectos[index].titulo}
+                          className="w-full h-full border-0 rounded-lg"
+                          loading="lazy"
+                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
+                        />
+                      </div>
+                      <div className="project-title">{proyectos[index].titulo}</div>
+                      <div className="project-desc">{proyectos[index].descripcion}</div>
+                      <div className="tech-list">
+                        {proyectos[index].tecnologias && proyectos[index].tecnologias.map((tec) => (
+                          <span key={tec} className="flex items-center gap-1 px-2 py-1 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full text-xs font-medium text-gray-700 dark:text-gray-200 shadow-sm">
+                            <span className="text-base">{iconMap[tec]}</span>
+                            {tec}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="action-buttons">
+                        <a
+                          href={proyectos[index].url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
+                        >
+                          Ver proyecto
+                        </a>
+                        <a
+                          href={proyectos[index].codigoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
+                        >
+                          Ver código
+                        </a>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full rounded-lg overflow-hidden shadow-md bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center">
+                      <iframe
+                        src={proyectos[index].previewUrl}
+                        title={proyectos[index].titulo}
+                        className="w-full h-full border-0"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
+                      />
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -118,7 +173,7 @@ function App() {
                 {/* Botón de cerrar tipo Uiverse */}
                 <button
                   className="close-btn"
-                  onClick={e => { e.stopPropagation(); handleCloseCard(selectedIndex); }}
+                  onClick={e => { e.stopPropagation(); handleCloseCard(); }}
                   aria-label="Cerrar"
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
