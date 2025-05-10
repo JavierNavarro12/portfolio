@@ -1,14 +1,17 @@
 // tailwind.config.js
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    './src/**/*.{js,jsx,ts,tsx}',
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.5s ease-out',
+        'blob-bounce': 'blob-bounce 8s infinite cubic-bezier(0.4, 0, 0.2, 1)',
       },
       keyframes: {
         fadeIn: {
@@ -18,6 +21,12 @@ module.exports = {
         slideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'blob-bounce': {
+          '0%': { transform: 'translate(0%, 0%) scale(1)' },
+          '33%': { transform: 'translate(30%, 20%) scale(1.1)' },
+          '66%': { transform: 'translate(-20%, 20%) scale(0.9)' },
+          '100%': { transform: 'translate(0%, 0%) scale(1)' },
         },
       },
       boxShadow: {

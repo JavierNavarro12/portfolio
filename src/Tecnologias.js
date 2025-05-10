@@ -19,12 +19,12 @@ const tecnologias = [
 export default function Tecnologias() {
   return (
     <section className="tecnologias w-full my-16 flex flex-col items-center">
-      <h2 className="text-3xl font-extrabold mb-8">Tecnologías</h2>
+      <h2 className="text-3xl font-extrabold mb-8 text-gray-900 dark:text-white">Tecnologías</h2>
       <div className="flex flex-wrap justify-center gap-6">
         {tecnologias.map((tec) => (
-          <div key={tec.nombre} className="flex flex-col items-center bg-[#f5f8fa] rounded-xl p-4 shadow hover:scale-105 transition-transform w-28">
+          <div key={tec.nombre} className="flex flex-col items-center bg-white rounded-xl p-4 shadow hover:scale-105 transition-transform w-28">
             <span className="text-4xl mb-2">{tec.icono}</span>
-            <span className="text-sm font-medium">{tec.nombre}</span>
+            <span className="text-sm font-medium text-gray-700">{tec.nombre}</span>
           </div>
         ))}
       </div>
