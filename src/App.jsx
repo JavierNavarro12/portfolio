@@ -1,10 +1,44 @@
 import React, { useState, useEffect } from "react";
 import proyectos from "./proyectos";
 import Tecnologias from "./Tecnologias";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello } from "react-icons/fa";
+import { SiNextdotjs, SiPostgresql, SiMysql } from "react-icons/si";
+import Starfield from "./Starfield";
+
+const iconMap = {
+  HTML: <FaHtml5 color="#e34c26" />,
+  CSS: <FaCss3Alt color="#264de4" />,
+  JavaScript: <FaJs color="#f0db4f" />,
+  React: <FaReact color="#61dafb" />,
+  "Next.js": <SiNextdotjs color="#000" />,
+  Java: <FaJava color="#007396" />,
+  Python: <FaPython color="#306998" />,
+  Figma: <FaFigma color="#a259ff" />,
+  GitHub: <FaGithub color="#333" />,
+  PostgreSQL: <SiPostgresql color="#336791" />,
+  MySQL: <SiMysql color="#00758f" />,
+  Trello: <FaTrello color="#0079bf" />,
+};
+
+const colorPalette = [
+  "142, 249, 252",
+  "142, 252, 204",
+  "142, 252, 157",
+  "215, 252, 142",
+  "252, 252, 142",
+  "252, 208, 142",
+  "252, 142, 142",
+  "252, 142, 239",
+  "204, 142, 252",
+  "142, 202, 252"
+];
 
 function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showCarousel, setShowCarousel] = useState(false);
+  const [openCards, setOpenCards] = useState([]); // array of open card indices
+  const [paused, setPaused] = useState(false);
 
   const openModal = (proyecto) => setModalProyecto(proyecto);
   const closeModal = () => setModalProyecto(null);
@@ -16,6 +50,125 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
+
+  const handleCardClick = (index) => {
+    setOpenCards((prev) => prev.includes(index) ? prev : [...prev, index]);
+    setPaused(true);
+  };
+  const handleCloseCard = (index) => {
+    setOpenCards((prev) => prev.filter(i => i !== index));
+    setPaused(false);
+  };
+
+  // Fullscreen Projects Room
+  if (showCarousel) {
+    // Encuentra el índice de la tarjeta seleccionada (si hay una)
+    const selectedIndex = openCards.length > 0 ? openCards[openCards.length - 1] : null;
+    const handleCloseRoom = () => {
+      setShowCarousel(false);
+      setOpenCards([]);
+      setModalProyecto(null);
+      setPaused(false);
+    };
+    return (
+      <div className="fixed inset-0 z-50 bg-transparent flex flex-col items-center justify-center min-h-screen w-full">
+        <Starfield />
+        <button
+          className="fixed top-8 left-8 flex items-center gap-2 px-5 py-2.5 bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg text-gray-700 dark:text-gray-200 font-semibold text-base hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 backdrop-blur-md cursor-pointer z-[10000]"
+          style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
+          onClick={handleCloseRoom}
+          tabIndex={0}
+          role="button"
+          aria-label="Volver al portfolio"
+        >
+          <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+          Volver
+        </button>
+        <div className="wrapper fullscreen-carousel" style={{ minHeight: '100vh', height: '100vh', width: '100vw', animation: 'fadeInScale 0.7s' }}>
+          <div className={`inner${paused ? ' paused' : ''}${openCards.length > 0 ? ' has-selected' : ''}`} style={{ '--quantity': proyectos.length }}>
+            {proyectos.map((proyecto, index) => {
+              // No renderizar la tarjeta seleccionada dentro del carrusel
+              if (selectedIndex === index) return null;
+              return (
+                <div
+                  key={index}
+                  className={`card`}
+                  style={{
+                    '--index': index,
+                    '--color-card': colorPalette[index % colorPalette.length],
+                  }}
+                  onClick={() => handleCardClick(index)}
+                >
+                  <div className="flex flex-col items-center justify-center h-full w-full p-4">
+                    <span className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 text-center">{proyecto.titulo}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 text-center">Haz click para ver el proyecto</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {/* Renderizar la tarjeta seleccionada fuera del carrusel 3D */}
+          {selectedIndex !== null && (
+            <div
+              className="card selected"
+              style={{
+                '--color-card': colorPalette[selectedIndex % colorPalette.length],
+                zIndex: 200,
+              }}
+            >
+              <div className="card-content" onClick={e => e.stopPropagation()}>
+                {/* Botón de cerrar tipo Uiverse */}
+                <button
+                  className="close-btn"
+                  onClick={e => { e.stopPropagation(); handleCloseCard(selectedIndex); }}
+                  aria-label="Cerrar"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+                <div className="preview-iframe">
+                  <iframe
+                    src={proyectos[selectedIndex].previewUrl}
+                    title={proyectos[selectedIndex].titulo}
+                    className="w-full h-full border-0 rounded-lg"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
+                  />
+                </div>
+                <div className="project-title">{proyectos[selectedIndex].titulo}</div>
+                <div className="project-desc">{proyectos[selectedIndex].descripcion}</div>
+                <div className="tech-list">
+                  {proyectos[selectedIndex].tecnologias && proyectos[selectedIndex].tecnologias.map((tec) => (
+                    <span key={tec} className="flex items-center gap-1 px-2 py-1 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full text-xs font-medium text-gray-700 dark:text-gray-200 shadow-sm">
+                      <span className="text-base">{iconMap[tec]}</span>
+                      {tec}
+                    </span>
+                  ))}
+                </div>
+                <div className="action-buttons">
+                  <a
+                    href={proyectos[selectedIndex].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
+                  >
+                    Ver proyecto
+                  </a>
+                  <a
+                    href={proyectos[selectedIndex].codigoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
+                  >
+                    Ver código
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#edeadd] dark:bg-gray-900 flex flex-col items-center py-8 transition-colors duration-300">
@@ -124,62 +277,15 @@ function App() {
         {/* Separador decorativo */}
         <div className="border-t border-gray-300 w-full mb-8" />
 
-        {/* Grid de proyectos */}
-        <section id="proyectos" className="w-full scroll-mt-24">
-          <div className="flex flex-wrap justify-center gap-2 mb-6 text-xs text-gray-500 dark:text-gray-400 tracking-widest">
-            {Array(8).fill('MY WORKS').map((txt, i) => (
-              <span key={i} className="px-2">{txt}</span>
-            ))}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {proyectos.map((proyecto, index) => (
-              <div key={index} className="relative w-full h-[400px] rounded-[14px] z-10 overflow-hidden flex flex-col items-center justify-center shadow-[20px_20px_60px_#bebebe,-20px_-20px_60px_#ffffff] dark:shadow-[20px_20px_60px_#1a1a1a,-20px_-20px_60px_#2a2a2a] group hover:scale-[1.02] transition-transform duration-300">
-                {/* Blob animation */}
-                <div className="absolute z-[1] w-[300px] h-[300px] rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-20 filter blur-[40px] animate-blob-bounce"></div>
-                <div className="absolute z-[1] w-[300px] h-[300px] rounded-full bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 opacity-20 filter blur-[40px] animate-blob-bounce" style={{ animationDelay: '-4s' }}></div>
-                <div className="absolute z-[1] w-[300px] h-[300px] rounded-full bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 opacity-20 filter blur-[40px] animate-blob-bounce" style={{ animationDelay: '-2s' }}></div>
-                {/* Card content */}
-                <div className="absolute top-[5px] left-[5px] w-[calc(100%-10px)] h-[calc(100%-10px)] z-[2] bg-white/95 dark:bg-gray-800/95 backdrop-blur-[24px] rounded-[10px] overflow-hidden outline outline-2 outline-white dark:outline-gray-700 p-4 flex flex-col">
-                  <div className="w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-4 flex items-center justify-center transition-all duration-300 group-hover:h-64 group-hover:bg-gray-100 dark:group-hover:bg-gray-600">
-                    <iframe
-                      src={proyecto.previewUrl}
-                      title={proyecto.titulo}
-                      className="w-full h-full border-0 transition-all duration-300 group-hover:scale-110"
-                      loading="lazy"
-                      sandbox="allow-scripts allow-same-origin"
-                    />
-                  </div>
-                  <div className="mb-2 flex flex-col items-center">
-                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 text-center">{proyecto.titulo}</span>
-                  </div>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm mb-2 text-center">{proyecto.descripcion}</p>
-                  <div className="flex justify-center mt-auto space-x-4">
-                    <button
-                      onClick={() => openModal(proyecto)}
-                      className="text-xs text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded px-3 py-1 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center"
-                    >
-                      Vista previa
-                    </button>
-                    <a
-                      href={proyecto.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded px-3 py-1 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center"
-                    >
-                      Ver proyecto
-                    </a>
-                    <a
-                      href={proyecto.codigoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded px-3 py-1 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center"
-                    >
-                      Ver código
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
+        {/* Grid de proyectos - Welcome screen */}
+        <section id="proyectos" className="w-full scroll-mt-24 min-h-[600px] flex flex-col items-center justify-center">
+          <div
+            className="flex flex-col items-center justify-center h-[500px] w-full animate-fade-in cursor-pointer select-none transition-transform duration-500"
+            onClick={() => setShowCarousel(true)}
+            style={{ animation: 'fadeInScale 0.7s' }}
+          >
+            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg">Proyectos</h2>
+            <span className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 font-medium">Haz clic para ver los proyectos</span>
           </div>
         </section>
 
@@ -296,7 +402,7 @@ function App() {
 
       {/* Modal de vista previa - moved outside main for proper stacking */}
       {modalProyecto && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70" onClick={closeModal}>
+        <div className="modal-preview" onClick={closeModal}>
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-4 max-w-3xl w-full relative" onClick={e => e.stopPropagation()}>
             <button
               onClick={closeModal}
@@ -311,7 +417,7 @@ function App() {
                 title={modalProyecto.titulo}
                 className="w-full h-full border-0 rounded-lg"
                 loading="lazy"
-                sandbox="allow-scripts allow-same-origin"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
               />
             </div>
             <div className="text-center mt-4 text-lg font-semibold text-gray-700 dark:text-gray-300">{modalProyecto.titulo}</div>
