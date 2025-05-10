@@ -40,7 +40,6 @@ function App() {
   const [openCards, setOpenCards] = useState([]); // array of open card indices
   const [paused, setPaused] = useState(false);
 
-  const openModal = (proyecto) => setModalProyecto(proyecto);
   const closeModal = () => setModalProyecto(null);
 
   useEffect(() => {
@@ -78,7 +77,6 @@ function App() {
           style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
           onClick={handleCloseRoom}
           tabIndex={0}
-          role="button"
           aria-label="Volver al portfolio"
         >
           <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>

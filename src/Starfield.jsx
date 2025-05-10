@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
 const STAR_COUNT = 180;
-const STAR_COLOR = 'rgba(255,255,255,0.85)';
 const STAR_SIZE = [0.7, 1.2, 1.7];
 const STAR_SPEED = 0.08;
 
