@@ -83,8 +83,8 @@
   background: none;
 }
 .inner {
-  --w: 320px;
-  --h: 440px;
+  --w: 400px;
+  --h: 520px;
   --translateZ: 520px;
   --rotateX: -15deg;
   --perspective: 1800px;

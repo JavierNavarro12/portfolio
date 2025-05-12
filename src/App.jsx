@@ -147,12 +147,11 @@ function App() {
                     </div>
                   ) : (
                     <div className="w-full h-full rounded-lg overflow-hidden shadow-md bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center">
-                      <iframe
-                        src={proyectos[index].previewUrl}
-                        title={proyectos[index].titulo}
-                        className="w-full h-full border-0"
+                      <img
+                        src={proyectos[index].imagenPreview}
+                        alt={proyectos[index].titulo}
+                        className="w-full h-full object-cover rounded-lg"
                         loading="lazy"
-                        sandbox="allow-scripts allow-same-origin"
                       />
                     </div>
                   )}
@@ -331,11 +330,11 @@ function App() {
         <div className="border-t border-gray-300 w-full mb-8" />
 
         {/* Grid de proyectos - Welcome screen */}
-        <section id="proyectos" className="w-full scroll-mt-24 min-h-[600px] flex flex-col items-center justify-center">
+        <section id="proyectos" className="w-full flex flex-col items-center justify-center flex-1">
           <div
-            className="flex flex-col items-center justify-center h-[500px] w-full animate-fade-in cursor-pointer select-none transition-transform duration-500"
+            className="flex flex-col items-center justify-center w-full h-full min-h-[300px] animate-fade-in cursor-pointer select-none transition-transform duration-500"
             onClick={() => setShowCarousel(true)}
-            style={{ animation: 'fadeInScale 0.7s' }}
+            style={{ animation: 'fadeInScale 0.7s', minHeight: '300px' }}
           >
             <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg">Proyectos</h2>
             <span className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 font-medium">Haz clic para ver los proyectos</span>

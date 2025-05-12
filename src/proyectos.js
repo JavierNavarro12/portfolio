@@ -5,7 +5,8 @@ const proyectos = [
       url: "https://flyingpolitics.netlify.app/",
       previewUrl: "https://flyingpolitics.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/Curso/tree/master/JuegoPajaros",
-      tecnologias: ["HTML", "CSS", "JavaScript"]
+      tecnologias: ["HTML", "CSS", "JavaScript"],
+      imagenPreview: require("./img/flying-politics.png")
     },
     {
       titulo: "Óptica Visión",
@@ -13,7 +14,8 @@ const proyectos = [
       url: "https://paginawebjaviernavarro.netlify.app/",
       previewUrl: "https://paginawebjaviernavarro.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/Curso/tree/master/PaginaWeb",
-      tecnologias: ["HTML", "CSS", "JavaScript"]
+      tecnologias: ["HTML", "CSS", "JavaScript"],
+      imagenPreview: require("./img/optica-vision.png")
     },
     {
       titulo: "Relojería",
@@ -21,7 +23,8 @@ const proyectos = [
       url: "https://relojeriajavier.netlify.app/",
       previewUrl: "https://relojeriajavier.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/PruebaPractica/tree/main/Practica",
-      tecnologias: ["HTML", "CSS", "JavaScript"]
+      tecnologias: ["HTML", "CSS", "JavaScript"],
+      imagenPreview: require("./img/relojeria.png")
     },
     {
       titulo: "Portfolio",
@@ -29,7 +32,8 @@ const proyectos = [
       url: "https://portfoliojaviernavarro.netlify.app/",
       previewUrl: "https://portfoliojaviernavarro.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/portfolio",
-      tecnologias: ["React", "JavaScript", "CSS", "HTML"]
+      tecnologias: ["React", "JavaScript", "CSS", "HTML"],
+      imagenPreview: require("./img/portfolio.png")
     }
   ];
 
