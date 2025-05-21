@@ -4,6 +4,8 @@ import Tecnologias from "./Tecnologias";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello } from "react-icons/fa";
 import { SiNextdotjs, SiPostgresql, SiMysql } from "react-icons/si";
 import Starfield from "./Starfield";
+import Spline from '@splinetool/react-spline';
+import { useInView } from 'react-intersection-observer';
 
 const iconMap = {
   HTML: <FaHtml5 color="#e34c26" />,
@@ -39,6 +41,7 @@ function App() {
   const [showCarousel, setShowCarousel] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [paused, setPaused] = useState(false);
+  const { ref: splineRef, inView: splineInView } = useInView({ triggerOnce: false, threshold: 0.1 });
 
   const closeModal = () => setModalProyecto(null);
 
@@ -71,7 +74,7 @@ function App() {
     };
     return (
       <div className="fixed inset-0 z-50 bg-transparent flex flex-col items-center justify-center min-h-screen w-full">
-        <Starfield />
+        {/* <Starfield /> */}
         <button
           className="fixed top-8 left-8 flex items-center gap-2 px-5 py-2.5 bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg text-gray-700 dark:text-gray-200 font-semibold text-base hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 backdrop-blur-md cursor-pointer z-[10000]"
           style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
@@ -277,13 +280,33 @@ function App() {
       <main className="w-full max-w-5xl bg-white/60 dark:bg-gray-800/60 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-md p-8 md:p-16 flex flex-col items-center">
         {/* Cabecera y presentación */}
         <div id="introduccion" className="w-full flex flex-col items-center mb-12 scroll-mt-24">
-          <div className="flex flex-col items-center">
-            <span className="text-2xl font-bold tracking-widest text-gray-700 dark:text-gray-300 mb-2">DESARROLLADOR WEB</span>
-            <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2">PORTFOLIO</h1>
-            <span className="text-6xl md:text-7xl font-extrabold text-transparent stroke-gray-400 dark:stroke-gray-600 mb-6" style={{ WebkitTextStroke: '2px #d1d5db', color: 'transparent' }}>PORTFOLIO</span>
-          </div>
-          <div className="flex flex-col md:flex-row items-center gap-8 mt-8">
-            {/* Placeholder de foto */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 w-full">
+            <div className="flex flex-col items-center md:items-start flex-1">
+              <span className="text-2xl font-bold tracking-widest text-gray-700 dark:text-gray-300 mb-2">DESARROLLADOR WEB</span>
+              {/* Contenedor para el título principal y su reflexión */}
+              <div className="title-with-reflection">
+                <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2">PORTFOLIO</h1>
+                {/* La reflexión se creará con CSS en base al H1 dentro de .title-with-reflection */}
+              </div>
+            </div>
+            {/* Contenedor para el robot y el bocadillo */}
+            <div ref={splineRef} className="flex-shrink-0 flex items-center justify-center relative">
+              {/* El Spline se renderiza siempre, pero su contenedor controlará la visibilidad */}
+              <div style={{
+                width: 220,
+                height: 220,
+                maxWidth: '40vw',
+                maxHeight: '40vw',
+                visibility: splineInView ? 'visible' : 'hidden', /* Controla la visibilidad */
+                pointerEvents: splineInView ? 'auto' : 'none' /* Deshabilita eventos cuando oculto */
+              }}>
+                <Spline scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode" />
+                {/* Bocadillo */}
+                <div className="speech-bubble">
+                  Bienvenido a mi portfolio!
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

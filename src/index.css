@@ -327,3 +327,31 @@
 .card:not(.selected) iframe {
   pointer-events: none;
 }
+
+/* Estilos para el bocadillo del robot */
+.speech-bubble {
+  position: absolute;
+  /* Ajusta estos valores según necesites para que el bocadillo salga de la boca del robot */
+  /* Los valores exactos pueden depender de la escena 3D y el tamaño del contenedor */
+  bottom: 20px; /* Posición vertical desde la parte inferior del contenedor */
+  left: 50%;   /* Posición horizontal */
+  transform: translateX(-50%); /* Centra el bocadillo horizontalmente */
+
+  background-color: #fff; /* Fondo blanco */
+  border: 1px solid #ccc; /* Borde ligero */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 8px 12px; /* Espacio interno */
+  font-size: 0.9rem; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+  white-space: nowrap; /* Evita que el texto se divida en líneas */
+  z-index: 10; /* Asegura que esté por encima del Spline (si es posible) */
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Sombra suave */
+
+  /* Estilo robótico */
+  font-family: monospace; /* Fuente monoespacio */
+  letter-spacing: 1px; /* Espaciado de letras */
+  text-transform: uppercase; /* Texto en mayúsculas (opcional, para un toque más robótico) */
+}
+
+/* Asegúrate de que el contenedor del Spline sea relative para que el posicionamiento absoluto funcione */
+/* Ya lo hicimos en el paso anterior añadiendo 'relative' a la clase del div ref={splineRef} */
