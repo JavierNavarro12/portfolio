@@ -3,7 +3,6 @@ import proyectos from "./proyectos";
 import Tecnologias from "./Tecnologias";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello } from "react-icons/fa";
 import { SiNextdotjs, SiPostgresql, SiMysql } from "react-icons/si";
-import Starfield from "./Starfield";
 import Spline from '@splinetool/react-spline';
 import { useInView } from 'react-intersection-observer';
 
