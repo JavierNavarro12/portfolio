@@ -40,7 +40,17 @@ function App() {
   const [showCarousel, setShowCarousel] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [paused, setPaused] = useState(false);
-  const { ref: splineRef, inView: splineInView } = useInView({ triggerOnce: false, threshold: 0.1 });
+  const [isSplineLoaded, setIsSplineLoaded] = useState(false);
+  const [isSplineVisible, setIsSplineVisible] = useState(false);
+  const { ref: splineRef, inView: splineInView } = useInView({ 
+    triggerOnce: false, 
+    threshold: 0.1,
+    onChange: (inView) => {
+      if (inView) {
+        setIsSplineVisible(true);
+      }
+    }
+  });
 
   const closeModal = () => setModalProyecto(null);
 
@@ -51,6 +61,20 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
+
+  // Precargar el modelo Spline
+  useEffect(() => {
+    const preloadSpline = async () => {
+      try {
+        const response = await fetch("https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode");
+        await response.json();
+        setIsSplineLoaded(true);
+      } catch (error) {
+        console.error("Error preloading Spline:", error);
+      }
+    };
+    preloadSpline();
+  }, []);
 
   const handleCardClick = (index) => {
     setSelectedCard(index);
@@ -290,20 +314,31 @@ function App() {
             </div>
             {/* Contenedor para el robot y el bocadillo */}
             <div ref={splineRef} className="flex-shrink-0 flex items-center justify-center relative">
-              {/* El Spline se renderiza siempre, pero su contenedor controlará la visibilidad */}
               <div style={{
                 width: 220,
                 height: 220,
                 maxWidth: '40vw',
                 maxHeight: '40vw',
-                visibility: splineInView ? 'visible' : 'hidden', /* Controla la visibilidad */
-                pointerEvents: splineInView ? 'auto' : 'none' /* Deshabilita eventos cuando oculto */
+                position: 'relative',
+                opacity: isSplineVisible ? 1 : 0,
+                transition: 'opacity 0.3s ease-in-out'
               }}>
-                <Spline scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode" />
-                {/* Bocadillo */}
-                <div className="speech-bubble">
-                  Bienvenido a mi portfolio!
-                </div>
+                {isSplineVisible && (
+                  <>
+                    <Spline 
+                      scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
+                      onLoad={() => setIsSplineLoaded(true)}
+                    />
+                    <div className="speech-bubble">
+                      Bienvenido a mi portfolio!
+                    </div>
+                  </>
+                )}
+                {!isSplineLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg">
+                    <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
