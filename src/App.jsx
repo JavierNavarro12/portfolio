@@ -327,7 +327,10 @@ function App() {
                   <>
                     <Spline 
                       scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
-                      onLoad={() => setIsSplineLoaded(true)}
+                      onLoad={() => {
+                        console.log('Spline loaded');
+                        setIsSplineLoaded(true);
+                      }}
                     />
                     <div className="speech-bubble">
                       Bienvenido a mi portfolio!
