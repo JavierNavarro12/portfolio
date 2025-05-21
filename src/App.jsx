@@ -42,7 +42,7 @@ function App() {
   const [paused, setPaused] = useState(false);
   const [isSplineLoaded, setIsSplineLoaded] = useState(false);
   const [isSplineVisible, setIsSplineVisible] = useState(false);
-  const { ref: splineRef, inView: splineInView } = useInView({ 
+  const { ref: splineRef } = useInView({ 
     triggerOnce: false, 
     threshold: 0.1,
     onChange: (inView) => {
