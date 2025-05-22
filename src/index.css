@@ -143,10 +143,11 @@
 @media (max-width: 700px) {
   .card.selected {
     max-width: 98vw;
-    max-height: 95vh;
     width: 98vw;
-    height: 95vh;
-    padding: 0;
+  }
+
+  .card.selected .preview-iframe {
+    height: 280px;
   }
 }
 .card.selected ~ .card {
@@ -171,7 +172,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+  padding: 2.5rem 1.5rem 1rem 1.5rem;
   overflow-y: auto;
 }
 .card.selected .preview-iframe {
@@ -185,7 +186,7 @@
 }
 @media (max-width: 700px) {
   .card.selected .preview-iframe {
-    height: 200px;
+    height: 280px;
   }
 }
 .card.selected .card-content .project-title {
@@ -355,3 +356,35 @@
 
 /* Asegúrate de que el contenedor del Spline sea relative para que el posicionamiento absoluto funcione */
 /* Ya lo hicimos en el paso anterior añadiendo 'relative' a la clase del div ref={splineRef} */
+
+@media (max-width: 640px) {
+  .inner {
+    --w: 250px; /* Reduce width */
+    --h: 300px; /* Reduce height */
+    --translateZ: 300px; /* Reduce the distance from the center */
+    --perspective: 1000px; /* Adjust perspective */
+    /* You might also adjust --rotateX if needed */
+  }
+
+  /* Optional: Adjust selected card size for even smaller screens if needed */
+  .card.selected {
+     max-width: 95vw;
+     width: 95vw;
+  }
+
+   .card.selected .card-content {
+     padding: 1.5rem 1rem 1rem 1rem; /* Adjusted bottom padding */
+   }
+
+   .card.selected .preview-iframe {
+     height: 220px; /* Increased height */
+   }
+
+   .card.selected .card-content .project-title {
+     font-size: 1.6rem;
+   }
+
+   .card.selected .card-content .project-desc {
+     font-size: 0.9rem;
+   }
+}

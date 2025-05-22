@@ -5,6 +5,7 @@ import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub,
 import { SiNextdotjs, SiPostgresql, SiMysql } from "react-icons/si";
 import Spline from '@splinetool/react-spline';
 import { useInView } from 'react-intersection-observer';
+import ProjectCarousel from './ProjectCarousel';
 
 const iconMap = {
   HTML: <FaHtml5 color="#e34c26" />,
@@ -21,25 +22,10 @@ const iconMap = {
   Trello: <FaTrello color="#0079bf" />,
 };
 
-const colorPalette = [
-  "142, 249, 252",
-  "142, 252, 204",
-  "142, 252, 157",
-  "215, 252, 142",
-  "252, 252, 142",
-  "252, 208, 142",
-  "252, 142, 142",
-  "252, 142, 239",
-  "204, 142, 252",
-  "142, 202, 252"
-];
-
 function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showCarousel, setShowCarousel] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [paused, setPaused] = useState(false);
   const { ref: splineRef, inView: splineInView } = useInView({ triggerOnce: false, threshold: 0.1 });
 
   const closeModal = () => setModalProyecto(null);
@@ -51,178 +37,6 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
-
-  const handleCardClick = (index) => {
-    setSelectedCard(index);
-    setPaused(true);
-  };
-  const handleCloseCard = () => {
-    setSelectedCard(null);
-    setPaused(false);
-  };
-
-  // Fullscreen Projects Room
-  if (showCarousel) {
-    // Encuentra el índice de la tarjeta seleccionada (si hay una)
-    const selectedIndex = selectedCard;
-    const handleCloseRoom = () => {
-      setShowCarousel(false);
-      setSelectedCard(null);
-      setModalProyecto(null);
-      setPaused(false);
-    };
-    return (
-      <div className="fixed inset-0 z-50 bg-transparent flex flex-col items-center justify-center min-h-screen w-full">
-        {/* <Starfield /> */}
-        <button
-          className="fixed top-8 left-8 flex items-center gap-2 px-5 py-2.5 bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg text-gray-700 dark:text-gray-200 font-semibold text-base hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 backdrop-blur-md cursor-pointer z-[10000]"
-          style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
-          onClick={handleCloseRoom}
-          tabIndex={0}
-          aria-label="Volver al portfolio"
-        >
-          <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-          Volver
-        </button>
-        <div className="wrapper fullscreen-carousel" style={{ minHeight: '100vh', height: '100vh', width: '100vw', animation: 'fadeInScale 0.7s' }}>
-          <div className={`inner${paused ? ' paused' : ''}${selectedCard !== null ? ' has-selected' : ''}`} style={{ '--quantity': proyectos.length }}>
-            {proyectos.map((proyecto, index) => {
-              // No renderizar la tarjeta seleccionada dentro del carrusel
-              if (selectedIndex === index) return null;
-              return (
-                <div
-                  key={index}
-                  className={`card${selectedIndex === index ? ' selected' : ''}`}
-                  style={{
-                    '--index': index,
-                    '--color-card': colorPalette[index % colorPalette.length],
-                  }}
-                  onClick={() => selectedIndex === null && handleCardClick(index)}
-                >
-                  {selectedIndex === index ? (
-                    <div className="card-content" onClick={e => e.stopPropagation()}>
-                      {/* Botón de cerrar tipo Uiverse */}
-                      <button
-                        className="close-btn"
-                        onClick={e => { e.stopPropagation(); handleCloseCard(); }}
-                        aria-label="Cerrar"
-                      >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                      </button>
-                      <div className="preview-iframe">
-                        <iframe
-                          src={proyectos[index].previewUrl}
-                          title={proyectos[index].titulo}
-                          className="w-full h-full border-0 rounded-lg"
-                          loading="lazy"
-                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
-                        />
-                      </div>
-                      <div className="project-title">{proyectos[index].titulo}</div>
-                      <div className="project-desc">{proyectos[index].descripcion}</div>
-                      <div className="tech-list">
-                        {proyectos[index].tecnologias && proyectos[index].tecnologias.map((tec) => (
-                          <span key={tec} className="flex items-center gap-1 px-2 py-1 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full text-xs font-medium text-gray-700 dark:text-gray-200 shadow-sm">
-                            <span className="text-base">{iconMap[tec]}</span>
-                            {tec}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="action-buttons">
-                        <a
-                          href={proyectos[index].url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
-                        >
-                          Ver proyecto
-                        </a>
-                        <a
-                          href={proyectos[index].codigoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
-                        >
-                          Ver código
-                        </a>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="w-full h-full rounded-lg overflow-hidden shadow-md bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center">
-                      <img
-                        src={proyectos[index].imagenPreview}
-                        alt={proyectos[index].titulo}
-                        className="w-full h-full object-cover rounded-lg"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-          {/* Renderizar la tarjeta seleccionada fuera del carrusel 3D */}
-          {selectedIndex !== null && (
-            <div
-              className="card selected"
-              style={{
-                '--color-card': colorPalette[selectedIndex % colorPalette.length],
-                zIndex: 200,
-              }}
-            >
-              <div className="card-content" onClick={e => e.stopPropagation()}>
-                {/* Botón de cerrar tipo Uiverse */}
-                <button
-                  className="close-btn"
-                  onClick={e => { e.stopPropagation(); handleCloseCard(); }}
-                  aria-label="Cerrar"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                </button>
-                <div className="preview-iframe">
-                  <iframe
-                    src={proyectos[selectedIndex].previewUrl}
-                    title={proyectos[selectedIndex].titulo}
-                    className="w-full h-full border-0 rounded-lg"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
-                  />
-                </div>
-                <div className="project-title">{proyectos[selectedIndex].titulo}</div>
-                <div className="project-desc">{proyectos[selectedIndex].descripcion}</div>
-                <div className="tech-list">
-                  {proyectos[selectedIndex].tecnologias && proyectos[selectedIndex].tecnologias.map((tec) => (
-                    <span key={tec} className="flex items-center gap-1 px-2 py-1 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full text-xs font-medium text-gray-700 dark:text-gray-200 shadow-sm">
-                      <span className="text-base">{iconMap[tec]}</span>
-                      {tec}
-                    </span>
-                  ))}
-                </div>
-                <div className="action-buttons">
-                  <a
-                    href={proyectos[selectedIndex].url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
-                  >
-                    Ver proyecto
-                  </a>
-                  <a
-                    href={proyectos[selectedIndex].codigoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
-                  >
-                    Ver código
-                  </a>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[#edeadd] dark:bg-gray-900 flex flex-col items-center py-8 transition-colors duration-300">
@@ -498,7 +312,10 @@ function App() {
           </div>
         </div>
       )}
-    </div>
+
+      {/* Renderizar el ProjectCarousel si showCarousel es true */}
+      {showCarousel && <ProjectCarousel onClose={() => setShowCarousel(false)} />}
+    </div >
   );
 }
 

@@ -1,5 +1,6 @@
 const proyectos = [
     {
+      id: 1,
       titulo: "Juego de Pájaros",
       descripcion: "Un juego interactivo donde tienes que superar obstáculos.",
       url: "https://flyingpolitics.netlify.app/",
@@ -9,6 +10,7 @@ const proyectos = [
       imagenPreview: require("./img/flying-politics.png")
     },
     {
+      id: 2,
       titulo: "Óptica Visión",
       descripcion: "Página web basica para una óptica.",
       url: "https://paginawebjaviernavarro.netlify.app/",
@@ -18,6 +20,7 @@ const proyectos = [
       imagenPreview: require("./img/optica-vision.png")
     },
     {
+      id: 3,
       titulo: "Relojería",
       descripcion: "Página web básica para una relojería.",
       url: "https://relojeriajavier.netlify.app/",
@@ -27,6 +30,7 @@ const proyectos = [
       imagenPreview: require("./img/relojeria.png")
     },
     {
+      id: 4,
       titulo: "Portfolio",
       descripcion: "Portfolio con mis proyectos",
       url: "https://portfoliojaviernavarro.netlify.app/",
