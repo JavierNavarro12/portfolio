@@ -1,26 +1,10 @@
 import React, { useState, useEffect } from "react";
-import proyectos from "./proyectos";
 import Tecnologias from "./Tecnologias";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello } from "react-icons/fa";
 import { SiNextdotjs, SiPostgresql, SiMysql } from "react-icons/si";
 import Spline from '@splinetool/react-spline';
 import { useInView } from 'react-intersection-observer';
 import ProjectCarousel from './ProjectCarousel';
-
-const iconMap = {
-  HTML: <FaHtml5 color="#e34c26" />,
-  CSS: <FaCss3Alt color="#264de4" />,
-  JavaScript: <FaJs color="#f0db4f" />,
-  React: <FaReact color="#61dafb" />,
-  "Next.js": <SiNextdotjs color="#000" />,
-  Java: <FaJava color="#007396" />,
-  Python: <FaPython color="#306998" />,
-  Figma: <FaFigma color="#a259ff" />,
-  GitHub: <FaGithub color="#333" />,
-  PostgreSQL: <SiPostgresql color="#336791" />,
-  MySQL: <SiMysql color="#00758f" />,
-  Trello: <FaTrello color="#0079bf" />,
-};
 
 function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
