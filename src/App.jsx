@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Tecnologias from "./Tecnologias";
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql } from "react-icons/si";
 import Spline from '@splinetool/react-spline';
 import { useInView } from 'react-intersection-observer';
 import ProjectCarousel from './ProjectCarousel';
