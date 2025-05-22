@@ -26,7 +26,8 @@ function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showCarousel, setShowCarousel] = useState(false);
-  const { ref: splineRef, inView: splineInView } = useInView({ triggerOnce: false, threshold: 0.1 });
+  const { ref: splineRef, inView } = useInView({ triggerOnce: false, threshold: 0.1 });
+  const isSplineVisible = typeof inView === 'boolean' ? inView : false;
 
   const closeModal = () => setModalProyecto(null);
 
@@ -104,20 +105,25 @@ function App() {
             </div>
             {/* Contenedor para el robot y el bocadillo */}
             <div ref={splineRef} className="flex-shrink-0 flex items-center justify-center relative">
-              {/* El Spline se renderiza siempre, pero su contenedor controlará la visibilidad */}
               <div style={{
                 width: 220,
                 height: 220,
                 maxWidth: '40vw',
                 maxHeight: '40vw',
-                visibility: splineInView ? 'visible' : 'hidden', /* Controla la visibilidad */
-                pointerEvents: splineInView ? 'auto' : 'none' /* Deshabilita eventos cuando oculto */
+                position: 'relative',
+                opacity: isSplineVisible ? 1 : 0,
+                transition: 'opacity 0.3s ease-in-out'
               }}>
-                <Spline scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode" />
-                {/* Bocadillo */}
-                <div className="speech-bubble">
-                  Bienvenido a mi portfolio!
-                </div>
+                {isSplineVisible && (
+                  <>
+                    <Spline
+                      scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
+                    />
+                    <div className="speech-bubble">
+                      Bienvenido a mi portfolio!
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -315,7 +321,7 @@ function App() {
 
       {/* Renderizar el ProjectCarousel si showCarousel es true */}
       {showCarousel && <ProjectCarousel onClose={() => setShowCarousel(false)} />}
-    </div >
+    </div>
   );
 }
 
