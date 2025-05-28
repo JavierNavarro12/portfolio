@@ -225,11 +225,11 @@ function App() {
         {/* Sección 6: Proyectos */}
         <section id="proyectos" className="w-full flex flex-col items-center justify-center flex-1 main-section opacity-0" data-aos="fade-up" data-aos-offset="550">
           <div
-            className="flex flex-col items-center justify-center w-full min-h-[300px] cursor-pointer select-none transition-all duration-500 hover:scale-105 bounce-on-hover text-center border-4 border-black dark:border-white bg-white dark:bg-gray-800 p-8 md:p-16 aspect-square sm:aspect-video transform active:scale-95"
+            className="flex flex-col items-center justify-center w-full min-h-[300px] cursor-pointer select-none transition-transform duration-300 hover:scale-105 text-center border-4 border-black dark:border-white bg-white dark:bg-gray-800 p-8 md:p-16 aspect-square sm:aspect-video transform-gpu will-change-transform active:scale-95"
             onClick={() => setShowCarousel(true)}
           >
-            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">Proyectos</h2>
-            <span className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 font-medium transform transition-all duration-300 hover:scale-105 tap-on-active">
+            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform-gpu will-change-transform transition-transform duration-300 hover:scale-105">Proyectos</h2>
+            <span className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 font-medium transform-gpu will-change-transform transition-transform duration-300 hover:scale-105">
               {isMobile ? 'Pulsa para ver los proyectos' : 'Haz clic para ver los proyectos'}
             </span>
           </div>
@@ -250,7 +250,7 @@ function App() {
               href="https://wa.me/34693744798"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 bounce-on-hover tap-on-active"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95"
               aria-label="WhatsApp"
             >
               <div className="absolute inset-0 bg-green-500 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -264,7 +264,7 @@ function App() {
               href="https://github.com/JavierNavarro12"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 wiggle-on-hover tap-on-active"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95"
               aria-label="GitHub"
             >
               <div className="absolute inset-0 bg-gray-700 dark:bg-gray-600 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -278,7 +278,7 @@ function App() {
               href="https://www.linkedin.com/in/javier-navarro-rodr%C3%ADguez-056023331/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 bounce-on-hover tap-on-active"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95"
               aria-label="LinkedIn"
             >
               <div className="absolute inset-0 bg-blue-600 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -290,7 +290,7 @@ function App() {
             </a>
             <a
               href="mailto:navarrojavi107@gmail.com"
-              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 wiggle-on-hover tap-on-active"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95"
               aria-label="Gmail"
             >
               <div className="absolute inset-0 bg-red-500 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -304,7 +304,7 @@ function App() {
               href="/CV-Javier-Navarro.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 bounce-on-hover tap-on-active"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95"
               aria-label="Currículum Vitae"
             >
               <div className="absolute inset-0 bg-blue-800 dark:bg-blue-700 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
