@@ -119,7 +119,7 @@ function App() {
       {/* Caja central */}
       <main className="w-full max-w-5xl bg-white/60 dark:bg-gray-800/60 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-md p-8 md:p-16 flex flex-col items-center transform transition-all duration-500 hover:shadow-xl hover:scale-[1.01] main-section animate-fade-in-scale" data-aos="fade-up">
         {/* Sección 1: Robot de bienvenida */}
-        <section className="w-full flex flex-col items-center justify-center min-h-[30vh] mb-12" data-aos="fade-up" data-aos-offset="100">
+        <section className="w-full flex flex-col items-center justify-center min-h-[30vh] mb-6" data-aos="fade-up" data-aos-offset="100">
           <div className="flex-shrink-0 flex items-center justify-center relative">
             <div style={{
               width: 400,
