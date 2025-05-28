@@ -3,6 +3,8 @@ import Tecnologias from "./Tecnologias";
 import Spline from '@splinetool/react-spline';
 import { useInView } from 'react-intersection-observer';
 import ProjectCarousel from './ProjectCarousel';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
@@ -21,13 +23,25 @@ function App() {
     }
   }, [isDarkMode]);
 
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    document.title = "Javier Navarro | Desarrollador Web";
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#edeadd] dark:bg-gray-900 flex flex-col items-center py-8 transition-colors duration-300">
       {/* Botón de tema oscuro */}
       <div className="fixed top-4 right-4 z-50">
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
-          className="relative w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110"
+          className="relative w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 hover:rotate-12 active:scale-95"
           aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
         >
           <div className="absolute inset-0 rounded-full overflow-hidden">
@@ -51,20 +65,29 @@ function App() {
       <nav className="w-full max-w-5xl flex justify-center mb-8">
         <ul className="flex space-x-10 text-gray-700 dark:text-gray-300 text-base font-medium tracking-wide">
           <li>
-            <a href="#introduccion" className="hover:underline hover:text-black dark:hover:text-white transition-colors duration-200">Introducción</a>
+            <a href="#introduccion" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
+              <span className="relative z-10">Introducción</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
           </li>
           <li>
-            <a href="#proyectos" className="hover:underline hover:text-black dark:hover:text-white transition-colors duration-200">Proyectos</a>
+            <a href="#proyectos" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
+              <span className="relative z-10">Proyectos</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
           </li>
           <li>
-            <a href="#contacto" className="hover:underline hover:text-black dark:hover:text-white transition-colors duration-200">Contacto</a>
+            <a href="#contacto" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
+              <span className="relative z-10">Contacto</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
           </li>
         </ul>
       </nav>
       {/* Fin menú minimalista */}
 
       {/* Menú superior minimalista (antiguo) */}
-      <header className="w-full max-w-5xl mb-8">
+      <header className="w-full max-w-5xl mb-8 hidden md:block">
         <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2">
           <span className="tracking-widest">01</span>
           <span className="tracking-widest">MAIN PAGE</span>
@@ -73,115 +96,100 @@ function App() {
       </header>
 
       {/* Caja central */}
-      <main className="w-full max-w-5xl bg-white/60 dark:bg-gray-800/60 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-md p-8 md:p-16 flex flex-col items-center">
-        {/* Cabecera y presentación */}
-        <div id="introduccion" className="w-full flex flex-col items-center mb-12 scroll-mt-24">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 w-full">
-            <div className="flex flex-col items-center md:items-start flex-1">
-              <span className="text-2xl font-bold tracking-widest text-gray-700 dark:text-gray-300 mb-2">DESARROLLADOR WEB</span>
-              {/* Contenedor para el título principal y su reflexión */}
-              <div className="title-with-reflection">
-                <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2">PORTFOLIO</h1>
-                {/* La reflexión se creará con CSS en base al H1 dentro de .title-with-reflection */}
-              </div>
-            </div>
-            {/* Contenedor para el robot y el bocadillo */}
-            <div ref={splineRef} className="flex-shrink-0 flex items-center justify-center relative">
-              <div style={{
-                width: 220,
-                height: 220,
-                maxWidth: '40vw',
-                maxHeight: '40vw',
-                position: 'relative',
-                opacity: isSplineVisible ? 1 : 0,
-                transition: 'opacity 0.3s ease-in-out'
-              }}>
-                {isSplineVisible && (
-                  <>
-                    <Spline
-                      scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
-                    />
-                    <div className="speech-bubble">
-                      Bienvenido a mi portfolio!
-                    </div>
-                  </>
-                )}
-              </div>
+      <main className="w-full max-w-5xl bg-white/60 dark:bg-gray-800/60 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-md p-8 md:p-16 flex flex-col items-center transform transition-all duration-500 hover:shadow-xl hover:scale-[1.01] main-section animate-fade-in-scale" data-aos="fade-up">
+        {/* Sección 1: Robot de bienvenida */}
+        <section className="w-full flex flex-col items-center justify-center min-h-[40vh] mb-12" data-aos="fade-up" data-aos-offset="100">
+          <div ref={splineRef} className="flex-shrink-0 flex items-center justify-center relative">
+            <div style={{
+              width: 400,
+              height: 400,
+              maxWidth: '80vw',
+              maxHeight: '80vw',
+              position: 'relative',
+              opacity: isSplineVisible ? 1 : 0,
+              transition: 'opacity 0.3s ease-in-out'
+            }}>
+              {isSplineVisible && (
+                <>
+                  <Spline scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode" />
+                  <div className="speech-bubble"><span className="typing-text">BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!</span></div>
+                </>
+              )}
             </div>
           </div>
+        </section>
+
+        {/* Sección 2: Título y Subtítulo */}
+        <section className="w-full flex flex-col items-center mb-12 text-center" data-aos="fade-up" data-aos-offset="200">
+          <span className="text-2xl font-bold tracking-widest text-gray-700 dark:text-gray-300 mb-2 bounce-on-hover">JAVIER NAVARRO | DESARROLLADOR WEB</span>
+          <div className="title-with-reflection">
+            <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2 wiggle-on-hover">PORTFOLIO</h1>
+          </div>
+        </section>
+
+        {/* Sección 3: ¿CÓMO PUEDO AYUDARTE? y descripción */}
+        <section className="w-full mb-8" data-aos="fade-up" data-aos-offset="300">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight bounce-on-hover text-center">¿CÓMO PUEDO AYUDARTE?</h2>
+          <div className="text-gray-700 dark:text-gray-300 text-lg text-center max-w-2xl mx-auto">
+            Soy un desarrollador web especializado en front-end. Mi objetivo es crear interfaces atractivas, accesibles y eficientes, aportando valor real a cada proyecto. Me apasiona aprender nuevas tecnologías y trabajar en equipo para lograr los mejores resultados.
+          </div>
+        </section>
+
+        {/* Sección 4: Habilidades */}
+        <section className="w-full mb-8" data-aos="fade-up" data-aos-offset="400">
+          <h3 className="font-bold mb-4 text-2xl text-gray-800 dark:text-gray-200 text-center transition-all duration-300 ease-in-out hover:scale-105 hover:rotate-3">HABILIDADES</h3>
+          <ul className="text-sm space-y-1 flex flex-wrap justify-center gap-4">
+            {['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Java', 'Python', 'SQL', 'Git', 'Figma'].map((skill) => (
+              <li key={skill} className="px-6 py-3 border-2 border-gray-700 dark:border-gray-600 bg-gray-900 dark:bg-gray-800 text-white rounded-full transition-all duration-400 ease-in-out hover:border-gray-500 hover:bg-gray-800 h-12 flex items-center justify-center hover:scale-105 active:scale-95">{skill}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Sección 5: Pasiones */}
+        <section className="w-full mb-8" data-aos="fade-up" data-aos-offset="500">
+          <h3 className="font-bold mb-4 text-2xl text-gray-800 dark:text-gray-200 text-center transition-all duration-300 ease-in-out hover:scale-105 hover:rotate-3">PASIÓN</h3>
+          <ul className="text-sm space-y-1 flex flex-wrap justify-center gap-4">
+            {[
+              'Desarrollo de interfaces',
+              'UX/UI',
+              'Accesibilidad web',
+              'Responsive Design',
+              'Animaciones e interactividad',
+              'Optimización de rendimiento',
+              'Trabajo en equipo'
+            ].map((passion) => (
+              <li key={passion} className="px-6 py-3 border-2 border-gray-700 dark:border-gray-600 bg-gray-900 dark:bg-gray-800 text-white rounded-full transition-all duration-400 ease-in-out hover:border-gray-500 hover:bg-gray-800 h-12 flex items-center justify-center hover:scale-105 active:scale-95">{passion}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Sección 6: Proyectos */}
+        <section id="proyectos" className="w-full flex flex-col items-center justify-center flex-1 main-section opacity-0" data-aos="fade-up" data-aos-offset="550">
+          <div
+            className="flex flex-col items-center justify-center w-full h-full min-h-[300px] cursor-pointer select-none transition-all duration-500 hover:scale-105 bounce-on-hover"
+            onClick={() => setShowCarousel(true)}
+          >
+            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">Proyectos</h2>
+            <span className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 font-medium transform transition-all duration-300 hover:scale-105 tap-on-active">Haz clic para ver los proyectos</span>
+          </div>
+        </section>
+
+        {/* Sección 7: Tecnologías */}
+        <div data-aos="fade-up" data-aos-offset="560" className="mt-5">
+          <Tecnologias />
         </div>
 
-        {/* Sección ¿CÓMO PUEDO AYUDARTE? */}
-        <section className="w-full mb-16">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight">¿CÓMO PUEDO AYUDARTE?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-700 dark:text-gray-300">
-            <div>
-              <p className="mb-4">Soy un desarrollador web especializado en front-end. Mi objetivo es crear interfaces atractivas, accesibles y eficientes, aportando valor real a cada proyecto. Me apasiona aprender nuevas tecnologías y trabajar en equipo para lograr los mejores resultados.</p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <h3 className="font-semibold mb-2 text-gray-800 dark:text-gray-200">HABILIDADES</h3>
-                <ul className="text-sm space-y-1">
-                  <li>HTML</li>
-                  <li>CSS</li>
-                  <li>JavaScript</li>
-                  <li>React</li>
-                  <li>Next.js</li>
-                  <li>Java</li>
-                  <li>Python</li>
-                  <li>SQL</li>
-                  <li>Git</li>
-                  <li>Figma</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2 text-gray-800 dark:text-gray-200">PASIÓN</h3>
-                <ul className="text-sm space-y-1">
-                  <li>Desarrollo de interfaces</li>
-                  <li>UX/UI</li>
-                  <li>Accesibilidad web</li>
-                  <li>Responsive Design</li>
-                  <li>Animaciones e interactividad</li>
-                  <li>Optimización de rendimiento</li>
-                  <li>Trabajo en equipo</li>
-                </ul>
-              </div>
-            </div>
+        {/* Sección 8: Contacto */}
+        <section id="contacto" className="w-full flex flex-col items-center scroll-mt-24 main-section mt-10" data-aos="fade-up" data-aos-offset="580">
+          <div>
+            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">Contacto</h2>
           </div>
-        </section>
-
-        {/* Separador decorativo */}
-        <div className="border-t border-gray-300 w-full mb-8" />
-
-        {/* Grid de proyectos - Welcome screen */}
-        <section id="proyectos" className="w-full flex flex-col items-center justify-center flex-1">
-          <div
-            className="flex flex-col items-center justify-center w-full h-full min-h-[300px] animate-fade-in cursor-pointer select-none transition-transform duration-500"
-            onClick={() => setShowCarousel(true)}
-            style={{ animation: 'fadeInScale 0.7s', minHeight: '300px' }}
-          >
-            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg">Proyectos</h2>
-            <span className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 font-medium">Haz clic para ver los proyectos</span>
-          </div>
-        </section>
-
-        {/* Barra separadora entre proyectos y tecnologías */}
-        <div className="border-t border-gray-300 w-full my-12" />
-
-        <Tecnologias />
-
-        {/* Separador entre tecnologías y contacto */}
-        <div className="border-t border-gray-300 w-full my-16" />
-
-        {/* Sección de contacto estilo imagen */}
-        <section id="contacto" className="w-full flex flex-col items-center scroll-mt-24">
-          <h2 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-none mb-8">CONTACTO</h2>
-          <div className="flex space-x-8 mt-4 mb-16">
+          <div className="flex flex-wrap justify-center gap-8 mt-4 mb-16">
             <a
               href="https://wa.me/34693744798"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-16 h-16 flex items-center justify-center"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:rotate-12 active:scale-95 bounce-on-hover tap-on-active"
               aria-label="WhatsApp"
             >
               <div className="absolute inset-0 bg-green-500 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -195,7 +203,7 @@ function App() {
               href="https://github.com/JavierNavarro12"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-16 h-16 flex items-center justify-center"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:rotate-12 active:scale-95 wiggle-on-hover tap-on-active"
               aria-label="GitHub"
             >
               <div className="absolute inset-0 bg-gray-700 dark:bg-gray-600 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -209,7 +217,7 @@ function App() {
               href="https://www.linkedin.com/in/javier-navarro-rodr%C3%ADguez-056023331/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-16 h-16 flex items-center justify-center"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:rotate-12 active:scale-95 bounce-on-hover tap-on-active"
               aria-label="LinkedIn"
             >
               <div className="absolute inset-0 bg-blue-600 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -221,7 +229,7 @@ function App() {
             </a>
             <a
               href="mailto:navarrojavi107@gmail.com"
-              className="group relative w-16 h-16 flex items-center justify-center"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:rotate-12 active:scale-95 wiggle-on-hover tap-on-active"
               aria-label="Gmail"
             >
               <div className="absolute inset-0 bg-red-500 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -232,6 +240,10 @@ function App() {
               <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-gray-700 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Gmail</span>
             </a>
           </div>
+
+          {/* Añadir espacio extra para scroll */}
+          <div className="my-[100px]"></div>
+
         </section>
 
       </main>
