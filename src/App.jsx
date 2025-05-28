@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Tecnologias from "./Tecnologias";
 import Spline from '@splinetool/react-spline';
-import { useInView } from 'react-intersection-observer';
 import ProjectCarousel from './ProjectCarousel';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
