@@ -130,7 +130,7 @@ function App() {
             }}>
               <>
                 <Spline scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode" />
-                <div className="speech-bubble"><span className="typing-text">BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!</span></div>
+                <div className="speech-bubble"><span className="typing-text">{isMobile ? 'BIENVENIDO A MI PORTFOLIO! DESLIZA PARA VERLO!' : 'BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!'}</span></div>
               </>
             </div>
           </div>
