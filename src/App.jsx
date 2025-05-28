@@ -25,8 +25,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    // Añadir un pequeño retraso para asegurar que el scroll funcione en móviles
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100); // Pequeño retraso de 100ms
+
+    // Limpiar el timer si el componente se desmonta
+    return () => clearTimeout(timer);
+  }, []); // El array vacío asegura que esto solo se ejecute una vez al montar
 
   useEffect(() => {
     document.title = "Javier Navarro | Desarrollador Web";
@@ -159,7 +165,7 @@ function App() {
         {/* Sección 6: Proyectos */}
         <section id="proyectos" className="w-full flex flex-col items-center justify-center flex-1 main-section opacity-0" data-aos="fade-up" data-aos-offset="550">
           <div
-            className="flex flex-col items-center justify-center w-full h-full min-h-[300px] cursor-pointer select-none transition-all duration-500 hover:scale-105 bounce-on-hover"
+            className="flex flex-col items-center justify-center w-full h-full min-h-[300px] cursor-pointer select-none transition-all duration-500 hover:scale-105 bounce-on-hover text-center"
             onClick={() => setShowCarousel(true)}
           >
             <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">Proyectos</h2>
