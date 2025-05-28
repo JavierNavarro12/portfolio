@@ -62,7 +62,7 @@ function App() {
       <div className="fixed top-4 right-4 z-50">
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
-          className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 hover:rotate-12 active:scale-95"
+          className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 hover:rotate-12 active:scale-95"
           aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
         >
           <div className="absolute inset-0 rounded-full overflow-hidden">
