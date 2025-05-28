@@ -10,8 +10,14 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showCarousel, setShowCarousel] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoadingSpline, setIsLoadingSpline] = useState(true);
+  const [showMinimumLoadTime, setShowMinimumLoadTime] = useState(true);
 
   const closeModal = () => setModalProyecto(null);
+
+  const handleSplineLoad = () => {
+    setIsLoadingSpline(false);
+  };
 
   useEffect(() => {
     if (isDarkMode) {
@@ -55,6 +61,19 @@ function App() {
     // Limpiar listener al desmontar el componente
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []); // Se ejecuta solo una vez al montar y limpiar al desmontar
+
+  useEffect(() => {
+    // Efecto para asegurar un tiempo mínimo de visualización del indicador de carga
+    const minLoadTimer = setTimeout(() => {
+      setShowMinimumLoadTime(false);
+    }, 500); // Muestra el indicador por al menos 500ms
+
+    // Limpiar el timer
+    return () => clearTimeout(minLoadTimer);
+  }, []); // Se ejecuta solo una vez al montar
+
+  // Determinar si se debe mostrar el indicador de carga
+  const shouldShowLoadingIndicator = isLoadingSpline || showMinimumLoadTime;
 
   return (
     <div className="min-h-screen bg-[#edeadd] dark:bg-gray-900 flex flex-col items-center py-8 transition-colors duration-300">
@@ -128,10 +147,33 @@ function App() {
               maxHeight: '80vw',
               position: 'relative',
             }}>
-              <>
-                <Spline scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode" />
+              {/* Indicador de carga mientras el Spline carga */}
+              {shouldShowLoadingIndicator && (
+                <div style={{
+                  position: 'absolute', 
+                  inset: 0, 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  backgroundColor: '#edeadd', // Color de fondo similar a la página
+                  color: '#333', // Color de texto
+                  zIndex: 5 // Asegura que esté encima del Spline mientras carga
+                }}>
+                  Cargando Robot...
+                </div>
+              )}
+
+              {/* Renderizar Spline siempre para iniciar la carga, ocultarlo si se debe mostrar el indicador */}
+              <Spline
+                scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
+                onLoad={handleSplineLoad} // Llama a esta función al cargar
+                style={{ visibility: shouldShowLoadingIndicator ? 'hidden' : 'visible' }} // Oculta el Spline si se muestra el indicador
+              />
+
+              {/* Mostrar el bocadillo solo después de que el Spline haya cargado COMPLETAMENTE */}
+              {!isLoadingSpline && (
                 <div className="speech-bubble"><span className="typing-text">{isMobile ? 'BIENVENIDO A MI PORTFOLIO! DESLIZA PARA VERLO!' : 'BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!'}</span></div>
-              </>
+              )}
             </div>
           </div>
         </section>
