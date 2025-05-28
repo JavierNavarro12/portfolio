@@ -250,7 +250,7 @@ function App() {
               href="https://wa.me/34693744798"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:rotate-12 active:scale-95 bounce-on-hover tap-on-active"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 bounce-on-hover tap-on-active"
               aria-label="WhatsApp"
             >
               <div className="absolute inset-0 bg-green-500 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -264,7 +264,7 @@ function App() {
               href="https://github.com/JavierNavarro12"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:rotate-12 active:scale-95 wiggle-on-hover tap-on-active"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 wiggle-on-hover tap-on-active"
               aria-label="GitHub"
             >
               <div className="absolute inset-0 bg-gray-700 dark:bg-gray-600 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -278,7 +278,7 @@ function App() {
               href="https://www.linkedin.com/in/javier-navarro-rodr%C3%ADguez-056023331/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:rotate-12 active:scale-95 bounce-on-hover tap-on-active"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 bounce-on-hover tap-on-active"
               aria-label="LinkedIn"
             >
               <div className="absolute inset-0 bg-blue-600 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -290,7 +290,7 @@ function App() {
             </a>
             <a
               href="mailto:navarrojavi107@gmail.com"
-              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:rotate-12 active:scale-95 wiggle-on-hover tap-on-active"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 wiggle-on-hover tap-on-active"
               aria-label="Gmail"
             >
               <div className="absolute inset-0 bg-red-500 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
@@ -299,6 +299,20 @@ function App() {
                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 20v-9.99l7.99 7.99c.39.39 1.02.39 1.41 0L20 10.01V20H4z" />
               </svg>
               <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-gray-700 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Gmail</span>
+            </a>
+            <a
+              href="/CV-Javier-Navarro.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95 bounce-on-hover tap-on-active"
+              aria-label="Currículum Vitae"
+            >
+              <div className="absolute inset-0 bg-blue-800 dark:bg-blue-700 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
+              <div className="absolute inset-0 bg-white dark:bg-gray-800 rounded-full transform transition-transform duration-300 group-hover:scale-90"></div>
+              <svg className="w-8 h-8 text-blue-800 dark:text-blue-300 relative z-10 transform transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v4h4v12H6z" />
+              </svg>
+              <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-gray-700 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Currículum</span>
             </a>
           </div>
 
