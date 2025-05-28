@@ -65,7 +65,7 @@ function App() {
       </div>
 
       {/* Menú minimalista */}
-      <nav className="w-full max-w-5xl flex justify-center mb-8 pr-20 sm:pr-0">
+      <nav className="w-full max-w-5xl flex justify-center mb-8 pr-20 pl-4 sm:pr-0 sm:pl-0">
         <ul className="flex space-x-10 text-gray-700 dark:text-gray-300 text-base font-medium tracking-wide">
           <li>
             <a href="#introduccion" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
