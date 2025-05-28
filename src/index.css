@@ -334,7 +334,7 @@
   position: absolute;
   /* Ajusta estos valores según necesites para que el bocadillo salga de la boca del robot */
   /* Los valores exactos pueden depender de la escena 3D y el tamaño del contenedor */
-  bottom: 17px; /* Adjusted vertical position again */
+  bottom: 18px; /* Adjusted vertical position again */
   left: 50%;   /* Posición horizontal */
   transform: translateX(-50%); /* Centra el bocadillo horizontalmente */
 
