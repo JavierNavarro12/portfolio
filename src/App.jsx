@@ -9,6 +9,7 @@ function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showCarousel, setShowCarousel] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const closeModal = () => setModalProyecto(null);
 
@@ -37,6 +38,23 @@ function App() {
   useEffect(() => {
     document.title = "Javier Navarro | Desarrollador Web";
   }, []);
+
+  // Efecto para detectar tamaño de pantalla
+  useEffect(() => {
+    const checkScreenSize = () => {
+      // Consideramos 'móvil' si el ancho es menor o igual a 768px (breakpoint md de Tailwind)
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Ejecutar al montar el componente
+    checkScreenSize();
+
+    // Añadir listener para redimensionamiento
+    window.addEventListener('resize', checkScreenSize);
+
+    // Limpiar listener al desmontar el componente
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []); // Se ejecuta solo una vez al montar y limpiar al desmontar
 
   return (
     <div className="min-h-screen bg-[#edeadd] dark:bg-gray-900 flex flex-col items-center py-8 transition-colors duration-300">
@@ -169,12 +187,14 @@ function App() {
             onClick={() => setShowCarousel(true)}
           >
             <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">Proyectos</h2>
-            <span className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 font-medium transform transition-all duration-300 hover:scale-105 tap-on-active">Haz clic para ver los proyectos</span>
+            <span className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 font-medium transform transition-all duration-300 hover:scale-105 tap-on-active">
+              {isMobile ? 'Pulsa para ver los proyectos' : 'Haz clic para ver los proyectos'}
+            </span>
           </div>
         </section>
 
         {/* Sección 7: Tecnologías */}
-        <div data-aos="fade-up" data-aos-offset="560" className="mt-5">
+        <div data-aos="fade-up" data-aos-offset="560" className="mt-2 sm:mt-5">
           <Tecnologias />
         </div>
 
