@@ -225,7 +225,7 @@ function App() {
         {/* Sección 6: Proyectos */}
         <section id="proyectos" className="w-full flex flex-col items-center justify-center flex-1 main-section opacity-0" data-aos="fade-up" data-aos-offset="550">
           <div
-            className="flex flex-col items-center justify-center w-full h-full min-h-[300px] cursor-pointer select-none transition-all duration-500 hover:scale-105 bounce-on-hover text-center"
+            className="flex flex-col items-center justify-center w-full min-h-[300px] cursor-pointer select-none transition-all duration-500 hover:scale-105 bounce-on-hover text-center border-4 border-black dark:border-white bg-white dark:bg-gray-800 p-8 md:p-16 aspect-square sm:aspect-video transform active:scale-95"
             onClick={() => setShowCarousel(true)}
           >
             <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">Proyectos</h2>
