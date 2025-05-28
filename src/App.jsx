@@ -10,8 +10,6 @@ function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showCarousel, setShowCarousel] = useState(false);
-  const { ref: splineRef, inView } = useInView({ triggerOnce: false, threshold: 0.1 });
-  const isSplineVisible = typeof inView === 'boolean' ? inView : false;
 
   const closeModal = () => setModalProyecto(null);
 
@@ -62,7 +60,7 @@ function App() {
       </div>
 
       {/* Menú minimalista */}
-      <nav className="w-full max-w-5xl flex justify-center mb-8">
+      <nav className="w-full max-w-5xl flex justify-center mb-8 pr-20 sm:pr-0">
         <ul className="flex space-x-10 text-gray-700 dark:text-gray-300 text-base font-medium tracking-wide">
           <li>
             <a href="#introduccion" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
@@ -99,22 +97,18 @@ function App() {
       <main className="w-full max-w-5xl bg-white/60 dark:bg-gray-800/60 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-md p-8 md:p-16 flex flex-col items-center transform transition-all duration-500 hover:shadow-xl hover:scale-[1.01] main-section animate-fade-in-scale" data-aos="fade-up">
         {/* Sección 1: Robot de bienvenida */}
         <section className="w-full flex flex-col items-center justify-center min-h-[40vh] mb-12" data-aos="fade-up" data-aos-offset="100">
-          <div ref={splineRef} className="flex-shrink-0 flex items-center justify-center relative">
+          <div className="flex-shrink-0 flex items-center justify-center relative">
             <div style={{
               width: 400,
               height: 400,
               maxWidth: '80vw',
               maxHeight: '80vw',
               position: 'relative',
-              opacity: isSplineVisible ? 1 : 0,
-              transition: 'opacity 0.3s ease-in-out'
             }}>
-              {isSplineVisible && (
-                <>
-                  <Spline scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode" />
-                  <div className="speech-bubble"><span className="typing-text">BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!</span></div>
-                </>
-              )}
+              <>
+                <Spline scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode" />
+                <div className="speech-bubble"><span className="typing-text">BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!</span></div>
+              </>
             </div>
           </div>
         </section>
