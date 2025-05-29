@@ -105,7 +105,7 @@ function App() {
       <nav className="w-full max-w-5xl flex justify-center mb-8 pr-20 pl-4 sm:pr-0 sm:pl-0">
         <ul className="flex space-x-10 text-gray-700 dark:text-gray-300 text-base font-medium tracking-wide">
           <li>
-            <a href="#introduccion" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
+            <a href="#como-ayudarte" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
               <span className="relative z-10">Introducción</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
             </a>
@@ -137,6 +137,14 @@ function App() {
 
       {/* Caja central */}
       <main className="w-full max-w-5xl bg-white/60 dark:bg-gray-800/60 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-md p-8 md:p-16 flex flex-col items-center transform transition-all duration-500 hover:shadow-xl hover:scale-[1.01] main-section animate-fade-in-scale" data-aos="fade-up">
+        {/* Sección 2: Título y Subtítulo */}
+        <section className="w-full flex flex-col items-center mb-12 text-center" data-aos="fade-up" data-aos-offset="200">
+          <span className="text-2xl font-bold tracking-widest text-gray-700 dark:text-gray-300 mb-2 bounce-on-hover">JAVIER NAVARRO | DESARROLLADOR WEB</span>
+          <div className="title-with-reflection">
+            <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2 wiggle-on-hover">PORTFOLIO</h1>
+          </div>
+        </section>
+
         {/* Sección 1: Robot de bienvenida */}
         <section className="w-full flex flex-col items-center justify-center min-h-[30vh] mb-6" data-aos="fade-up" data-aos-offset="100">
           <div className="flex-shrink-0 flex items-center justify-center relative">
@@ -178,30 +186,12 @@ function App() {
           </div>
         </section>
 
-        {/* Sección 2: Título y Subtítulo */}
-        <section className="w-full flex flex-col items-center mb-12 text-center" data-aos="fade-up" data-aos-offset="200">
-          <span className="text-2xl font-bold tracking-widest text-gray-700 dark:text-gray-300 mb-2 bounce-on-hover">JAVIER NAVARRO | DESARROLLADOR WEB</span>
-          <div className="title-with-reflection">
-            <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2 wiggle-on-hover">PORTFOLIO</h1>
-          </div>
-        </section>
-
         {/* Sección 3: ¿CÓMO PUEDO AYUDARTE? y descripción */}
-        <section className="w-full mb-8" data-aos="fade-up" data-aos-offset="300">
+        <section id="como-ayudarte" className="w-full mb-8 scroll-mt-40" data-aos="fade-up" data-aos-offset="300">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight bounce-on-hover text-center">¿CÓMO PUEDO AYUDARTE?</h2>
           <div className="text-gray-700 dark:text-gray-300 text-lg text-center max-w-2xl mx-auto">
             Soy un desarrollador web especializado en front-end. Mi objetivo es crear interfaces atractivas, accesibles y eficientes, aportando valor real a cada proyecto. Me apasiona aprender nuevas tecnologías y trabajar en equipo para lograr los mejores resultados.
           </div>
-        </section>
-
-        {/* Sección 4: Habilidades */}
-        <section className="w-full mb-8" data-aos="fade-up" data-aos-offset="400">
-          <h3 className="font-bold mb-4 text-2xl text-gray-800 dark:text-gray-200 text-center transition-all duration-300 ease-in-out hover:scale-105 hover:rotate-3">HABILIDADES</h3>
-          <ul className="text-sm space-y-1 flex flex-wrap justify-center gap-4">
-            {['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Java', 'Python', 'SQL', 'Git', 'Figma'].map((skill) => (
-              <li key={skill} className="px-6 py-3 border-2 border-gray-700 dark:border-gray-600 bg-gray-900 dark:bg-gray-800 text-white rounded-full transition-all duration-400 ease-in-out hover:border-gray-500 hover:bg-gray-800 h-12 flex items-center justify-center hover:scale-105 active:scale-95">{skill}</li>
-            ))}
-          </ul>
         </section>
 
         {/* Sección 5: Pasiones */}
@@ -223,7 +213,7 @@ function App() {
         </section>
 
         {/* Sección 6: Proyectos */}
-        <section id="proyectos" className="w-full flex flex-col items-center justify-center flex-1 main-section opacity-0" data-aos="fade-up" data-aos-offset="550">
+        <section id="proyectos" className="w-full flex flex-col items-center justify-center flex-1 main-section opacity-0 scroll-mt-40" data-aos="fade-up" data-aos-offset="550">
           <div
             className="flex flex-col items-center justify-center w-full min-h-[300px] cursor-pointer select-none transition-transform duration-300 hover:scale-105 text-center border-4 border-black dark:border-white bg-white dark:bg-gray-800 p-8 md:p-16 aspect-square sm:aspect-video transform-gpu will-change-transform active:scale-95"
             onClick={() => setShowCarousel(true)}
