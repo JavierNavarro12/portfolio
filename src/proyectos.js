@@ -1,8 +1,8 @@
 const proyectos = [
     {
       id: 1,
-      titulo: "Juego de Pájaros",
-      descripcion: "Un juego interactivo donde tienes que superar obstáculos.",
+      titulo: { es: "Juego de Pájaros", en: "Bird Game" },
+      descripcion: { es: "Un juego interactivo donde tienes que superar obstáculos.", en: "An interactive game where you have to overcome obstacles." },
       url: "https://flyingpolitics.netlify.app/",
       previewUrl: "https://flyingpolitics.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/Curso/tree/master/JuegoPajaros",
@@ -11,8 +11,8 @@ const proyectos = [
     },
     {
       id: 2,
-      titulo: "Óptica Visión",
-      descripcion: "Página web basica para una óptica.",
+      titulo: { es: "Óptica Visión", en: "Vision Optics" },
+      descripcion: { es: "Página web basica para una óptica.", en: "Basic website for an optician." },
       url: "https://paginawebjaviernavarro.netlify.app/",
       previewUrl: "https://paginawebjaviernavarro.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/Curso/tree/master/PaginaWeb",
@@ -21,8 +21,8 @@ const proyectos = [
     },
     {
       id: 3,
-      titulo: "Relojería",
-      descripcion: "Página web básica para una relojería.",
+      titulo: { es: "Relojería", en: "Watchmaker" },
+      descripcion: { es: "Página web básica para una relojería.", en: "Basic website for a watchmaker." },
       url: "https://relojeriajavier.netlify.app/",
       previewUrl: "https://relojeriajavier.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/PruebaPractica/tree/main/Practica",
@@ -31,8 +31,8 @@ const proyectos = [
     },
     {
       id: 4,
-      titulo: "Portfolio",
-      descripcion: "Portfolio con mis proyectos",
+      titulo: { es: "Portfolio", en: "Portfolio" },
+      descripcion: { es: "Portfolio con mis proyectos", en: "Portfolio with my projects" },
       url: "https://portfoliojaviernavarro.netlify.app/",
       previewUrl: "https://portfoliojaviernavarro.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/portfolio",

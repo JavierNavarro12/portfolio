@@ -65,6 +65,8 @@ function ProjectCard({
   isSelected,
   onCardClick,
   onCloseCard,
+  language,
+  translations
 }) {
   const cardStyle = {
     '--index': index,
@@ -85,7 +87,7 @@ function ProjectCard({
           <button
             className="close-btn"
             onClick={(e) => { e.stopPropagation(); onCloseCard(); }}
-            aria-label="Cerrar"
+            aria-label={translations.close}
           >
             <svg
               width="24"
@@ -104,14 +106,14 @@ function ProjectCard({
           <div className="preview-iframe compact-preview">
             <iframe
               src={proyecto.previewUrl}
-              title={proyecto.titulo}
+              title={proyecto.titulo[language]}
               className="w-full h-full border-0 rounded-lg"
               loading="lazy"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
             />
           </div>
-          <div className="project-title compact-title">{proyecto.titulo}</div>
-          <div className="project-desc compact-desc">{proyecto.descripcion}</div>
+          <div className="project-title compact-title">{proyecto.titulo[language]}</div>
+          <div className="project-desc compact-desc">{proyecto.descripcion[language]}</div>
           <div className="tech-list compact-tech-list">
             {proyecto.tecnologias &&
               proyecto.tecnologias.map((tec) => (
@@ -138,7 +140,7 @@ function ProjectCard({
               rel="noopener noreferrer"
               className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
             >
-              Ver proyecto
+              {translations.viewProject}
             </a>
             <a
               href={proyecto.codigoUrl}
@@ -146,7 +148,7 @@ function ProjectCard({
               rel="noopener noreferrer"
               className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
             >
-              Ver código
+              {translations.viewCode || 'Ver código'}
             </a>
           </div>
         </div>
@@ -154,7 +156,7 @@ function ProjectCard({
         <div className="w-full h-full rounded-lg overflow-hidden shadow-md bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center">
           <img
             src={proyecto.imagenPreview}
-            alt={proyecto.titulo}
+            alt={proyecto.titulo[language]}
             className="w-full h-full object-cover rounded-lg"
             loading="lazy"
           />

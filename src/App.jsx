@@ -5,6 +5,82 @@ import ProjectCarousel from './ProjectCarousel';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+// Language translations
+const translations = {
+  es: {
+    title: "JAVIER NAVARRO | DESARROLLADOR WEB",
+    portfolio: "PORTFOLIO",
+    welcome: "BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!",
+    welcomeMobile: "BIENVENIDO A MI PORTFOLIO! DESLIZA PARA VERLO!",
+    howCanIHelp: "¿CÓMO PUEDO AYUDARTE?",
+    description: "Soy un desarrollador web especializado en front-end. Mi objetivo es crear interfaces atractivas, accesibles y eficientes, aportando valor real a cada proyecto. Me apasiona aprender nuevas tecnologías y trabajar en equipo para lograr los mejores resultados.",
+    passion: "PASIÓN",
+    passions: [
+      'Desarrollo de interfaces',
+      'UX/UI',
+      'Accesibilidad web',
+      'Responsive Design',
+      'Animaciones e interactividad',
+      'Optimización de rendimiento',
+      'Trabajo en equipo'
+    ],
+    technologies: "TECNOLOGÍAS",
+    projects: "Proyectos",
+    projectsClick: "Haz clic para ver los proyectos",
+    projectsClickMobile: "Pulsa para ver los proyectos",
+    contact: "Contacto",
+    copyright: "© 2024 Javier Navarro. Todos los derechos reservados.",
+    menu: {
+      intro: "Introducción",
+      projects: "Proyectos",
+      contact: "Contacto"
+    },
+    carousel: {
+      close: "Cerrar",
+      next: "Siguiente",
+      previous: "Anterior",
+      viewProject: "Ver proyecto",
+      viewCode: "Ver código"
+    }
+  },
+  en: {
+    title: "JAVIER NAVARRO | WEB DEVELOPER",
+    portfolio: "PORTFOLIO",
+    welcome: "WELCOME TO MY PORTFOLIO! SCROLL TO SEE IT!",
+    welcomeMobile: "WELCOME TO MY PORTFOLIO! SWIPE TO SEE IT!",
+    howCanIHelp: "HOW CAN I HELP YOU?",
+    description: "I am a web developer specialized in front-end. My goal is to create attractive, accessible and efficient interfaces, bringing real value to each project. I am passionate about learning new technologies and working in a team to achieve the best results.",
+    passion: "PASSION",
+    passions: [
+      'Interface Development',
+      'UX/UI',
+      'Web Accessibility',
+      'Responsive Design',
+      'Animations & Interactivity',
+      'Performance Optimization',
+      'Teamwork'
+    ],
+    technologies: "TECHNOLOGIES",
+    projects: "Projects",
+    projectsClick: "Click to see the projects",
+    projectsClickMobile: "Tap to see the projects",
+    contact: "Contact",
+    copyright: "© 2024 Javier Navarro. All rights reserved.",
+    menu: {
+      intro: "Introduction",
+      projects: "Projects",
+      contact: "Contact"
+    },
+    carousel: {
+      close: "Close",
+      next: "Next",
+      previous: "Previous",
+      viewProject: "View Project",
+      viewCode: "View code"
+    }
+  }
+};
+
 function App() {
   const [modalProyecto, setModalProyecto] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -12,6 +88,10 @@ function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [isLoadingSpline, setIsLoadingSpline] = useState(true);
   const [showMinimumLoadTime, setShowMinimumLoadTime] = useState(true);
+  const [language, setLanguage] = useState('es');
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+
+  const t = translations[language];
 
   const closeModal = () => setModalProyecto(null);
 
@@ -75,25 +155,97 @@ function App() {
   // Determinar si se debe mostrar el indicador de carga
   const shouldShowLoadingIndicator = isLoadingSpline || showMinimumLoadTime;
 
+  const isMobileScreen = typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
+
   return (
     <div className="min-h-screen bg-[#edeadd] dark:bg-gray-900 flex flex-col items-center py-8 transition-colors duration-300">
-      {/* Botón de tema oscuro */}
-      <div className="fixed top-4 right-4 z-50">
+      {/* Botón de tema oscuro y selector de idioma */}
+      <div
+        className={
+          isMobileScreen
+            ? 'fixed bottom-10 left-4 z-50 flex flex-col items-start space-y-3 sm:space-y-4 md:top-4 md:right-4 md:bottom-auto md:left-auto md:flex-row md:items-center md:space-x-4 md:space-y-0'
+            : 'fixed top-4 right-4 z-50 flex items-center space-x-4'
+        }
+      >
+        {/* Language Selector Dropdown */}
+        <div className="relative">
+          <button
+            onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+            className={
+              isMobileScreen
+                ? 'w-14 h-14 rounded-full overflow-hidden shadow-lg bg-white dark:bg-gray-800 flex items-center justify-center p-0'
+                : 'flex items-center space-x-2 bg-white dark:bg-gray-800 rounded-full px-3 py-2 shadow-lg hover:shadow-xl transition-all duration-300'
+            }
+          >
+            <img
+              src={language === 'es' ? "https://flagcdn.com/w20/es.png" : "https://flagcdn.com/w20/gb.png"}
+              alt={language === 'es' ? "Español" : "English"}
+              className={isMobileScreen ? "w-7 h-7 rounded-full" : "w-5 h-5 rounded-full"}
+            />
+            {/* Mostrar flecha en móvil, pero no texto */}
+            <svg
+              className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isLanguageMenuOpen ? 'rotate-180' : ''} ${isMobileScreen ? '' : 'ml-1'}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+            {/* Solo en escritorio mostrar texto */}
+            {!isMobileScreen && (
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                {language === 'es' ? 'ES' : 'EN'}
+              </span>
+            )}
+          </button>
+          {/* Dropdown Menu */}
+          {isLanguageMenuOpen && (
+            <div className={`absolute ${isMobileScreen ? 'left-0 bottom-full mb-2' : 'right-0 mt-2'} w-14 bg-white dark:bg-gray-800 rounded-xl shadow-2xl z-50 flex flex-col items-center p-0`}>
+              {language !== 'es' && (
+                <button
+                  onClick={() => {
+                    setLanguage('es');
+                    setIsLanguageMenuOpen(false);
+                  }}
+                  className="flex items-center justify-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl"
+                >
+                  <img src="https://flagcdn.com/w40/es.png" alt="Español" className="w-8 h-8 rounded-full" />
+                </button>
+              )}
+              {language !== 'en' && (
+                <button
+                  onClick={() => {
+                    setLanguage('en');
+                    setIsLanguageMenuOpen(false);
+                  }}
+                  className="flex items-center justify-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl"
+                >
+                  <img src="https://flagcdn.com/w40/gb.png" alt="English" className="w-8 h-8 rounded-full" />
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+        {/* Dark Mode Button */}
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
-          className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 hover:rotate-12 active:scale-95"
+          className={
+            isMobileScreen
+              ? 'relative w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 active:scale-95'
+              : 'relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 hover:rotate-12 active:scale-95'
+          }
           aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
         >
           <div className="absolute inset-0 rounded-full overflow-hidden">
             <div className={`absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 transition-transform duration-500 ${isDarkMode ? 'translate-y-0' : 'translate-y-full'}`}></div>
           </div>
-          <div className="relative z-10 w-6 h-6 flex items-center justify-center">
+          <div className={isMobileScreen ? "relative z-10 w-7 h-7 flex items-center justify-center" : "relative z-10 w-6 h-6 flex items-center justify-center"}>
             {isDarkMode ? (
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={isMobileScreen ? "w-6 h-6 text-white" : "w-5 h-5 text-white"} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
               </svg>
             ) : (
-              <svg className="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={isMobileScreen ? "w-6 h-6 text-yellow-500" : "w-5 h-5 text-yellow-500"} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             )}
@@ -102,23 +254,23 @@ function App() {
       </div>
 
       {/* Menú minimalista */}
-      <nav className="w-full max-w-5xl flex justify-center mb-8 pr-20 pl-4 sm:pr-0 sm:pl-0">
-        <ul className="flex space-x-10 text-gray-700 dark:text-gray-300 text-base font-medium tracking-wide">
+      <nav className="w-full max-w-5xl flex justify-center mb-8 pr-0 pl-0">
+        <ul className="flex space-x-10 text-gray-700 dark:text-gray-300 text-base font-medium tracking-wide w-full justify-center items-center text-center">
           <li>
             <a href="#como-ayudarte" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
-              <span className="relative z-10">Introducción</span>
+              <span className="relative z-10">{t.menu.intro}</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
             </a>
           </li>
           <li>
             <a href="#proyectos" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
-              <span className="relative z-10">Proyectos</span>
+              <span className="relative z-10">{t.menu.projects}</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
             </a>
           </li>
           <li>
             <a href="#contacto" className="relative group hover:text-black dark:hover:text-white transition-colors duration-200">
-              <span className="relative z-10">Contacto</span>
+              <span className="relative z-10">{t.menu.contact}</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
             </a>
           </li>
@@ -139,9 +291,9 @@ function App() {
       <main className="w-full max-w-5xl bg-white/60 dark:bg-gray-800/60 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-md p-8 md:p-16 flex flex-col items-center transform transition-all duration-500 hover:shadow-xl hover:scale-[1.01] main-section animate-fade-in-scale" data-aos="fade-up">
         {/* Sección 2: Título y Subtítulo */}
         <section className="w-full flex flex-col items-center mb-12 text-center" data-aos="fade-up" data-aos-offset="200">
-          <span className="text-2xl font-bold tracking-widest text-gray-700 dark:text-gray-300 mb-2 bounce-on-hover">JAVIER NAVARRO | DESARROLLADOR WEB</span>
+          <span className="text-2xl font-bold tracking-widest text-gray-700 dark:text-gray-300 mb-2 bounce-on-hover">{t.title}</span>
           <div className="title-with-reflection">
-            <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2 wiggle-on-hover">PORTFOLIO</h1>
+            <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2 wiggle-on-hover">{t.portfolio}</h1>
           </div>
         </section>
 
@@ -180,7 +332,7 @@ function App() {
 
               {/* Mostrar el bocadillo solo después de que el Spline haya cargado COMPLETAMENTE */}
               {!isLoadingSpline && (
-                <div className="speech-bubble"><span className="typing-text">{isMobile ? 'BIENVENIDO A MI PORTFOLIO! DESLIZA PARA VERLO!' : 'BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!'}</span></div>
+                <div className="speech-bubble"><span className="typing-text">{isMobile ? t.welcomeMobile : t.welcome}</span></div>
               )}
             </div>
           </div>
@@ -188,25 +340,17 @@ function App() {
 
         {/* Sección 3: ¿CÓMO PUEDO AYUDARTE? y descripción */}
         <section id="como-ayudarte" className="w-full mb-8 scroll-mt-40" data-aos="fade-up" data-aos-offset="300">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight bounce-on-hover text-center">¿CÓMO PUEDO AYUDARTE?</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight bounce-on-hover text-center">{t.howCanIHelp}</h2>
           <div className="text-gray-700 dark:text-gray-300 text-lg text-center max-w-2xl mx-auto">
-            Soy un desarrollador web especializado en front-end. Mi objetivo es crear interfaces atractivas, accesibles y eficientes, aportando valor real a cada proyecto. Me apasiona aprender nuevas tecnologías y trabajar en equipo para lograr los mejores resultados.
+            {t.description}
           </div>
         </section>
 
         {/* Sección 5: Pasiones */}
         <section className="w-full mb-8" data-aos="fade-up" data-aos-offset="500">
-          <h3 className="font-bold mb-4 text-2xl text-gray-800 dark:text-gray-200 text-center transition-all duration-300 ease-in-out hover:scale-105 hover:rotate-3">PASIÓN</h3>
+          <h3 className="font-bold mb-4 text-2xl text-gray-800 dark:text-gray-200 text-center transition-all duration-300 ease-in-out hover:scale-105 hover:rotate-3">{t.passion}</h3>
           <ul className="text-sm space-y-1 flex flex-wrap justify-center gap-4">
-            {[
-              'Desarrollo de interfaces',
-              'UX/UI',
-              'Accesibilidad web',
-              'Responsive Design',
-              'Animaciones e interactividad',
-              'Optimización de rendimiento',
-              'Trabajo en equipo'
-            ].map((passion) => (
+            {t.passions.map((passion) => (
               <li key={passion} className="px-6 py-3 border-2 border-gray-700 dark:border-gray-600 bg-gray-900 dark:bg-gray-800 text-white rounded-full transition-all duration-400 ease-in-out hover:border-gray-500 hover:bg-gray-800 h-12 flex items-center justify-center hover:scale-105 active:scale-95">{passion}</li>
             ))}
           </ul>
@@ -218,22 +362,22 @@ function App() {
             className="flex flex-col items-center justify-center w-full min-h-[300px] cursor-pointer select-none transition-transform duration-300 hover:scale-105 text-center border-4 border-black dark:border-white bg-white dark:bg-gray-800 p-8 md:p-16 aspect-square sm:aspect-video transform-gpu will-change-transform active:scale-95"
             onClick={() => setShowCarousel(true)}
           >
-            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform-gpu will-change-transform transition-transform duration-300 hover:scale-105">Proyectos</h2>
+            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform-gpu will-change-transform transition-transform duration-300 hover:scale-105">{t.projects}</h2>
             <span className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 font-medium transform-gpu will-change-transform transition-transform duration-300 hover:scale-105">
-              {isMobile ? 'Pulsa para ver los proyectos' : 'Haz clic para ver los proyectos'}
+              {isMobile ? t.projectsClickMobile : t.projectsClick}
             </span>
           </div>
         </section>
 
         {/* Sección 7: Tecnologías */}
         <div data-aos="fade-up" data-aos-offset="560" className="mt-2 sm:mt-5">
-          <Tecnologias />
+          <Tecnologias language={language} />
         </div>
 
         {/* Sección 8: Contacto */}
         <section id="contacto" className="w-full flex flex-col items-center scroll-mt-24 main-section mt-10" data-aos="fade-up" data-aos-offset="580">
           <div>
-            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">Contacto</h2>
+            <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">{t.contact}</h2>
           </div>
           <div className="flex flex-wrap justify-center gap-8 mt-4 mb-16">
             <a
@@ -315,7 +459,7 @@ function App() {
 
       {/* Footer minimalista */}
       <footer className="w-full max-w-5xl mx-auto mt-8 py-6 flex flex-col md:flex-row items-center justify-between border-t border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-sm">
-        <span className="mb-2 md:mb-0">© 2024 Javier Navarro. Todos los derechos reservados.</span>
+        <span className="mb-2 md:mb-0">{t.copyright}</span>
         <div className="flex space-x-6">
           <a
             href="https://github.com/JavierNavarro12"
@@ -379,7 +523,7 @@ function App() {
       )}
 
       {/* Renderizar el ProjectCarousel si showCarousel es true */}
-      {showCarousel && <ProjectCarousel onClose={() => setShowCarousel(false)} />}
+      {showCarousel && <ProjectCarousel onClose={() => setShowCarousel(false)} language={language} translations={translations[language].carousel} />}
     </div>
   );
 }

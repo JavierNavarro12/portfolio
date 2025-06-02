@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import proyectos from "./proyectos";
 import ProjectCard from './ProjectCard';
 
-function ProjectCarousel({ onClose }) {
+function ProjectCarousel({ onClose, language, translations }) {
   const [selectedCard, setSelectedCard] = useState(null);
   const [paused, setPaused] = useState(false);
 
@@ -27,10 +27,10 @@ function ProjectCarousel({ onClose }) {
         style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
         onClick={onClose}
         tabIndex={0}
-        aria-label="Volver al portfolio"
+        aria-label={language === 'es' ? 'Volver al portfolio' : 'Back to portfolio'}
       >
         <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-        Volver
+        {language === 'es' ? 'Volver' : 'Back'}
       </button>
       <div className={`wrapper fullscreen-carousel${paused ? ' paused' : ''}${selectedCard !== null ? ' has-selected' : ''}`} style={{ '--quantity': proyectos.length, minHeight: '100vh', height: '100vh', width: '100vw', animation: 'fadeInScale 0.7s' }}>
         <div className="inner">
@@ -44,6 +44,8 @@ function ProjectCarousel({ onClose }) {
                     isSelected={selectedIndex === index} // Siempre false aquí para el carrusel 3D
                     onCardClick={handleCardClick}
                     onCloseCard={handleCloseCard} // Este no debería usarse en la vista no seleccionada, pero se pasa por completitud
+                    language={language}
+                    translations={translations}
                 />
             )
           ))}
@@ -57,6 +59,8 @@ function ProjectCarousel({ onClose }) {
               isSelected={true} // Siempre true para la tarjeta seleccionada
               onCardClick={handleCardClick} // Este no debería usarse en la vista seleccionada, pero se pasa por completitud
               onCloseCard={handleCloseCard}
+              language={language}
+              translations={translations}
           />
         )}
       </div>
