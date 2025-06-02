@@ -36,7 +36,7 @@ const proyectos = [
       url: "https://portfoliojaviernavarro.netlify.app/",
       previewUrl: "https://portfoliojaviernavarro.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/portfolio",
-      tecnologias: ["React", "JavaScript", "CSS", "HTML"],
+      tecnologias: ["React", "JavaScript", "CSS"],
       imagenPreview: require("./img/portfolio.png")
     }
   ];

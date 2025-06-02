@@ -30,6 +30,35 @@ const colorPalette = [
   "142, 202, 252"
 ];
 
+const techBgColor = {
+  HTML: '#fff3e0', // naranja claro
+  CSS: '#e3f0ff', // azul claro
+  JavaScript: '#fffde7', // amarillo claro
+  React: '#e0f7fa', // celeste claro
+  'Next.js': '#f3f4f6', // gris claro
+  Java: '#e0ecff', // azul muy claro
+  Python: '#e0f2f1', // verde agua claro
+  Figma: '#f3e8ff', // violeta claro
+  GitHub: '#f4f4f4', // gris claro
+  PostgreSQL: '#e8f0fe', // azul claro
+  MySQL: '#e0f7fa', // celeste claro
+  Trello: '#e3f2fd', // azul claro
+};
+const techTextColor = {
+  HTML: '#e34c26',
+  CSS: '#264de4',
+  JavaScript: '#eab308',
+  React: '#0ea5e9',
+  'Next.js': '#222',
+  Java: '#007396',
+  Python: '#306998',
+  Figma: '#a259ff',
+  GitHub: '#333',
+  PostgreSQL: '#336791',
+  MySQL: '#00758f',
+  Trello: '#0079bf',
+};
+
 function ProjectCard({
   proyecto,
   index,
@@ -51,7 +80,7 @@ function ProjectCard({
       onClick={() => !isSelected && onCardClick(index)}
     >
       {isSelected ? (
-        <div className="card-content" onClick={(e) => e.stopPropagation()}>
+        <div className="card-content compact-project-card" onClick={(e) => e.stopPropagation()}>
           {/* Botón de cerrar tipo Uiverse */}
           <button
             className="close-btn"
@@ -72,7 +101,7 @@ function ProjectCard({
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
-          <div className="preview-iframe">
+          <div className="preview-iframe compact-preview">
             <iframe
               src={proyecto.previewUrl}
               title={proyecto.titulo}
@@ -81,21 +110,28 @@ function ProjectCard({
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
             />
           </div>
-          <div className="project-title">{proyecto.titulo}</div>
-          <div className="project-desc">{proyecto.descripcion}</div>
-          <div className="tech-list">
+          <div className="project-title compact-title">{proyecto.titulo}</div>
+          <div className="project-desc compact-desc">{proyecto.descripcion}</div>
+          <div className="tech-list compact-tech-list">
             {proyecto.tecnologias &&
               proyecto.tecnologias.map((tec) => (
                 <span
                   key={tec}
-                  className="flex items-center gap-1 px-2 py-1 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full text-xs font-medium text-gray-700 dark:text-gray-200 shadow-sm"
+                  style={{
+                    background: techBgColor[tec] || '#f3f4f6',
+                    color: techTextColor[tec] || '#222',
+                    border: `1.5px solid ${techTextColor[tec] || '#bbb'}`,
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
+                    fontWeight: 600,
+                  }}
+                  className="flex items-center gap-1 px-3 py-1 rounded-full text-xs shadow-sm"
                 >
-                  <span className="text-base">{iconMap[tec]}</span>
+                  <span className="text-base" style={{ color: techTextColor[tec] || '#222' }}>{iconMap[tec]}</span>
                   {tec}
                 </span>
               ))}
           </div>
-          <div className="action-buttons">
+          <div className="action-buttons compact-action-buttons">
             <a
               href={proyecto.url}
               target="_blank"
