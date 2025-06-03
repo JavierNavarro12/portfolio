@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Tecnologias from "./Tecnologias";
 import Spline from '@splinetool/react-spline';
 import ProjectCarousel from './ProjectCarousel';
@@ -90,6 +90,7 @@ function App() {
   const [showMinimumLoadTime, setShowMinimumLoadTime] = useState(true);
   const [language, setLanguage] = useState('es');
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const languageMenuRef = useRef(null);
 
   const t = translations[language];
 
@@ -157,6 +158,18 @@ function App() {
 
   const isMobileScreen = typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
 
+  // Cerrar el menú de idioma al hacer clic fuera
+  useEffect(() => {
+    if (!isLanguageMenuOpen) return;
+    function handleClickOutside(event) {
+      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+        setIsLanguageMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isLanguageMenuOpen]);
+
   return (
     <div className="min-h-screen bg-[#edeadd] dark:bg-gray-900 flex flex-col items-center py-8 transition-colors duration-300">
       {/* Botón de tema oscuro y selector de idioma */}
@@ -166,6 +179,7 @@ function App() {
             ? 'fixed bottom-10 left-4 z-50 flex flex-col items-start space-y-3 sm:space-y-4 md:top-4 md:right-4 md:bottom-auto md:left-auto md:flex-row md:items-center md:space-x-4 md:space-y-0'
             : 'fixed top-4 right-4 z-50 flex items-center space-x-4'
         }
+        ref={languageMenuRef}
       >
         {/* Language Selector Dropdown */}
         <div className="relative">
@@ -174,40 +188,33 @@ function App() {
             className={
               isMobileScreen
                 ? 'w-14 h-14 rounded-full overflow-hidden shadow-lg bg-white dark:bg-gray-800 flex items-center justify-center p-0'
-                : 'flex items-center space-x-2 bg-white dark:bg-gray-800 rounded-full px-3 py-2 shadow-lg hover:shadow-xl transition-all duration-300'
+                : 'w-12 h-12 rounded-full overflow-hidden shadow-lg bg-white dark:bg-gray-800 flex items-center justify-center p-0 hover:shadow-xl transition-all duration-300'
             }
           >
             <img
-              src={language === 'es' ? "https://flagcdn.com/w20/es.png" : "https://flagcdn.com/w20/gb.png"}
+              src={language === 'es' ? "https://flagcdn.com/w40/es.png" : "https://flagcdn.com/w40/gb.png"}
               alt={language === 'es' ? "Español" : "English"}
-              className={isMobileScreen ? "w-7 h-7 rounded-full" : "w-5 h-5 rounded-full"}
+              className="w-7 h-7 rounded-full ml-1"
             />
-            {/* Mostrar flecha en móvil, pero no texto */}
             <svg
-              className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isLanguageMenuOpen ? 'rotate-180' : ''} ${isMobileScreen ? '' : 'ml-1'}`}
+              className={`w-8 h-8 ml-1 text-gray-500 transition-transform duration-300 ${isLanguageMenuOpen ? 'rotate-180' : ''}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
-            {/* Solo en escritorio mostrar texto */}
-            {!isMobileScreen && (
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {language === 'es' ? 'ES' : 'EN'}
-              </span>
-            )}
           </button>
           {/* Dropdown Menu */}
           {isLanguageMenuOpen && (
-            <div className={`absolute ${isMobileScreen ? 'left-0 bottom-full mb-2' : 'right-0 mt-2'} w-14 bg-white dark:bg-gray-800 rounded-xl shadow-2xl z-50 flex flex-col items-center p-0`}>
+            <div className={`absolute ${isMobileScreen ? 'left-0 bottom-full mb-2' : 'right-0 mt-2'} w-12 bg-white dark:bg-gray-800 rounded-full overflow-hidden shadow-2xl z-50 flex flex-col items-center p-0`}>
               {language !== 'es' && (
                 <button
                   onClick={() => {
                     setLanguage('es');
                     setIsLanguageMenuOpen(false);
                   }}
-                  className="flex items-center justify-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl"
+                  className="flex items-center justify-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <img src="https://flagcdn.com/w40/es.png" alt="Español" className="w-8 h-8 rounded-full" />
                 </button>
@@ -218,7 +225,7 @@ function App() {
                     setLanguage('en');
                     setIsLanguageMenuOpen(false);
                   }}
-                  className="flex items-center justify-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl"
+                  className="flex items-center justify-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <img src="https://flagcdn.com/w40/gb.png" alt="English" className="w-8 h-8 rounded-full" />
                 </button>
@@ -232,20 +239,20 @@ function App() {
           className={
             isMobileScreen
               ? 'relative w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 active:scale-95'
-              : 'relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 hover:rotate-12 active:scale-95'
+              : 'relative w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 hover:rotate-12 active:scale-95'
           }
           aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
         >
           <div className="absolute inset-0 rounded-full overflow-hidden">
             <div className={`absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 transition-transform duration-500 ${isDarkMode ? 'translate-y-0' : 'translate-y-full'}`}></div>
           </div>
-          <div className={isMobileScreen ? "relative z-10 w-7 h-7 flex items-center justify-center" : "relative z-10 w-6 h-6 flex items-center justify-center"}>
+          <div className="relative z-10 w-6 h-6 flex items-center justify-center">
             {isDarkMode ? (
-              <svg className={isMobileScreen ? "w-6 h-6 text-white" : "w-5 h-5 text-white"} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
               </svg>
             ) : (
-              <svg className={isMobileScreen ? "w-6 h-6 text-yellow-500" : "w-5 h-5 text-yellow-500"} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             )}
