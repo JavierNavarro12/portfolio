@@ -38,6 +38,16 @@ const proyectos = [
       codigoUrl: "https://github.com/JavierNavarro12/portfolio",
       tecnologias: ["React", "JavaScript", "CSS"],
       imagenPreview: require("./img/portfolio.png")
+    },
+    {
+      id: 5,
+      titulo: { es: "Juego de Programación", en: "Programming Game" },
+      descripcion: { es: "Un escape room virtual de programación.", en: "A virtual programming escape room." },
+      url: "https://scape-room.netlify.app",
+      previewUrl: "https://scape-room.netlify.app",
+      codigoUrl: "",
+      tecnologias: ["React", "JavaScript", "CSS"],
+      imagenPreview: require("./img/scape-room.png")
     }
   ];
 
