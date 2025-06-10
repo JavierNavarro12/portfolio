@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello } from "react-icons/fa";
 import { SiNextdotjs, SiPostgresql, SiMysql } from "react-icons/si";
+import { FiExternalLink } from "react-icons/fi";
 
 const iconMap = {
   HTML: <FaHtml5 color="#e34c26" />,
@@ -73,6 +74,11 @@ function ProjectCard({
     '--color-card': colorPalette[index % colorPalette.length],
     zIndex: isSelected ? 200 : 'auto', // Asegura que la tarjeta seleccionada esté al frente
   };
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+
+  useEffect(() => {
+    setIframeLoaded(false);
+  }, [proyecto.previewUrl, proyecto.id]);
 
   return (
     <div
@@ -103,13 +109,18 @@ function ProjectCard({
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
-          <div className="preview-iframe compact-preview">
+          <div className="preview-iframe compact-preview" style={{ position: 'relative' }}>
+            {!iframeLoaded && (
+              <div className="skeleton-preview" />
+            )}
             <iframe
               src={proyecto.previewUrl}
               title={proyecto.titulo[language]}
               className="w-full h-full border-0 rounded-lg"
               loading="lazy"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
+              style={{ position: 'relative', zIndex: 1 }}
+              onLoad={() => setIframeLoaded(true)}
             />
           </div>
           <div className="project-title compact-title">{proyecto.titulo[language]}</div>
@@ -135,20 +146,22 @@ function ProjectCard({
           </div>
           <div className="action-buttons compact-action-buttons">
             <a
-              href={proyecto.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
-            >
-              {translations.viewProject}
-            </a>
-            <a
               href={proyecto.codigoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-base font-semibold text-[#444] dark:text-gray-300 border border-[#d1d5db] dark:border-gray-600 rounded-lg px-5 py-2 bg-[#f3f3f3] dark:bg-gray-700 hover:bg-[#e0e0e0] dark:hover:bg-gray-600 transition-colors duration-200 text-center cursor-pointer"
+              className="project-action-btn"
             >
+              <FaGithub className="w-6 h-6 mr-2" />
               {translations.viewCode || 'Ver código'}
+            </a>
+            <a
+              href={proyecto.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-action-btn"
+            >
+              <FiExternalLink className="w-6 h-6 mr-2" />
+              {translations.viewProject}
             </a>
           </div>
         </div>

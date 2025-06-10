@@ -605,3 +605,109 @@
     margin-top: 0.1rem;
   }
 }
+
+.project-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid #e5e7eb;
+  color: #222 !important;
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-decoration: none;
+}
+.project-action-btn svg {
+  color: #222 !important;
+  transition: color 0.2s;
+}
+.project-action-btn:hover, .project-action-btn:focus {
+  background: #f3f4f6;
+  color: #222 !important;
+  border-color: #222;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.project-action-btn:hover svg, .project-action-btn:focus svg {
+  color: #222 !important;
+}
+
+.card.selected .card-content .tech-list span,
+.compact-tech-list span {
+  font-size: 0.75rem !important;
+  padding: 0.25rem 0.7rem !important;
+}
+.card.selected .card-content .tech-list .text-base,
+.compact-tech-list .text-base {
+  font-size: 1rem !important;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+
+.scroll-down span {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-bottom: 2px solid white;
+  border-right: 2px solid white;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+  background: transparent;
+  transform: rotate(45deg);
+  animation: scroll-down 1.5s infinite;
+}
+
+.scroll-down.alt span {
+  border-bottom: 2px solid #222;
+  border-right: 2px solid #222;
+}
+.dark .scroll-down.alt span {
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
+.scroll-down span:nth-child(1) {
+  animation-delay: -0.2s;
+}
+
+.scroll-down span:nth-child(2) {
+  animation-delay: -0.4s;
+}
+
+@keyframes scroll-down {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-8px, -8px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+}
+
+.skeleton-preview {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.2s infinite linear;
+  z-index: 2;
+}
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

@@ -77,7 +77,13 @@ const translations = {
       previous: "Previous",
       viewProject: "View Project",
       viewCode: "View code"
-    }
+    },
+    techSections: {
+      frontend: 'Frontend',
+      backend: 'Backend',
+      database: 'Database',
+      tools: 'Tools',
+    },
   }
 };
 
@@ -91,6 +97,8 @@ function App() {
   const [language, setLanguage] = useState('es');
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const languageMenuRef = useRef(null);
+  const [showScrollDown, setShowScrollDown] = useState(true);
+  const comoAyudarteRef = useRef(null);
 
   const t = translations[language];
 
@@ -170,6 +178,21 @@ function App() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isLanguageMenuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!comoAyudarteRef.current) return;
+      const rect = comoAyudarteRef.current.getBoundingClientRect();
+      // Oculta la flecha cuando la sección está a punto de entrar en el viewport (ajusta el offset si quieres)
+      if (rect.top < window.innerHeight * 0.85) {
+        setShowScrollDown(false);
+      } else {
+        setShowScrollDown(true);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#edeadd] dark:bg-gray-900 flex flex-col items-center py-8 transition-colors duration-300">
       {/* Botón de tema oscuro y selector de idioma */}
@@ -181,53 +204,35 @@ function App() {
         }
         ref={languageMenuRef}
       >
-        {/* Language Selector Dropdown */}
+        {/* Nuevo selector de idioma */}
         <div className="relative">
           <button
             onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-            className={
-              isMobileScreen
-                ? 'w-14 h-14 rounded-full overflow-hidden shadow-lg bg-white dark:bg-gray-800 flex items-center justify-center p-0'
-                : 'w-12 h-12 rounded-full overflow-hidden shadow-lg bg-white dark:bg-gray-800 flex items-center justify-center p-0 hover:shadow-xl transition-all duration-300'
-            }
+            className="flex items-center justify-center gap-2 w-20 h-10 rounded-xl bg-[#334155] dark:bg-[#1e293b] border-2 border-blue-900 shadow-md text-white font-bold text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200"
+            style={{ minWidth: 80, minHeight: 40 }}
+            aria-label="Selector de idioma"
           >
-            <img
-              src={language === 'es' ? "https://flagcdn.com/w40/es.png" : "https://flagcdn.com/w40/gb.png"}
-              alt={language === 'es' ? "Español" : "English"}
-              className="w-7 h-7 rounded-full ml-1"
-            />
-            <svg
-              className={`w-8 h-8 ml-1 text-gray-500 transition-transform duration-300 ${isLanguageMenuOpen ? 'rotate-180' : ''}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
+            <span>{language === 'es' ? 'ES' : 'EN'}</span>
+            <span className="flex flex-col justify-center">
+              <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="white" strokeWidth="2" strokeLinecap="round"/></svg>
+            </span>
           </button>
-          {/* Dropdown Menu */}
           {isLanguageMenuOpen && (
-            <div className={`absolute ${isMobileScreen ? 'left-0 bottom-full mb-2' : 'right-0 mt-2'} w-12 bg-white dark:bg-gray-800 rounded-full overflow-hidden shadow-2xl z-50 flex flex-col items-center p-0`}>
-              {language !== 'es' && (
+            <div className="absolute right-0 mt-2 w-20 h-10 bg-[#334155] dark:bg-[#1e293b] border-2 border-blue-900 rounded-xl shadow-md z-50 flex flex-col justify-center animate-fade-in-scale" style={{minWidth: 80, minHeight: 40}}>
+              {language === 'es' && (
                 <button
-                  onClick={() => {
-                    setLanguage('es');
-                    setIsLanguageMenuOpen(false);
-                  }}
-                  className="flex items-center justify-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  onClick={() => { setLanguage('en'); setIsLanguageMenuOpen(false); }}
+                  className="flex items-center justify-center w-full h-full text-white hover:bg-blue-900/80 transition-colors text-lg font-semibold rounded-xl"
                 >
-                  <img src="https://flagcdn.com/w40/es.png" alt="Español" className="w-8 h-8 rounded-full" />
+                  EN
                 </button>
               )}
-              {language !== 'en' && (
+              {language === 'en' && (
                 <button
-                  onClick={() => {
-                    setLanguage('en');
-                    setIsLanguageMenuOpen(false);
-                  }}
-                  className="flex items-center justify-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  onClick={() => { setLanguage('es'); setIsLanguageMenuOpen(false); }}
+                  className="flex items-center justify-center w-full h-full text-white hover:bg-blue-900/80 transition-colors text-lg font-semibold rounded-xl"
                 >
-                  <img src="https://flagcdn.com/w40/gb.png" alt="English" className="w-8 h-8 rounded-full" />
+                  ES
                 </button>
               )}
             </div>
@@ -339,14 +344,22 @@ function App() {
 
               {/* Mostrar el bocadillo solo después de que el Spline haya cargado COMPLETAMENTE */}
               {!isLoadingSpline && (
-                <div className="speech-bubble"><span className="typing-text">{isMobile ? t.welcomeMobile : t.welcome}</span></div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                  <div className="speech-bubble"><span className="typing-text">{isMobile ? t.welcomeMobile : t.welcome}</span></div>
+                  {showScrollDown && (
+                    <div className="scroll-down alt" aria-label="Scroll down" style={{ position: 'static', marginLeft: '16px', marginBottom: '-8px' }}>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           </div>
         </section>
 
         {/* Sección 3: ¿CÓMO PUEDO AYUDARTE? y descripción */}
-        <section id="como-ayudarte" className="w-full mb-8 scroll-mt-40" data-aos="fade-up" data-aos-offset="300">
+        <section id="como-ayudarte" ref={comoAyudarteRef} className="w-full mb-8 scroll-mt-40" data-aos="fade-up" data-aos-offset="300">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight bounce-on-hover text-center">{t.howCanIHelp}</h2>
           <div className="text-gray-700 dark:text-gray-300 text-lg text-center max-w-2xl mx-auto">
             {t.description}
@@ -378,7 +391,7 @@ function App() {
 
         {/* Sección 7: Tecnologías */}
         <div data-aos="fade-up" data-aos-offset="560" className="mt-2 sm:mt-5">
-          <Tecnologias language={language} />
+          <Tecnologias language={language} translations={translations[language]} />
         </div>
 
         {/* Sección 8: Contacto */}
