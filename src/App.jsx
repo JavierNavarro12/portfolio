@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, Suspense, lazy } from "react";
 import Tecnologias from "./Tecnologias";
-import ProjectCarousel from './ProjectCarousel';
 import 'aos/dist/aos.css';
 
 const Spline = lazy(() => import('@splinetool/react-spline'));
+const ProjectCarousel = lazy(() => import('./ProjectCarousel'));
 
 // Language translations
 const translations = {
@@ -117,11 +117,12 @@ function App() {
   }, [isDarkMode]);
 
   useEffect(() => {
-    // Carga dinámica de AOS
-    import('aos').then(AOS => {
-      AOS.init({ duration: 1000, once: false });
-    });
-  }, []);
+    if (!isLoadingSpline) {
+      import('aos').then(AOS => {
+        AOS.init({ duration: 1000, once: false });
+      });
+    }
+  }, [isLoadingSpline]);
 
   useEffect(() => {
     // Añadir un pequeño retraso para asegurar que el scroll funcione en móviles
@@ -540,7 +541,11 @@ function App() {
       )}
 
       {/* Renderizar el ProjectCarousel si showCarousel es true */}
-      {showCarousel && <ProjectCarousel onClose={() => setShowCarousel(false)} language={language} translations={translations[language].carousel} />}
+      {showCarousel && (
+        <Suspense fallback={null}>
+          <ProjectCarousel onClose={() => setShowCarousel(false)} language={language} translations={translations[language].carousel} />
+        </Suspense>
+      )}
     </div>
   );
 }
