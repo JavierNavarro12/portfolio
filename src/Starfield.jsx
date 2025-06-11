@@ -67,7 +67,7 @@ const Starfield = () => {
       canvas.height = height;
       starsRef.current = Array.from({ length: STAR_COUNT }, () => createStar(width, height));
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
     return () => {
       cancelAnimationFrame(animationRef.current);

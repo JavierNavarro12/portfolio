@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense, lazy } from "react";
 import Tecnologias from "./Tecnologias";
-import Spline from '@splinetool/react-spline';
 import ProjectCarousel from './ProjectCarousel';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+const Spline = lazy(() => import('@splinetool/react-spline'));
 
 // Language translations
 const translations = {
@@ -117,7 +117,10 @@ function App() {
   }, [isDarkMode]);
 
   useEffect(() => {
-    AOS.init({ duration: 1000, once: false });
+    // Carga dinámica de AOS
+    import('aos').then(AOS => {
+      AOS.init({ duration: 1000, once: false });
+    });
   }, []);
 
   useEffect(() => {
@@ -137,19 +140,12 @@ function App() {
   // Efecto para detectar tamaño de pantalla
   useEffect(() => {
     const checkScreenSize = () => {
-      // Consideramos 'móvil' si el ancho es menor o igual a 768px (breakpoint md de Tailwind)
       setIsMobile(window.innerWidth <= 768);
     };
-
-    // Ejecutar al montar el componente
     checkScreenSize();
-
-    // Añadir listener para redimensionamiento
-    window.addEventListener('resize', checkScreenSize);
-
-    // Limpiar listener al desmontar el componente
+    window.addEventListener('resize', checkScreenSize, { passive: true });
     return () => window.removeEventListener('resize', checkScreenSize);
-  }, []); // Se ejecuta solo una vez al montar y limpiar al desmontar
+  }, []);
 
   useEffect(() => {
     // Efecto para asegurar un tiempo mínimo de visualización del indicador de carga
@@ -182,14 +178,13 @@ function App() {
     const handleScroll = () => {
       if (!comoAyudarteRef.current) return;
       const rect = comoAyudarteRef.current.getBoundingClientRect();
-      // Oculta la flecha cuando la sección está a punto de entrar en el viewport (ajusta el offset si quieres)
       if (rect.top < window.innerHeight * 0.85) {
         setShowScrollDown(false);
       } else {
         setShowScrollDown(true);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -335,12 +330,14 @@ function App() {
                 </div>
               )}
 
-              {/* Renderizar Spline siempre para iniciar la carga, ocultarlo si se debe mostrar el indicador */}
-              <Spline
-                scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
-                onLoad={handleSplineLoad} // Llama a esta función al cargar
-                style={{ visibility: shouldShowLoadingIndicator ? 'hidden' : 'visible' }} // Oculta el Spline si se muestra el indicador
-              />
+              {/* Renderizar Spline con Suspense */}
+              <Suspense fallback={null}>
+                <Spline
+                  scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
+                  onLoad={handleSplineLoad}
+                  style={{ visibility: shouldShowLoadingIndicator ? 'hidden' : 'visible' }}
+                />
+              </Suspense>
 
               {/* Mostrar el bocadillo solo después de que el Spline haya cargado COMPLETAMENTE */}
               {!isLoadingSpline && (
