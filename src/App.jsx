@@ -316,32 +316,40 @@ function App() {
               position: 'relative',
             }}>
               {/* Indicador de carga mientras el Spline carga */}
-              {shouldShowLoadingIndicator && (
+              {shouldShowLoadingIndicator && !isMobileScreen && (
                 <div style={{
                   position: 'absolute', 
                   inset: 0, 
                   display: 'flex', 
                   alignItems: 'center', 
                   justifyContent: 'center', 
-                  backgroundColor: '#edeadd', // Color de fondo similar a la página
-                  color: '#333', // Color de texto
-                  zIndex: 5 // Asegura que esté encima del Spline mientras carga
+                  backgroundColor: '#edeadd',
+                  color: '#333',
+                  zIndex: 5
                 }}>
                   Cargando Robot...
                 </div>
               )}
 
-              {/* Renderizar Spline con Suspense */}
-              <Suspense fallback={null}>
-                <Spline
-                  scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
-                  onLoad={handleSplineLoad}
-                  style={{ visibility: shouldShowLoadingIndicator ? 'hidden' : 'visible' }}
+              {/* Mostrar imagen estática en móvil, Spline en escritorio */}
+              {isMobileScreen ? (
+                <img
+                  src="/robot-static.png"
+                  alt="Robot de bienvenida"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#edeadd' }}
                 />
-              </Suspense>
+              ) : (
+                <Suspense fallback={null}>
+                  <Spline
+                    scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
+                    onLoad={handleSplineLoad}
+                    style={{ visibility: shouldShowLoadingIndicator ? 'hidden' : 'visible' }}
+                  />
+                </Suspense>
+              )}
 
-              {/* Mostrar el bocadillo solo después de que el Spline haya cargado COMPLETAMENTE */}
-              {!isLoadingSpline && (
+              {/* Mostrar el bocadillo solo después de que el Spline haya cargado COMPLETAMENTE o siempre en móvil */}
+              {((!isLoadingSpline && !isMobileScreen) || isMobileScreen) && (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                   <div className="speech-bubble"><span className="typing-text">{isMobile ? t.welcomeMobile : t.welcome}</span></div>
                   {showScrollDown && (
