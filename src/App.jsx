@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, Suspense, lazy } from "react";
 import Tecnologias from "./Tecnologias";
 import 'aos/dist/aos.css';
 
-const Spline = lazy(() => import('@splinetool/react-spline'));
 const ProjectCarousel = lazy(() => import('./ProjectCarousel'));
 
 // Language translations
@@ -113,6 +112,7 @@ function App() {
   const [showScrollDown, setShowScrollDown] = useState(true);
   const comoAyudarteRef = useRef(null);
   const [mobileSectionStep, setMobileSectionStep] = useState(0);
+  const [SplineComponent, setSplineComponent] = useState(null);
 
   const t = translations[language];
 
@@ -213,6 +213,16 @@ function App() {
     timers.push(setTimeout(() => setMobileSectionStep(4), 1600)); // Tecnologías
     timers.push(setTimeout(() => setMobileSectionStep(5), 2000)); // Contacto
     return () => timers.forEach(clearTimeout);
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (!isMobile) {
+      import('@splinetool/react-spline').then(mod => {
+        setSplineComponent(() => mod.default);
+      });
+    } else {
+      setSplineComponent(null);
+    }
   }, [isMobile]);
 
   return (
@@ -365,13 +375,15 @@ function App() {
                   style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#edeadd' }}
                 />
               ) : (
-                <Suspense fallback={null}>
-                  <Spline
-                    scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
-                    onLoad={handleSplineLoad}
-                    style={{ visibility: shouldShowLoadingIndicator ? 'hidden' : 'visible' }}
-                  />
-                </Suspense>
+                SplineComponent && (
+                  <Suspense fallback={null}>
+                    <SplineComponent
+                      scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
+                      onLoad={handleSplineLoad}
+                      style={{ visibility: shouldShowLoadingIndicator ? 'hidden' : 'visible' }}
+                    />
+                  </Suspense>
+                )
               )}
 
               {/* Mostrar el bocadillo solo después de que el Spline haya cargado COMPLETAMENTE o siempre en móvil */}
@@ -470,14 +482,14 @@ function App() {
             </div>
         }
 
-        {/* Sección 8: Contacto */}
+        {/* Sección 8: si */}
         {isMobile
           ? <FadeInSection show={mobileSectionStep >= 5}>
               <section id="contacto" className="w-full flex flex-col items-center scroll-mt-24 main-section mt-10">
                 <div>
                   <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">{t.contact}</h2>
                 </div>
-                <div className="flex flex-wrap justify-center gap-8 mt-4 mb-16">
+                <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-4 mb-16 w-full max-w-2xl">
                   <a
                     href="https://wa.me/34693744798"
                     target="_blank"
@@ -555,7 +567,7 @@ function App() {
               <div>
                 <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">{t.contact}</h2>
               </div>
-              <div className="flex flex-wrap justify-center gap-8 mt-4 mb-16">
+              <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-4 mb-16 w-full max-w-2xl">
                 <a
                   href="https://wa.me/34693744798"
                   target="_blank"
@@ -597,6 +609,32 @@ function App() {
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                   </svg>
                   <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-gray-700 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">LinkedIn</span>
+                </a>
+                <a
+                  href="mailto:navarrojavi107@gmail.com"
+                  className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95"
+                  aria-label="Gmail"
+                >
+                  <div className="absolute inset-0 bg-red-500 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
+                  <div className="absolute inset-0 bg-white dark:bg-gray-800 rounded-full transform transition-transform duration-300 group-hover:scale-90"></div>
+                  <svg className="w-8 h-8 text-red-500 relative z-10 transform transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 20v-9.99l7.99 7.99c.39.39 1.02.39 1.41 0L20 10.01V20H4z" />
+                  </svg>
+                  <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-gray-700 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Gmail</span>
+                </a>
+                <a
+                  href="/CV-Javier-Navarro.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-20 h-20 flex items-center justify-center transform transition-all duration-300 hover:scale-110 active:scale-95"
+                  aria-label="Currículum Vitae"
+                >
+                  <div className="absolute inset-0 bg-blue-800 dark:bg-blue-700 rounded-full transform transition-transform duration-300 group-hover:scale-110"></div>
+                  <div className="absolute inset-0 bg-white dark:bg-gray-800 rounded-full transform transition-transform duration-300 group-hover:scale-90"></div>
+                  <svg className="w-8 h-8 text-blue-800 dark:text-blue-300 relative z-10 transform transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v4h4v12H6z" />
+                  </svg>
+                  <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-gray-700 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Currículum</span>
                 </a>
               </div>
               {/* Añadir espacio extra para scroll */}

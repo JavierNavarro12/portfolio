@@ -48,12 +48,14 @@ const sectionTitles = {
 
 export default function Tecnologias({ language, translations }) {
   const techSections = translations?.techSections || sectionTitles;
+  // Detectar si es móvil
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
   return (
     <section className="tecnologias w-full my-16 flex flex-col items-center animate-fade-in-scale main-section">
       <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 dark:text-white bounce-on-hover" style={{marginBottom: '2.5rem'}}>{language === 'es' ? 'Tecnologías' : 'Technologies'}</h2>
       <div className="w-full flex flex-col md:flex-row md:justify-center gap-10">
         {Object.entries(tecnologias).map(([key, techs], idx) => (
-          <div key={key} className="flex-1 flex flex-col items-center animate-fade-in-scale" style={{ animationDelay: `${idx * 0.1 + 0.1}s` }}>
+          <div key={key} className={`flex-1 flex flex-col items-center${isMobile ? ' animate-fade-in-scale' : ''}`} style={isMobile ? { animationDelay: `${idx * 0.1 + 0.1}s` } : {}}>
             <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200 bounce-on-hover">{techSections[key]}</h3>
             <div className="flex flex-wrap justify-center gap-4">
               {techs.map((tec) => (
