@@ -1,6 +1,7 @@
 import React from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaPhp } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiVisualstudiocode } from "react-icons/si";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaPhp, FaNodeJs } from "react-icons/fa";
+import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiVisualstudiocode, SiFirebase, SiPnpm, SiNetlify } from "react-icons/si";
+import { BsCodeSlash } from "react-icons/bs";
 import cursorLogo from './img/cursor-logo.svg';
 import intellijLogo from './img/intellij-logo.svg';
 
@@ -16,11 +17,14 @@ const tecnologias = {
     { nombre: "Bootstrap", icono: <SiBootstrap color="#7952b3" />, url: "https://getbootstrap.com/" },
   ],
   backend: [
+    { nombre: "Node.js", icono: <FaNodeJs color="#339933" />, url: "https://nodejs.org/" },
     { nombre: "JavaScript", icono: <FaJs color="#f0db4f" />, url: "https://developer.mozilla.org/docs/Web/JavaScript" },
     { nombre: "TypeScript", icono: <SiTypescript color="#3178c6" />, url: "https://www.typescriptlang.org/" },
     { nombre: "Java", icono: <FaJava color="#007396" />, url: "https://www.java.com/" },
     { nombre: "Python", icono: <FaPython color="#306998" />, url: "https://www.python.org/" },
     { nombre: "PHP", icono: <FaPhp color="#777BB4" />, url: "https://www.php.net/" },
+    { nombre: "Firebase", icono: <SiFirebase color="#FFCA28" />, url: "https://firebase.google.com/" },
+    { nombre: "APIs", icono: <BsCodeSlash color="#4CAF50" />, url: "https://developer.mozilla.org/docs/Web/API" },
   ],
   database: [
     { nombre: "PostgreSQL", icono: <SiPostgresql color="#336791" />, url: "https://www.postgresql.org/" },
@@ -36,6 +40,8 @@ const tecnologias = {
     { nombre: "GitHub", icono: <FaGithub color="#333" />, url: "https://github.com/" },
     { nombre: "Trello", icono: <FaTrello color="#0079bf" />, url: "https://trello.com/" },
     { nombre: "Cursor", icono: <img src={cursorLogo} alt="Cursor" style={{width:24, height:24, borderRadius:6}} />, url: "https://www.cursor.so/" },
+    { nombre: "pnpm", icono: <SiPnpm color="#F69220" />, url: "https://pnpm.io/" },
+    { nombre: "Netlify", icono: <SiNetlify color="#00AD9F" />, url: "https://www.netlify.com/" },
   ]
 };
 

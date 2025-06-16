@@ -201,18 +201,21 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Aparición escalonada en móvil
+  // Aparición escalonada en móvil SOLO al hacer scroll
   useEffect(() => {
     if (!isMobile) return;
     setMobileSectionStep(0);
-    let timers = [];
-    // Mostrar la primera sección (robot/título) inmediatamente
-    timers.push(setTimeout(() => setMobileSectionStep(1), 400)); // Sección 3
-    timers.push(setTimeout(() => setMobileSectionStep(2), 800)); // Sección 5
-    timers.push(setTimeout(() => setMobileSectionStep(3), 1200)); // Sección 6
-    timers.push(setTimeout(() => setMobileSectionStep(4), 1600)); // Tecnologías
-    timers.push(setTimeout(() => setMobileSectionStep(5), 2000)); // Contacto
-    return () => timers.forEach(clearTimeout);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      // Ajusta estos valores según la altura de tus secciones
+      if (scrollY > 50) setMobileSectionStep(1); // ¿Cómo puedo ayudarte?
+      if (scrollY > 400) setMobileSectionStep(2); // Pasiones
+      if (scrollY > 800) setMobileSectionStep(3); // Proyectos
+      if (scrollY > 1200) setMobileSectionStep(4); // Tecnologías
+      if (scrollY > 1600) setMobileSectionStep(5); // Contacto
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobile]);
 
   useEffect(() => {
