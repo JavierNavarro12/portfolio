@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaPhp, FaNodeJs } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiVisualstudiocode, SiFirebase, SiPnpm, SiNetlify } from "react-icons/si";
+import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiVisualstudiocode, SiFirebase, SiPnpm, SiNetlify, SiJest } from "react-icons/si";
 import { BsCodeSlash } from "react-icons/bs";
 import cursorLogo from './img/cursor-logo.svg';
 import intellijLogo from './img/intellij-logo.svg';
@@ -42,6 +42,7 @@ const tecnologias = {
     { nombre: "Cursor", icono: <img src={cursorLogo} alt="Cursor" style={{width:24, height:24, borderRadius:6}} />, url: "https://www.cursor.so/" },
     { nombre: "pnpm", icono: <SiPnpm color="#F69220" />, url: "https://pnpm.io/" },
     { nombre: "Netlify", icono: <SiNetlify color="#00AD9F" />, url: "https://www.netlify.com/" },
+    { nombre: "Jest", icono: <SiJest color="#C21325" />, url: "https://jestjs.io/" },
   ]
 };
 
