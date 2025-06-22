@@ -21,13 +21,16 @@ const proyectos = [
     },
     {
       id: 3,
-      titulo: { es: "Relojería", en: "Watchmaker" },
-      descripcion: { es: "Página web básica para una relojería.", en: "Basic website for a watchmaker." },
-      url: "https://relojeriajavier.netlify.app/",
-      previewUrl: "https://relojeriajavier.netlify.app/",
-      codigoUrl: "https://github.com/JavierNavarro12/PruebaPractica/tree/main/Practica",
-      tecnologias: ["HTML", "CSS", "JavaScript"],
-      imagenPreview: require("./img/relojeria.png")
+      titulo: { es: "Fitness App", en: "Fitness App" },
+      descripcion: { 
+        es: "Aplicación fullstack que, usando IA, genera informes personalizados sobre los suplementos que debes tomar.", 
+        en: "A fullstack app that uses AI to generate personalized reports on the supplements you should take." 
+      },
+      url: "https://endlessgoalsnutrition.com",
+      previewUrl: "https://endlessgoalsnutrition.com",
+      codigoUrl: "https://github.com/JavierNavarro12/Fitness",
+      tecnologias: ["React", "TypeScript", "Firebase", "APIs", "Tailwind CSS"],
+      imagenPreview: require("./img/fitness-app.png")
     },
     {
       id: 4,

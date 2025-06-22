@@ -81,19 +81,17 @@
   justify-content: center;
   overflow: hidden;
   background: none;
+  perspective: 1800px;
 }
 .inner {
   --w: 400px;
   --h: 520px;
   --translateZ: 520px;
-  --rotateX: -15deg;
-  --perspective: 1800px;
   position: relative;
   width: var(--w);
   height: var(--h);
   z-index: 2;
   transform-style: preserve-3d;
-  transform: perspective(var(--perspective));
   animation: rotating 20s linear infinite;
   display: block;
   margin: 0 auto;
@@ -177,7 +175,7 @@
 }
 .card.selected .preview-iframe {
   width: 100%;
-  height: 400px;
+  height: 320px;
   border-radius: 12px;
   border: 2px solid #e5e7eb;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
@@ -291,14 +289,15 @@
   color: #222;
   width: 22px;
   height: 22px;
+  transition: transform 0.2s;
 }
 
 @keyframes rotating {
   from {
-    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
+    transform: rotateY(0) rotateX(-5deg);
   }
   to {
-    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
+    transform: rotateY(360deg) rotateX(-5deg);
   }
 }
 
@@ -478,14 +477,6 @@
 }
 .tap-on-active:active {
   animation: tap 0.2s;
-}
-
-@keyframes fadeInScale {
-  0% { opacity: 0; transform: scale(0.95) translateY(20px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
-}
-.animate-fade-in-scale {
-  animation: fadeInScale 0.7s cubic-bezier(.4,2,.6,1) both;
 }
 
 /* Responsive tweaks for main sections */
@@ -710,4 +701,15 @@
 @keyframes skeleton-shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* Corrección para scroll en móvil */
+@media (max-width: 768px) {
+  .mobile-scroll-fix {
+    min-height: none; /* Permitir que el contenido defina la altura */
+  }
+}
+
+.title-with-reflection h1 {
+  background: linear-gradient(180deg, #333 40%, #333 60%);
 }

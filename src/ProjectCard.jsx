@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql } from "react-icons/si";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt } from "react-icons/fa";
+import { SiNextdotjs, SiPostgresql, SiMysql, SiTypescript, SiFirebase, SiTailwindcss } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
+import { BsCodeSlash } from "react-icons/bs";
 
 const iconMap = {
   HTML: <FaHtml5 color="#e34c26" />,
   CSS: <FaCss3Alt color="#264de4" />,
+  "Tailwind CSS": <SiTailwindcss color="#38bdf8" />,
   JavaScript: <FaJs color="#f0db4f" />,
+  TypeScript: <SiTypescript color="#3178c6" />,
   React: <FaReact color="#61dafb" />,
   "Next.js": <SiNextdotjs color="#000" />,
   Java: <FaJava color="#007396" />,
   Python: <FaPython color="#306998" />,
   Figma: <FaFigma color="#a259ff" />,
   GitHub: <FaGithub color="#333" />,
+  Git: <FaGitAlt color="#f34f29" />,
+  Firebase: <SiFirebase color="#FFCA28" />,
+  APIs: <BsCodeSlash color="#4CAF50" />,
   PostgreSQL: <SiPostgresql color="#336791" />,
   MySQL: <SiMysql color="#00758f" />,
   Trello: <FaTrello color="#0079bf" />,
@@ -35,26 +41,36 @@ const techBgColor = {
   HTML: '#fff3e0', // naranja claro
   CSS: '#e3f0ff', // azul claro
   JavaScript: '#fffde7', // amarillo claro
+  TypeScript: '#e0f2ff', // azul claro
   React: '#e0f7fa', // celeste claro
   'Next.js': '#f3f4f6', // gris claro
   Java: '#e0ecff', // azul muy claro
   Python: '#e0f2f1', // verde agua claro
   Figma: '#f3e8ff', // violeta claro
   GitHub: '#f4f4f4', // gris claro
+  Git: '#ffe8e6', // rojo claro
+  Firebase: '#fff8e1', // amarillo claro
+  APIs: '#e8f5e8', // verde claro
   PostgreSQL: '#e8f0fe', // azul claro
   MySQL: '#e0f7fa', // celeste claro
   Trello: '#e3f2fd', // azul claro
+  "Tailwind CSS": '#e0f2fe', // celeste claro
 };
 const techTextColor = {
   HTML: '#e34c26',
   CSS: '#264de4',
+  "Tailwind CSS": '#38bdf8',
   JavaScript: '#eab308',
+  TypeScript: '#3178c6',
   React: '#0ea5e9',
   'Next.js': '#222',
   Java: '#007396',
   Python: '#306998',
   Figma: '#a259ff',
   GitHub: '#333',
+  Git: '#f34f29',
+  Firebase: '#FFCA28',
+  APIs: '#4CAF50',
   PostgreSQL: '#336791',
   MySQL: '#00758f',
   Trello: '#0079bf',

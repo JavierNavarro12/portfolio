@@ -53,19 +53,22 @@ const sectionTitles = {
   tools: 'Herramientas',
 };
 
-export default function Tecnologias({ language, translations }) {
+export default function Tecnologias({ language, translations, isMobile }) {
   const techSections = translations?.techSections || sectionTitles;
-  // Detectar si es móvil
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  
   return (
-    <section className="tecnologias w-full my-16 flex flex-col items-center animate-fade-in-scale main-section">
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 dark:text-white bounce-on-hover" style={{marginBottom: '2.5rem'}}>{language === 'es' ? 'Tecnologías' : 'Technologies'}</h2>
+    <section 
+      className="tecnologias w-full my-16 flex flex-col items-center main-section" 
+      data-aos="fade-up"
+      data-aos-offset={isMobile ? "150" : "400"}
+    >
+      <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 dark:text-white bounce-on-hover" style={{marginBottom: '2.5rem'}} data-aos="fade-up" data-aos-delay="100">{language === 'es' ? 'Tecnologías' : 'Technologies'}</h2>
       <div className="w-full flex flex-col md:flex-row md:justify-center gap-10">
         {Object.entries(tecnologias).map(([key, techs], idx) => (
-          <div key={key} className={`flex-1 flex flex-col items-center${isMobile ? ' animate-fade-in-scale' : ''}`} style={isMobile ? { animationDelay: `${idx * 0.1 + 0.1}s` } : {}}>
+          <div key={key} className="flex-1 flex flex-col items-center" data-aos="fade-up" data-aos-delay={150 * (idx + 1)}>
             <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200 bounce-on-hover">{techSections[key]}</h3>
             <div className="flex flex-wrap justify-center gap-4">
-              {techs.map((tec) => (
+              {techs.map((tec, tecIdx) => (
                 <a
                   key={tec.nombre}
                   href={tec.url}
@@ -74,6 +77,8 @@ export default function Tecnologias({ language, translations }) {
                   className="flex items-center gap-2 bg-white dark:bg-gray-900 rounded-xl px-3 py-2 shadow hover:scale-105 transition-transform border border-gray-200 dark:border-gray-700 bounce-on-hover tap-on-active"
                   style={{ minWidth: 0 }}
                   title={tec.nombre}
+                  data-aos="fade-up"
+                  data-aos-delay={100 + (tecIdx * 50)}
                 >
                   <span className="text-2xl">{tec.icono}</span>
                   <span className="text-xs font-semibold text-gray-700 dark:text-gray-200 whitespace-nowrap">{tec.nombre}</span>
