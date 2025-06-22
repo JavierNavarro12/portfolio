@@ -337,7 +337,7 @@ function App() {
               {((!isLoadingSpline && !isMobile) || isMobile) && (
                 <div style={{
                   position: 'absolute',
-                  bottom: '5%',
+                  bottom: isMobile ? '5%' : '-14%',
                   left: '50%',
                   transform: 'translateX(-50%)',
                   display: 'flex',
@@ -407,7 +407,7 @@ function App() {
         </div>
 
         {/* Sección 8: si */}
-        <section id="contacto" className="w-full flex flex-col items-center scroll-mt-24 main-section mt-10" data-aos="fade-up" data-aos-offset={isMobile ? "200" : "580"}>
+        <section id="contacto" className="w-full flex flex-col items-center scroll-mt-24 main-section mt-10" data-aos="fade-up" data-aos-offset={isMobile ? "200" : "300"}>
           <div data-aos="fade-up">
             <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform transition-all duration-300 hover:scale-105 wiggle-on-hover">{t.contact}</h2>
           </div>
