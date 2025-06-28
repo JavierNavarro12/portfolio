@@ -1,3 +1,9 @@
+import flyingPolitics from "./img/flying-politics.png";
+import opticaVision from "./img/optica-vision.png";
+import fitnessApp from "./img/fitness-app.png";
+import portfolio from "./img/portfolio.png";
+import scapeRoom from "./img/scape-room.png";
+
 const proyectos = [
     {
       id: 1,
@@ -7,7 +13,7 @@ const proyectos = [
       previewUrl: "https://flyingpolitics.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/Curso/tree/master/JuegoPajaros",
       tecnologias: ["HTML", "CSS", "JavaScript"],
-      imagenPreview: require("./img/flying-politics.png")
+      imagenPreview: flyingPolitics
     },
     {
       id: 2,
@@ -17,7 +23,7 @@ const proyectos = [
       previewUrl: "https://paginawebjaviernavarro.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/Curso/tree/master/PaginaWeb",
       tecnologias: ["HTML", "CSS", "JavaScript"],
-      imagenPreview: require("./img/optica-vision.png")
+      imagenPreview: opticaVision
     },
     {
       id: 3,
@@ -30,7 +36,7 @@ const proyectos = [
       previewUrl: "https://endlessgoalsnutrition.com",
       codigoUrl: "https://github.com/JavierNavarro12/Fitness",
       tecnologias: ["React", "TypeScript", "Firebase", "APIs", "Tailwind CSS"],
-      imagenPreview: require("./img/fitness-app.png")
+      imagenPreview: fitnessApp
     },
     {
       id: 4,
@@ -40,7 +46,7 @@ const proyectos = [
       previewUrl: "https://portfoliojaviernavarro.netlify.app/",
       codigoUrl: "https://github.com/JavierNavarro12/portfolio",
       tecnologias: ["React", "JavaScript", "CSS"],
-      imagenPreview: require("./img/portfolio.png")
+      imagenPreview: portfolio
     },
     {
       id: 5,
@@ -50,7 +56,7 @@ const proyectos = [
       previewUrl: "https://scape-room.netlify.app",
       codigoUrl: "",
       tecnologias: ["React", "JavaScript", "CSS"],
-      imagenPreview: require("./img/scape-room.png")
+      imagenPreview: scapeRoom
     }
   ];
 

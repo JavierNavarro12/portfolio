@@ -91,10 +91,17 @@ function ProjectCard({
     zIndex: isSelected ? 200 : 'auto', // Asegura que la tarjeta seleccionada esté al frente
   };
   const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [iframeError, setIframeError] = useState(false);
 
   useEffect(() => {
     setIframeLoaded(false);
-  }, [proyecto.previewUrl, proyecto.id]);
+    setIframeError(false);
+    // Fallback por timeout si el iframe no carga
+    const timeout = setTimeout(() => {
+      if (!iframeLoaded) setIframeError(true);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [proyecto.previewUrl, proyecto.id, iframeLoaded]);
 
   return (
     <div
@@ -126,18 +133,30 @@ function ProjectCard({
             </svg>
           </button>
           <div className="preview-iframe compact-preview" style={{ position: 'relative' }}>
-            {!iframeLoaded && (
+            {!iframeLoaded && !iframeError && (
               <div className="skeleton-preview" />
             )}
-            <iframe
-              src={proyecto.previewUrl}
-              title={proyecto.titulo[language]}
-              className="w-full h-full border-0 rounded-lg"
-              loading="lazy"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
-              style={{ position: 'relative', zIndex: 1 }}
-              onLoad={() => setIframeLoaded(true)}
-            />
+            {!iframeError ? (
+              <iframe
+                src={proyecto.previewUrl}
+                title={proyecto.titulo[language]}
+                className="w-full h-full border-0 rounded-lg"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
+                style={{ position: 'relative', zIndex: 1 }}
+                onLoad={() => setIframeLoaded(true)}
+                onError={() => setIframeError(true)}
+              />
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center p-0 m-0">
+                <img
+                  src={proyecto.imagenPreview}
+                  alt={proyecto.titulo[language]}
+                  className="w-full h-full object-cover rounded-lg"
+                  style={{ background: '#f3f4f6', width: '100%', height: '100%', margin: 0, padding: 0 }}
+                />
+              </div>
+            )}
           </div>
           <div className="project-title compact-title">{proyecto.titulo[language]}</div>
           <div className="project-desc compact-desc">{proyecto.descripcion[language]}</div>
