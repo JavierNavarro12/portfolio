@@ -55,6 +55,8 @@ const sectionTitles = {
   tools: 'Herramientas',
 };
 
+export { tecnologias };
+
 export default function Tecnologias({ language, translations, isMobile }) {
   const techSections = translations?.techSections || sectionTitles;
   

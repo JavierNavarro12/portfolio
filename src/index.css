@@ -713,3 +713,18 @@
 .title-with-reflection h1 {
   background: linear-gradient(180deg, #333 40%, #333 60%);
 }
+
+@keyframes carousel-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes carousel-right {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+.animate-carousel-left {
+  animation-name: carousel-left;
+}
+.animate-carousel-right {
+  animation-name: carousel-right;
+}

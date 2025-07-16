@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef, Suspense, lazy } from "react";
-import Tecnologias from "./Tecnologias";
+import React, { useState, useEffect, useRef, Suspense } from "react";
+import TechCarousel from "./TechCarousel";
+import ProjectCarousel from "./ProjectCarousel";
 import 'aos/dist/aos.css';
-
-const ProjectCarousel = lazy(() => import('./ProjectCarousel'));
 
 // Language translations
 const translations = {
@@ -403,7 +402,7 @@ function App() {
 
         {/* Sección 7: Tecnologías */}
         <div className="mt-2 sm:mt-5">
-          <Tecnologias language={language} translations={translations[language]} isMobile={isMobile} />
+          <TechCarousel language={language} translations={translations[language]} />
         </div>
 
         {/* Sección 8: si */}

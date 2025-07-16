@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import proyectos from "./proyectos";
+import proyectos from './proyectos';
 import ProjectCard from './ProjectCard';
 
 function ProjectCarousel({ onClose, language, translations }) {
