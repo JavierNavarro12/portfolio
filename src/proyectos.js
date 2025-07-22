@@ -16,16 +16,6 @@ const proyectos = [
       imagenPreview: flyingPolitics
     },
     {
-      id: 2,
-      titulo: { es: "Óptica Visión", en: "Vision Optics" },
-      descripcion: { es: "Página web basica para una óptica.", en: "Basic website for an optician." },
-      url: "https://paginawebjaviernavarro.netlify.app/",
-      previewUrl: "https://paginawebjaviernavarro.netlify.app/",
-      codigoUrl: "https://github.com/JavierNavarro12/Curso/tree/master/PaginaWeb",
-      tecnologias: ["HTML", "CSS", "JavaScript"],
-      imagenPreview: opticaVision
-    },
-    {
       id: 3,
       titulo: { es: "Fitness App", en: "Fitness App" },
       descripcion: { 
