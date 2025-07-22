@@ -1,5 +1,4 @@
 import flyingPolitics from "./img/flying-politics.png";
-import opticaVision from "./img/optica-vision.png";
 import fitnessApp from "./img/fitness-app.png";
 import portfolio from "./img/portfolio.png";
 import scapeRoom from "./img/scape-room.png";
