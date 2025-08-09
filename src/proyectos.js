@@ -2,8 +2,22 @@ import flyingPolitics from "./img/flying-politics.png";
 import fitnessApp from "./img/fitness-app.png";
 import portfolio from "./img/portfolio.png";
 import scapeRoom from "./img/scape-room.png";
+import aifinder from "./img/aifinder.png";
 
 const proyectos = [
+    {
+      id: 6,
+      titulo: { es: "AIFinder", en: "AIFinder" },
+      descripcion: {
+        es: "AIFinder.es es una plataforma web que reúne y organiza herramientas de inteligencia artificial, permitiendo explorarlas por categorías, leer artículos relacionados y proponer nuevas aplicaciones para su inclusión.",
+        en: "AIFinder is a web platform that gathers and organizes AI tools, allowing exploration by categories, reading related articles, and proposing new apps for inclusion."
+      },
+      url: "https://www.aifinder.es",
+      previewUrl: "https://www.aifinder.es",
+      codigoUrl: "https://github.com/JavierNavarro12/web_next.js",
+      tecnologias: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase"],
+      imagenPreview: aifinder
+    },
     {
       id: 1,
       titulo: { es: "Juego de Pájaros", en: "Bird Game" },

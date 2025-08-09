@@ -387,10 +387,15 @@ function App() {
           </ul>
         </section>
 
-        {/* Sección 6: Proyectos */}
+        {/* Sección 6: Tecnologías */}
+        <div className="mt-2 sm:mt-5">
+          <TechCarousel language={language} translations={translations[language]} isMobile={isMobile} />
+        </div>
+
+        {/* Sección 7: Proyectos */}
         <section id="proyectos" className="w-full flex flex-col items-center justify-center flex-1 main-section scroll-mt-24" data-aos="fade-up" data-aos-offset={isMobile ? "150" : "550"}>
           <div
-            className="flex flex-col items-center justify-center w-full min-h-[300px] cursor-pointer select-none transition-transform duration-300 hover:scale-105 text-center border-4 border-black dark:border-white bg-white dark:bg-gray-800 p-8 md:p-16 aspect-square sm:aspect-video transform-gpu will-change-transform active:scale-95"
+            className="flex flex-col items-center justify-center w-full min-h-[240px] md:max-h-[420px] cursor-pointer select-none transition-transform duration-300 hover:scale-105 text-center border-4 border-black dark:border-white bg-white dark:bg-gray-800 p-6 md:p-12 aspect-square sm:aspect-[2/1] transform-gpu will-change-transform active:scale-95"
             onClick={() => setShowCarousel(true)}
           >
             <h2 className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight drop-shadow-lg transform-gpu will-change-transform transition-transform duration-300 hover:scale-105">{t.projects}</h2>
@@ -399,11 +404,6 @@ function App() {
             </span>
           </div>
         </section>
-
-        {/* Sección 7: Tecnologías */}
-        <div className="mt-2 sm:mt-5">
-          <TechCarousel language={language} translations={translations[language]} />
-        </div>
 
         {/* Sección 8: si */}
         <section id="contacto" className="w-full flex flex-col items-center scroll-mt-24 main-section mt-10" data-aos="fade-up" data-aos-offset={isMobile ? "200" : "300"}>

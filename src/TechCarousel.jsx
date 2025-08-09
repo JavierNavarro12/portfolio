@@ -24,11 +24,15 @@ function splitInRows(arr, numRows) {
 const techRows = splitInRows(allTechs, 3);
 const directions = ['left', 'right', 'left'];
 
-export default function TechCarousel({ language = 'es', translations }) {
+export default function TechCarousel({ language = 'es', translations, isMobile = false }) {
   // Obtener el título traducido
   const title = translations?.technologies || (language === 'en' ? 'Technologies' : 'Tecnologías');
   return (
-    <section className="w-full my-16 flex flex-col items-center" data-aos="fade-up">
+    <section
+      className="w-full my-16 flex flex-col items-center"
+      data-aos="fade-up"
+      data-aos-offset={isMobile ? "200" : "600"}
+    >
       <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 dark:text-white">{title}</h2>
       <div className="w-full max-w-5xl mx-auto">
         <div className="relative w-full flex flex-col">
