@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { tecnologias } from './Tecnologias';
 
 // Unimos todas las tecnologías en un solo array y eliminamos duplicados por nombre
@@ -63,76 +63,108 @@ export default function TechCarousel({ language = 'es', translations, isMobile =
 
 function CarouselRow({ techs, direction }) {
   const containerRef = useRef(null);
-  const [items, setItems] = useState(techs);
+  const trackRef = useRef(null);
+  const [duration, setDuration] = useState(30);
   const [isPaused, setIsPaused] = useState(false);
-  const speed = 1; // px por frame
-  const GAP = 16; // px, igual que el gap visual entre tarjetas
+  const [baseWidth, setBaseWidth] = useState(0);
+  const [repeatCount, setRepeatCount] = useState(2);
+
+  const repeatedItems = useMemo(() => {
+    const repeats = Math.max(repeatCount, 2);
+    const sequence = [];
+    for (let cycle = 0; cycle < repeats; cycle += 1) {
+      techs.forEach((item, idx) => {
+        sequence.push({
+          item,
+          key: `${item.nombre}-${cycle}-${idx}`,
+        });
+      });
+    }
+    return sequence;
+  }, [techs, repeatCount]);
 
   useEffect(() => {
-    let animationId;
-    const container = containerRef.current;
-    if (!container) return;
+    const SPEED_PX_PER_SEC = 80;
 
-    function animate() {
-      if (!isPaused) {
-        if (direction === 'left') {
-          container.scrollLeft += speed;
-          const first = container.firstChild;
-          if (first && first.getBoundingClientRect().right <= container.getBoundingClientRect().left - GAP) {
-            const width = first.offsetWidth + GAP;
-            setItems(prev => {
-              const newItems = [...prev.slice(1), prev[0]];
-              setTimeout(() => {
-                container.scrollLeft -= width;
-              }, 0);
-              return newItems;
-            });
-          }
-        } else {
-          container.scrollLeft -= speed;
-          const last = container.lastChild;
-          if (last && last.getBoundingClientRect().left >= container.getBoundingClientRect().right + GAP) {
-            const width = last.offsetWidth + GAP;
-            setItems(prev => {
-              const newItems = [prev[prev.length - 1], ...prev.slice(0, -1)];
-              setTimeout(() => {
-                container.scrollLeft += width;
-              }, 0);
-              return newItems;
-            });
-          }
-        }
-      }
-      animationId = requestAnimationFrame(animate);
+    const updateMetrics = () => {
+      const container = containerRef.current;
+      const track = trackRef.current;
+      if (!container || !track) return;
+
+      const containerWidth = container.offsetWidth;
+    const repeats = Math.max(repeatCount, 1);
+    const totalWidth = track.scrollWidth;
+    if (containerWidth === 0 || totalWidth === 0) return;
+
+    const singleCycleWidth = totalWidth / repeats;
+    if (!Number.isFinite(singleCycleWidth) || singleCycleWidth === 0) return;
+
+    const desiredRepeats = Math.max(2, Math.ceil((containerWidth * 2) / singleCycleWidth));
+    if (desiredRepeats !== repeatCount) {
+      setRepeatCount(desiredRepeats);
+      return;
     }
-    animationId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationId);
-  }, [isPaused, direction]);
 
-  const handleMouseEnter = () => setIsPaused(true);
-  const handleMouseLeave = () => setIsPaused(false);
+    const newDuration = Math.max(singleCycleWidth / SPEED_PX_PER_SEC, 12);
+    setDuration(prev => (Math.abs(prev - newDuration) > 0.1 ? newDuration : prev));
+    setBaseWidth(prev => (Math.abs(prev - singleCycleWidth) > 1 ? singleCycleWidth : prev));
+    };
+
+    updateMetrics();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const observer = new ResizeObserver(() => updateMetrics());
+      if (trackRef.current) observer.observe(trackRef.current);
+      if (containerRef.current) observer.observe(containerRef.current);
+      return () => observer.disconnect();
+    } else {
+      window.addEventListener('resize', updateMetrics);
+      return () => window.removeEventListener('resize', updateMetrics);
+    }
+  }, [techs, repeatCount]);
+
+  const handlePauseStart = () => setIsPaused(true);
+  const handlePauseEnd = () => setIsPaused(false);
+  const isReady = baseWidth > 0;
 
   return (
     <div
       ref={containerRef}
       className="overflow-hidden w-full my-0 min-h-[90px] py-2"
-      style={{ whiteSpace: 'nowrap', display: 'flex' }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handlePauseStart}
+      onMouseLeave={handlePauseEnd}
+      onTouchStart={handlePauseStart}
+      onTouchEnd={handlePauseEnd}
+      onTouchCancel={handlePauseEnd}
     >
-      {items.map((tec, idx) => (
-        <a
-          key={tec.nombre + idx}
-          href={tec.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-col items-center bg-white dark:bg-gray-900 rounded-xl px-4 py-3 shadow hover:scale-110 transition-transform border border-gray-200 dark:border-gray-700 min-w-[90px] sm:min-w-[110px] max-w-[140px] cursor-pointer mx-2"
-          title={tec.nombre}
-        >
-          <span className="text-3xl mb-1">{tec.icono}</span>
-          <span className="text-xs font-semibold text-gray-700 dark:text-gray-200 whitespace-nowrap text-center">{tec.nombre}</span>
-        </a>
-      ))}
+      <div
+        ref={trackRef}
+        className={`inline-flex items-center ${direction === 'left' ? 'animate-carousel-left' : 'animate-carousel-right'}`}
+        style={{
+          width: 'max-content',
+          animationDuration: `${duration}s`,
+          animationTimingFunction: 'linear',
+          animationIterationCount: 'infinite',
+          animationDirection: direction === 'right' ? 'reverse' : 'normal',
+          animationPlayState: isPaused || !isReady ? 'paused' : 'running',
+          willChange: 'transform',
+          '--marquee-translate': `${baseWidth}px`
+        }}
+      >
+        {repeatedItems.map(({ item, key }) => (
+          <a
+            key={key}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center bg-white dark:bg-gray-900 rounded-xl px-4 py-3 shadow hover:scale-110 transition-transform border border-gray-200 dark:border-gray-700 min-w-[90px] sm:min-w-[110px] max-w-[140px] cursor-pointer mx-2 flex-shrink-0"
+            title={item.nombre}
+          >
+            <span className="text-3xl mb-1">{item.icono}</span>
+            <span className="text-xs font-semibold text-gray-700 dark:text-gray-200 whitespace-nowrap text-center">{item.nombre}</span>
+          </a>
+        ))}
+      </div>
     </div>
   );
-} 
+}
