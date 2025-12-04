@@ -22,11 +22,12 @@ export const translations = {
     projectsClick: "Haz clic para ver los proyectos",
     projectsClickMobile: "Pulsa para ver los proyectos",
     contact: "Contacto",
-    copyright: "© 2024 Javier Navarro. Todos los derechos reservados.",
+    copyright: `© ${new Date().getFullYear()} Javier Navarro. Todos los derechos reservados.`,
     menu: {
       intro: "Introducción",
       projects: "Proyectos",
-      contact: "Contacto"
+      contact: "Contacto",
+      mainPage: "PÁGINA PRINCIPAL"
     },
     carousel: {
       close: "Cerrar",
@@ -58,11 +59,12 @@ export const translations = {
     projectsClick: "Click to see the projects",
     projectsClickMobile: "Tap to see the projects",
     contact: "Contact",
-    copyright: "© 2024 Javier Navarro. All rights reserved.",
+    copyright: `© ${new Date().getFullYear()} Javier Navarro. All rights reserved.`,
     menu: {
       intro: "Introduction",
       projects: "Projects",
-      contact: "Contact"
+      contact: "Contact",
+      mainPage: "MAIN PAGE"
     },
     carousel: {
       close: "Close",

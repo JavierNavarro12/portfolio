@@ -57,7 +57,7 @@ function Navigation() {
       <header className="w-full max-w-5xl mb-8 hidden md:block">
         <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2">
           <span className="tracking-widest">01</span>
-          <span className="tracking-widest">MAIN PAGE</span>
+          <span className="tracking-widest">{t.menu.mainPage}</span>
         </div>
         <div className="border-t border-gray-300 dark:border-gray-700 w-full mb-2" />
       </header>

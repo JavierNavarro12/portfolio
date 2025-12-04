@@ -65,7 +65,10 @@ function Hero({ isMobile, scrollTargetRef }) {
                   <SplineComponent
                     scene="https://prod.spline.design/ZY6f65Za3BSGmQH9/scene.splinecode"
                     onLoad={handleSplineLoad}
-                    style={{ visibility: shouldShowLoadingIndicator ? 'hidden' : 'visible' }}
+                    style={{ 
+                      visibility: shouldShowLoadingIndicator ? 'hidden' : 'visible',
+                      pointerEvents: 'none' // Evita que Spline capture el scroll
+                    }}
                   />
                 </Suspense>
               )
