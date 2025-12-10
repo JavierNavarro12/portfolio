@@ -1,25 +1,136 @@
-import React from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { gsap } from '../hooks/useGSAP';
 
-function Passions({ isMobile }) {
+function Passions() {
   const { t } = useLanguage();
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const pillsRef = useRef([]);
+
+  useLayoutEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Animación del título con rotación 3D
+      gsap.from(titleRef.current, {
+        opacity: 0,
+        rotateX: -90,
+        y: -30,
+        duration: 0.8,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      // Animación de "explosión" de las pills
+      // Primero todas se colocan en el centro
+      pillsRef.current.forEach((pill, index) => {
+        if (!pill) return;
+        
+        // Calcular rotación aleatoria entre -15 y 15 grados
+        const rotation = (Math.random() - 0.5) * 30;
+
+        gsap.from(pill, {
+          opacity: 0,
+          scale: 0,
+          x: 0,
+          y: 0,
+          rotation: rotation * 2,
+          duration: 0.8,
+          delay: index * 0.08,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+
+        // Efecto de "respiración" continua para cada pill
+        gsap.to(pill, {
+          y: Math.random() * 6 - 3,
+          rotation: rotation * 0.5,
+          duration: 2 + Math.random(),
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+          delay: index * 0.1,
+        });
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [t.passions]);
+
+  // Efecto de focus cuando se hace hover en una pill
+  const handlePillHover = (index) => {
+    pillsRef.current.forEach((pill, i) => {
+      if (!pill) return;
+      
+      if (i === index) {
+        gsap.to(pill, {
+          scale: 1.1,
+          zIndex: 10,
+          duration: 0.3,
+          ease: 'power2.out',
+        });
+      } else {
+        gsap.to(pill, {
+          opacity: 0.4,
+          filter: 'blur(2px)',
+          scale: 0.95,
+          duration: 0.3,
+          ease: 'power2.out',
+        });
+      }
+    });
+  };
+
+  const handlePillLeave = () => {
+    pillsRef.current.forEach((pill) => {
+      if (!pill) return;
+      
+      gsap.to(pill, {
+        opacity: 1,
+        filter: 'blur(0px)',
+        scale: 1,
+        zIndex: 1,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+    });
+  };
 
   return (
     <section 
-      className="w-full mb-8" 
-      data-aos="fade-up" 
-      data-aos-offset={isMobile ? "150" : "500"}
+      ref={sectionRef}
+      className="w-full mb-8 relative overflow-visible"
     >
-      <h3 className="font-bold mb-4 text-2xl text-gray-800 dark:text-gray-200 text-center transition-all duration-300 ease-in-out hover:scale-105 hover:rotate-3" data-aos="fade-up">
+      <h3 
+        ref={titleRef}
+        className="font-bold mb-6 text-2xl text-gray-800 dark:text-gray-200 text-center"
+        style={{ perspective: '1000px' }}
+      >
         {t.passion}
       </h3>
-      <ul className="text-sm space-y-1 flex flex-wrap justify-center gap-4">
+      
+      <ul className="text-sm flex flex-wrap justify-center gap-4 relative">
         {t.passions.map((passion, index) => (
           <li 
-            key={passion} 
-            className="px-6 py-3 border-2 border-gray-700 dark:border-gray-600 bg-gray-900 dark:bg-gray-800 text-white rounded-full transition-all duration-400 ease-in-out hover:border-gray-500 hover:bg-gray-800 h-12 flex items-center justify-center hover:scale-105 active:scale-95" 
-            data-aos="fade-up" 
-            data-aos-delay={100 * (index + 1)}
+            key={passion}
+            ref={el => pillsRef.current[index] = el}
+            className="passion-pill px-6 py-3 border-2 border-gray-700 dark:border-gray-600 bg-gray-900 dark:bg-gray-800 text-white rounded-full cursor-pointer h-12 flex items-center justify-center select-none"
+            onMouseEnter={() => handlePillHover(index)}
+            onMouseLeave={handlePillLeave}
+            style={{
+              willChange: 'transform, opacity, filter',
+              transformStyle: 'preserve-3d',
+            }}
           >
             {passion}
           </li>

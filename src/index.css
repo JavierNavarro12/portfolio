@@ -342,34 +342,27 @@
 
 /* Estilos para el bocadillo del robot */
 .speech-bubble {
-  position: absolute;
-  /* Ajusta estos valores según necesites para que el bocadillo salga de la boca del robot */
-  /* Los valores exactos pueden depender de la escena 3D y el tamaño del contenedor */
-  bottom: 18px; /* Adjusted vertical position again */
-  left: 50%;   /* Posición horizontal */
-  transform: translateX(-50%); /* Centra el bocadillo horizontalmente */
-
-  background-color: #fff; /* Fondo blanco */
-  border: 1px solid #ccc; /* Borde ligero */
-  border-radius: 10px; /* Bordes redondeados */
-  padding: 10px 20px; /* Espacio interno */
-  font-size: 0.9rem; /* Tamaño de fuente */
-  color: #333; /* Color del texto */
-  white-space: nowrap; /* Keep text on one line */
-  z-index: 10; /* Ensure it's above Spline */
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Soft shadow */
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  color: #333;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
 
   /* Style robótico */
-  font-family: monospace; /* Monospace font */
-  letter-spacing: 1px; /* Letter spacing */
-  text-transform: uppercase; /* Uppercase text (optional) */
-  text-align: center; /* Center text */
-  min-width: 300px; /* Ensure minimum width */
+  font-family: monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  min-width: 300px;
   
-  /* Remove typing animation from the bubble itself */
   animation: none; 
-  overflow: visible; /* Allow content to be visible */
-  width: auto; /* Auto width based on content */
+  overflow: visible;
+  width: auto;
 }
 
 /* Typing animation for the text */
@@ -389,20 +382,18 @@
 /* Responsive adjustments for speech bubble */
 @media (max-width: 640px) {
   .speech-bubble {
-    font-size: 0.7rem; /* Smaller font size on small screens */
-    padding: 8px 12px; /* Reduced padding */
-    white-space: nowrap; /* Keep text on one line */
-    min-width: unset; /* Remove minimum width constraint */
-    width: auto; /* Allow width to be more flexible */
-    left: 50%;
-    transform: translateX(-50%);
+    font-size: 0.7rem;
+    padding: 8px 12px;
+    white-space: nowrap;
+    min-width: unset;
+    width: auto;
   }
 
   .typing-text {
-     white-space: nowrap; /* Keep text on one line */
-     animation: typing 4s steps(40, end) forwards; /* Apply typing animation */
-     width: 0; /* Start with zero width for typing effect */
-     opacity: 1; /* Ensure visible for typing */
+     white-space: nowrap;
+     animation: typing 4s steps(40, end) forwards;
+     width: 0;
+     opacity: 1;
   }
 }
 

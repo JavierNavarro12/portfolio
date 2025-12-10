@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { gsap } from '../hooks/useGSAP';
 
 function Footer() {
   const { t } = useLanguage();
+  const footerRef = useRef(null);
+  const lineRef = useRef(null);
 
   const socialLinks = [
     {
@@ -37,8 +40,49 @@ function Footer() {
     }
   ];
 
+  useLayoutEffect(() => {
+    if (!footerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Animación de la línea superior
+      gsap.from(lineRef.current, {
+        scaleX: 0,
+        duration: 1,
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      // Animación del contenido del footer
+      gsap.from(footerRef.current.children, {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        stagger: 0.1,
+        delay: 0.3,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <footer className="w-full max-w-5xl mx-auto mt-8 py-6 flex flex-col md:flex-row items-center justify-between border-t border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-sm">
+    <footer ref={footerRef} className="w-full max-w-5xl mx-auto mt-8 py-6 flex flex-col md:flex-row items-center justify-between text-gray-500 dark:text-gray-400 text-sm relative">
+      {/* Línea superior animada */}
+      <div 
+        ref={lineRef}
+        className="absolute top-0 left-0 right-0 h-px bg-gray-300 dark:bg-gray-700 origin-left"
+      />
+      
       <span className="mb-2 md:mb-0">{t.copyright}</span>
       <div className="flex space-x-6">
         {socialLinks.map(link => (
@@ -47,7 +91,7 @@ function Footer() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${link.hoverClass} transition-colors duration-200`}
+            className={`${link.hoverClass} transition-colors duration-200 transform hover:scale-110`}
             aria-label={link.label}
           >
             {link.icon}

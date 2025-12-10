@@ -1,5 +1,6 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, { useRef, useEffect, useState, useMemo, useLayoutEffect } from 'react';
 import { tecnologias } from './Tecnologias';
+import { gsap } from './hooks/useGSAP';
 
 // Unimos todas las tecnologías en un solo array y eliminamos duplicados por nombre
 const allTechsRaw = [
@@ -24,35 +25,96 @@ function splitInRows(arr, numRows) {
 const techRows = splitInRows(allTechs, 3);
 const directions = ['left', 'right', 'left'];
 
-export default function TechCarousel({ language = 'es', translations, isMobile = false }) {
-  // Obtener el título traducido
+export default function TechCarousel({ language = 'es', translations }) {
   const title = translations?.technologies || (language === 'en' ? 'Technologies' : 'Tecnologías');
+  
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const rowRefs = useRef([]);
+
+  // Animaciones GSAP de entrada
+  useLayoutEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Animación del título con clip-path reveal
+      gsap.from(titleRef.current, {
+        clipPath: 'inset(0 100% 0 0)',
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      // Animación de entrada de cada fila con fade in simple
+      rowRefs.current.forEach((row, index) => {
+        if (!row) return;
+        
+        gsap.from(row, {
+          opacity: 0,
+          duration: 0.8,
+          delay: index * 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
-      className="w-full my-16 flex flex-col items-center"
-      data-aos="fade-up"
-      data-aos-offset={isMobile ? "200" : "600"}
+      ref={sectionRef}
+      className="w-full my-16 flex flex-col items-center tech-carousel-section"
     >
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 dark:text-white">{title}</h2>
+      <h2 
+        ref={titleRef}
+        className="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 dark:text-white tech-title"
+        style={{ clipPath: 'inset(0 0% 0 0)' }}
+      >
+        {title}
+      </h2>
       <div className="w-full max-w-5xl mx-auto">
-        <div className="relative w-full flex flex-col">
+        <div className="relative w-full flex flex-col overflow-hidden">
           {/* Overlay izquierdo global */}
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-20 z-10 fade-gradient"
-               style={{background: 'linear-gradient(to right, var(--fade-gradient, rgba(255,255,255,0.85)) 60%, transparent 100%)'}}
+          <div 
+            className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10 fade-left"
           />
           {/* Overlay derecho global */}
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-20 z-10 fade-gradient"
-               style={{background: 'linear-gradient(to left, var(--fade-gradient, rgba(255,255,255,0.85)) 60%, transparent 100%)'}}
+          <div 
+            className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10 fade-right"
           />
           {techRows.map((row, i) => (
-            <CarouselRow key={i} techs={row} direction={directions[i]} />
+            <div 
+              key={i} 
+              ref={el => rowRefs.current[i] = el}
+              className="tech-row"
+            >
+              <CarouselRow techs={row} direction={directions[i]} />
+            </div>
           ))}
           <style>{`
-            .fade-gradient {
-              --fade-gradient: rgba(255,255,255,0.85);
+            .fade-left {
+              background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
             }
-            .dark .fade-gradient {
-              --fade-gradient: rgba(26,32,44,0.85);
+            .fade-right {
+              background: linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+            }
+            .dark .fade-left {
+              background: linear-gradient(to right, rgba(31, 41, 55, 1) 0%, rgba(31, 41, 55, 0) 100%);
+            }
+            .dark .fade-right {
+              background: linear-gradient(to left, rgba(31, 41, 55, 1) 0%, rgba(31, 41, 55, 0) 100%);
             }
           `}</style>
         </div>
