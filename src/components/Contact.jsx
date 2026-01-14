@@ -3,7 +3,8 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { gsap } from '../hooks/useGSAP';
 
 function Contact() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const cvHref = language === 'es' ? '/CV-Javier-Navarro-ES.pdf' : '/CV-Javier-Navarro-EN.pdf';
   
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
@@ -55,7 +56,7 @@ function Contact() {
       bgColor: "#ef4444"
     },
     {
-      href: "/CV-Javier-Navarro.pdf",
+      href: cvHref,
       label: "Currículum",
       icon: (
         <svg className="w-8 h-8 text-blue-800 dark:text-blue-300 relative z-10" fill="currentColor" viewBox="0 0 24 24">
