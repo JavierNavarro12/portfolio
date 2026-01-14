@@ -37,8 +37,10 @@ function AppContent() {
 
   // Establecer título del documento
   useEffect(() => {
-    document.title = "Javier Navarro | Desarrollador Web";
-  }, []);
+    if (t?.title) {
+      document.title = t.title;
+    }
+  }, [t]);
 
   // Función para abrir el carrusel con transición
   const handleOpenCarousel = useCallback(async () => {

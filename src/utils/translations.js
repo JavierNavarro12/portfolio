@@ -29,6 +29,12 @@ export const translations = {
       contact: "Contacto",
       mainPage: "PÁGINA PRINCIPAL"
     },
+    techSections: {
+      frontend: 'Frontend',
+      backend: 'Backend',
+      database: 'Base de datos',
+      tools: 'Herramientas',
+    },
     carousel: {
       close: "Cerrar",
       next: "Siguiente",

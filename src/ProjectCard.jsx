@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql, SiTypescript, SiFirebase, SiTailwindcss } from "react-icons/si";
+import React, { useState, useEffect, useRef } from 'react';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaApple, FaHeartbeat } from "react-icons/fa";
+import { SiNextdotjs, SiPostgresql, SiMysql, SiTypescript, SiFirebase, SiTailwindcss, SiSwift, SiSupabase, SiStripe, SiOpenai, SiFramer } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
 import { BsCodeSlash } from "react-icons/bs";
 
@@ -22,6 +22,16 @@ const iconMap = {
   PostgreSQL: <SiPostgresql color="#336791" />,
   MySQL: <SiMysql color="#00758f" />,
   Trello: <FaTrello color="#0079bf" />,
+  Swift: <SiSwift color="#f05138" />,
+  SwiftUI: <SiSwift color="#f05138" />,
+  iOS: <FaApple color="#111" />,
+  watchOS: <FaApple color="#111" />,
+  HealthKit: <FaHeartbeat color="#e11d48" />,
+  Supabase: <SiSupabase color="#3ecf8e" />,
+  "Firebase Analytics": <SiFirebase color="#FFCA28" />,
+  Stripe: <SiStripe color="#635bff" />,
+  OpenAI: <SiOpenai color="#111" />,
+  "Framer Motion": <SiFramer color="#111" />,
 };
 
 const colorPalette = [
@@ -55,6 +65,16 @@ const techBgColor = {
   MySQL: '#e0f7fa', // celeste claro
   Trello: '#e3f2fd', // azul claro
   "Tailwind CSS": '#e0f2fe', // celeste claro
+  Swift: '#fff5f0', // naranja muy claro
+  SwiftUI: '#fff5f0', // naranja muy claro
+  iOS: '#f3f4f6', // gris claro
+  watchOS: '#f3f4f6', // gris claro
+  HealthKit: '#fee2e2', // rojo claro
+  Supabase: '#ecfdf5', // verde claro
+  "Firebase Analytics": '#fff8e1', // amarillo claro
+  Stripe: '#eef2ff', // azul claro
+  OpenAI: '#f3f4f6', // gris claro
+  "Framer Motion": '#f3f4f6', // gris claro
 };
 const techTextColor = {
   HTML: '#e34c26',
@@ -74,6 +94,16 @@ const techTextColor = {
   PostgreSQL: '#336791',
   MySQL: '#00758f',
   Trello: '#0079bf',
+  Swift: '#f05138',
+  SwiftUI: '#f05138',
+  iOS: '#111',
+  watchOS: '#111',
+  HealthKit: '#e11d48',
+  Supabase: '#3ecf8e',
+  "Firebase Analytics": '#b45309',
+  Stripe: '#635bff',
+  OpenAI: '#111',
+  "Framer Motion": '#111',
 };
 
 function ProjectCard({
@@ -92,16 +122,32 @@ function ProjectCard({
   };
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeError, setIframeError] = useState(false);
+  const iframeTimeoutRef = useRef(null);
+  const shouldUseIframe = Boolean(proyecto.previewUrl) && !proyecto.forceImagePreview;
 
   useEffect(() => {
     setIframeLoaded(false);
     setIframeError(false);
+
+    if (!shouldUseIframe) {
+      return () => {};
+    }
+
+    if (iframeTimeoutRef.current) {
+      clearTimeout(iframeTimeoutRef.current);
+    }
+
     // Fallback por timeout si el iframe no carga
-    const timeout = setTimeout(() => {
-      if (!iframeLoaded) setIframeError(true);
-    }, 500);
-    return () => clearTimeout(timeout);
-  }, [proyecto.previewUrl, proyecto.id, iframeLoaded]);
+    iframeTimeoutRef.current = setTimeout(() => {
+      setIframeError(true);
+    }, 1200);
+
+    return () => {
+      if (iframeTimeoutRef.current) {
+        clearTimeout(iframeTimeoutRef.current);
+      }
+    };
+  }, [proyecto.previewUrl, proyecto.id, shouldUseIframe]);
 
   return (
     <div
@@ -133,18 +179,23 @@ function ProjectCard({
             </svg>
           </button>
           <div className="preview-iframe compact-preview" style={{ position: 'relative' }}>
-            {!iframeLoaded && !iframeError && (
+            {shouldUseIframe && !iframeLoaded && !iframeError && (
               <div className="skeleton-preview" />
             )}
-            {!iframeError ? (
+            {shouldUseIframe && !iframeError ? (
               <iframe
                 src={proyecto.previewUrl}
                 title={proyecto.titulo[language]}
                 className="w-full h-full border-0 rounded-lg"
                 loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation-by-user-activation"
                 style={{ position: 'relative', zIndex: 1 }}
-                onLoad={() => setIframeLoaded(true)}
+                onLoad={() => {
+                  if (iframeTimeoutRef.current) {
+                    clearTimeout(iframeTimeoutRef.current);
+                  }
+                  setIframeLoaded(true);
+                }}
                 onError={() => setIframeError(true)}
               />
             ) : (
@@ -152,8 +203,15 @@ function ProjectCard({
                 <img
                   src={proyecto.imagenPreview}
                   alt={proyecto.titulo[language]}
-                  className="w-full h-full object-cover rounded-lg"
-                  style={{ background: '#f3f4f6', width: '100%', height: '100%', margin: 0, padding: 0 }}
+                  className="w-full h-full rounded-lg"
+                  style={{
+                    objectFit: proyecto.imageFit || 'cover',
+                    background: '#f3f4f6',
+                    width: '100%',
+                    height: '100%',
+                    margin: 0,
+                    padding: 0
+                  }}
                 />
               </div>
             )}
@@ -180,15 +238,17 @@ function ProjectCard({
               ))}
           </div>
           <div className="action-buttons compact-action-buttons">
-            <a
-              href={proyecto.codigoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-action-btn"
-            >
-              <FaGithub className="w-6 h-6 mr-2" />
-              {translations.viewCode || 'Ver código'}
-            </a>
+            {proyecto.codigoUrl && (
+              <a
+                href={proyecto.codigoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-action-btn"
+              >
+                <FaGithub className="w-6 h-6 mr-2" />
+                {translations.viewCode || 'Ver código'}
+              </a>
+            )}
             <a
               href={proyecto.url}
               target="_blank"
@@ -205,7 +265,8 @@ function ProjectCard({
           <img
             src={proyecto.imagenPreview}
             alt={proyecto.titulo[language]}
-            className="w-full h-full object-cover rounded-lg"
+            className="w-full h-full rounded-lg"
+            style={{ objectFit: proyecto.imageFit || 'cover' }}
             loading="lazy"
           />
         </div>

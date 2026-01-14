@@ -62,7 +62,7 @@ function ProjectCarousel({ onClose, language, translations }) {
     >
       <button
         ref={backButtonRef}
-        className="fixed top-8 left-8 flex items-center gap-2 px-5 py-2.5 bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg text-gray-700 dark:text-gray-200 font-semibold text-base hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 backdrop-blur-md cursor-pointer z-[110]"
+        className="fixed top-8 left-8 flex items-center gap-2 px-5 py-2.5 bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg text-gray-700 dark:text-gray-200 font-semibold text-base hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 backdrop-blur-md cursor-pointer z-[3000]"
         style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
         onClick={handleClose}
         tabIndex={0}
