@@ -20,24 +20,30 @@ function Hero({ isMobile, scrollTargetRef }) {
   const robotContainerRef = useRef(null);
   const speechBubbleRef = useRef(null);
   
-  // Estado para las letras del título (evita manipular DOM directamente)
-  const [titleChars, setTitleChars] = useState([]);
+  // Estado para las lineas del titulo (evita manipular DOM directamente)
+  const [titleLines, setTitleLines] = useState([]);
   const hasAnimated = useRef(false);
 
   // Preparar las letras del título
   useEffect(() => {
-    if (t.title) {
-      setTitleChars(t.title.split(''));
+    if (!t.title) return;
+
+    if (isMobile) {
+      const parts = t.title.split('|').map((part) => part.trim()).filter(Boolean);
+      setTitleLines(parts.length >= 2 ? parts.slice(0, 2) : [t.title]);
+      return;
     }
-  }, [t.title]);
+
+    setTitleLines([t.title]);
+  }, [t.title, isMobile]);
 
   useEffect(() => {
     hasAnimated.current = false;
-  }, [language]);
+  }, [language, isMobile]);
 
   // Animaciones GSAP - solo se ejecuta UNA vez cuando las letras están listas
   useLayoutEffect(() => {
-    if (!heroRef.current || hasAnimated.current || titleChars.length === 0) return;
+    if (!heroRef.current || hasAnimated.current || titleLines.length === 0) return;
     hasAnimated.current = true;
 
     const ctx = gsap.context(() => {
@@ -97,7 +103,7 @@ function Hero({ isMobile, scrollTargetRef }) {
     }, heroRef);
 
     return () => ctx.revert();
-  }, [titleChars, language]);
+  }, [titleLines, language, isMobile]);
 
   return (
     <div ref={heroRef}>
@@ -107,17 +113,21 @@ function Hero({ isMobile, scrollTargetRef }) {
           ref={titleRef}
           className="text-2xl font-bold tracking-widest text-gray-700 dark:text-gray-300 mb-2 bounce-on-hover hero-title"
         >
-          {titleChars.map((char, index) => (
-            <span 
-              key={index} 
-              className="title-char"
-              style={{ 
-                display: 'inline-block',
-                opacity: 0,
-                transform: 'translateY(30px) rotateX(90deg)',
-              }}
-            >
-              {char === ' ' ? '\u00A0' : char}
+          {titleLines.map((line, lineIndex) => (
+            <span key={lineIndex} className="block">
+              {line.split('').map((char, index) => (
+                <span 
+                  key={`${lineIndex}-${index}`} 
+                  className="title-char"
+                  style={{ 
+                    display: 'inline-block',
+                    opacity: 0,
+                    transform: 'translateY(30px) rotateX(90deg)',
+                  }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              ))}
             </span>
           ))}
         </span>
