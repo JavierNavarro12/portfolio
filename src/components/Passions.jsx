@@ -21,7 +21,7 @@ function Passions() {
         ease: 'back.out(1.7)',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 75%',
+          start: 'top 55%',
           toggleActions: 'play none none reverse',
         },
       });
@@ -45,7 +45,7 @@ function Passions() {
           ease: 'back.out(1.7)',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
+            start: 'top 50%',
             toggleActions: 'play none none reverse',
           },
         });
@@ -109,7 +109,7 @@ function Passions() {
   return (
     <section 
       ref={sectionRef}
-      className="w-full mb-8 relative overflow-visible"
+      className="w-full mb-16 pt-8 relative overflow-visible"
     >
       <h3 
         ref={titleRef}

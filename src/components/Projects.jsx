@@ -42,7 +42,7 @@ function Projects({ onShowCarousel, isMobile, cardRef }) {
           ease: 'power3.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
+            start: 'top 55%',
             toggleActions: 'play none none reverse',
           },
         });
@@ -58,7 +58,7 @@ function Projects({ onShowCarousel, isMobile, cardRef }) {
         ease: 'back.out(1.7)',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 65%',
+          start: 'top 50%',
           toggleActions: 'play none none reverse',
         },
       });
@@ -73,7 +73,7 @@ function Projects({ onShowCarousel, isMobile, cardRef }) {
         ease: 'elastic.out(1, 0.5)',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 65%',
+          start: 'top 50%',
           toggleActions: 'play none none reverse',
         },
       });
@@ -87,7 +87,7 @@ function Projects({ onShowCarousel, isMobile, cardRef }) {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 65%',
+          start: 'top 50%',
           toggleActions: 'play none none reverse',
         },
       });

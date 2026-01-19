@@ -43,8 +43,8 @@ const About = forwardRef(({ isMobile }, ref) => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 60%',
-          end: 'bottom 40%',
+          start: 'top 55%',
+          end: 'bottom 45%',
           scrub: 0.5,
           // Pin suave mientras se revela el contenido
         },
@@ -82,13 +82,33 @@ const About = forwardRef(({ isMobile }, ref) => {
     if (!sectionRef.current || !isMobile) return;
 
     const ctx = gsap.context(() => {
+      if (titleRef.current) {
+        gsap.set(titleRef.current, {
+          clipPath: 'inset(0 0% 0 0)',
+          opacity: 1,
+          textShadow: 'none',
+        });
+      }
+
+      if (descriptionRef.current) {
+        const words = descriptionRef.current.querySelectorAll('.about-word');
+        if (words.length > 0) {
+          const text = Array.from(words)
+            .map((word) => word.textContent)
+            .join('')
+            .replace(/\s+/g, ' ')
+            .trim();
+          descriptionRef.current.textContent = text;
+        }
+      }
+
       gsap.from(sectionRef.current, {
         opacity: 0,
         y: 50,
         duration: 0.8,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 80%',
+          start: 'top 55%',
           toggleActions: 'play none none reverse',
         },
       });
@@ -105,7 +125,7 @@ const About = forwardRef(({ isMobile }, ref) => {
         if (typeof ref === 'function') ref(node);
         else if (ref) ref.current = node;
       }}
-      className="w-full mb-8 scroll-mt-24 relative"
+      className="w-full mb-16 scroll-mt-24 relative"
     >
       <div ref={containerRef} className="relative">
         {/* Título con reveal de máscara */}

@@ -45,7 +45,7 @@ export default function TechCarousel({ language = 'es', translations }) {
         ease: 'power3.inOut',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 75%',
+          start: 'top 55%',
           toggleActions: 'play none none reverse',
         },
       });
@@ -61,7 +61,7 @@ export default function TechCarousel({ language = 'es', translations }) {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
+            start: 'top 50%',
             toggleActions: 'play none none reverse',
           },
         });
