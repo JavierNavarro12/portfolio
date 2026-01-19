@@ -5,7 +5,7 @@ import { useScrollVisibility } from '../hooks/useScrollVisibility';
 import { gsap } from '../hooks/useGSAP';
 
 function Hero({ isMobile, scrollTargetRef }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { 
     SplineComponent, 
     shouldShowLoadingIndicator, 
@@ -30,6 +30,10 @@ function Hero({ isMobile, scrollTargetRef }) {
       setTitleChars(t.title.split(''));
     }
   }, [t.title]);
+
+  useEffect(() => {
+    hasAnimated.current = false;
+  }, [language]);
 
   // Animaciones GSAP - solo se ejecuta UNA vez cuando las letras están listas
   useLayoutEffect(() => {
@@ -93,7 +97,7 @@ function Hero({ isMobile, scrollTargetRef }) {
     }, heroRef);
 
     return () => ctx.revert();
-  }, [titleChars]);
+  }, [titleChars, language]);
 
   return (
     <div ref={heroRef}>
