@@ -1,21 +1,21 @@
 // Traducciones de la aplicación
 export const translations = {
   es: {
-    title: "JAVIER NAVARRO | DESARROLLADOR WEB",
+    title: "JAVIER NAVARRO | FULL STACK DEVELOPER",
     portfolio: "PORTFOLIO",
     welcome: "BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!",
     welcomeMobile: "BIENVENIDO A MI PORTFOLIO! DESLIZA PARA VERLO!",
     howCanIHelp: "¿CÓMO PUEDO AYUDARTE?",
-    description: "Soy un desarrollador web especializado en front-end. Mi objetivo es crear interfaces atractivas, accesibles y eficientes, aportando valor real a cada proyecto. Me apasiona aprender nuevas tecnologías y trabajar en equipo para lograr los mejores resultados.",
+    description: "Soy un desarrollador full stack con experiencia en la creación de productos SaaS, integraciones de APIs y automatización de procesos. Mi objetivo es construir soluciones completas, desde la interfaz hasta la infraestructura, aportando valor real a cada proyecto.",
     passion: "PASIÓN",
     passions: [
-      'Desarrollo de interfaces',
-      'UX/UI',
-      'Accesibilidad web',
-      'Responsive Design',
-      'Animaciones e interactividad',
-      'Optimización de rendimiento',
-      'Trabajo en equipo'
+      'Productos SaaS',
+      'Integración de APIs',
+      'Automatización de procesos',
+      'Infraestructura y DevOps',
+      'Módulos ERP',
+      'Pagos y suscripciones',
+      'IA generativa'
     ],
     technologies: "TECNOLOGÍAS",
     projects: "Proyectos",
@@ -44,21 +44,21 @@ export const translations = {
     }
   },
   en: {
-    title: "JAVIER NAVARRO | WEB DEVELOPER",
+    title: "JAVIER NAVARRO | FULL STACK DEVELOPER",
     portfolio: "PORTFOLIO",
     welcome: "WELCOME TO MY PORTFOLIO! SCROLL TO SEE IT!",
     welcomeMobile: "WELCOME TO MY PORTFOLIO! SWIPE TO SEE IT!",
     howCanIHelp: "HOW CAN I HELP YOU?",
-    description: "I am a web developer specialized in front-end. My goal is to create attractive, accessible and efficient interfaces, bringing real value to each project. I am passionate about learning new technologies and working in a team to achieve the best results.",
+    description: "I am a full stack developer with experience building SaaS products, API integrations, and process automation. My goal is to build complete solutions, from the interface to the infrastructure, bringing real value to every project.",
     passion: "PASSION",
     passions: [
-      'Interface Development',
-      'UX/UI',
-      'Web Accessibility',
-      'Responsive Design',
-      'Animations & Interactivity',
-      'Performance Optimization',
-      'Teamwork'
+      'SaaS Products',
+      'API Integration',
+      'Process Automation',
+      'Infrastructure & DevOps',
+      'ERP Modules',
+      'Payments & Subscriptions',
+      'Generative AI'
     ],
     technologies: "TECHNOLOGIES",
     projects: "Projects",

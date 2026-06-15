@@ -1,7 +1,7 @@
 import React from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaPhp, FaNodeJs } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiVisualstudiocode, SiFirebase, SiPnpm, SiNetlify, SiJest, SiCypress, SiGithubactions } from "react-icons/si";
-import { BsCodeSlash } from "react-icons/bs";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaPhp, FaNodeJs, FaWhatsapp, FaFacebook, FaLinkedin, FaWordpress } from "react-icons/fa";
+import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiVisualstudiocode, SiFirebase, SiPnpm, SiNetlify, SiJest, SiCypress, SiGithubactions, SiStripe, SiRedis, SiFfmpeg, SiTiktok, SiMeta, SiPm2 } from "react-icons/si";
+import { BsCodeSlash, BsRobot, BsGear } from "react-icons/bs";
 import cursorLogo from './img/cursor-logo.svg';
 import intellijLogo from './img/intellij-logo.svg';
 
@@ -25,11 +25,18 @@ const tecnologias = {
     { nombre: "PHP", icono: <FaPhp color="#777BB4" />, url: "https://www.php.net/" },
     { nombre: "Firebase", icono: <SiFirebase color="#FFCA28" />, url: "https://firebase.google.com/" },
     { nombre: "APIs", icono: <BsCodeSlash color="#4CAF50" />, url: "https://developer.mozilla.org/docs/Web/API" },
+    { nombre: "Stripe", icono: <SiStripe color="#635bff" />, url: "https://stripe.com/" },
+    { nombre: "Anthropic", icono: <BsRobot color="#d97706" />, url: "https://www.anthropic.com/" },
+    { nombre: "Meta", icono: <SiMeta color="#0081FB" />, url: "https://developers.facebook.com/" },
+    { nombre: "TikTok", icono: <SiTiktok color="#000000" />, url: "https://developers.tiktok.com/" },
+    { nombre: "LinkedIn", icono: <FaLinkedin color="#0077B5" />, url: "https://developer.linkedin.com/" },
+    { nombre: "WhatsApp", icono: <FaWhatsapp color="#25D366" />, url: "https://business.whatsapp.com/" },
   ],
   database: [
     { nombre: "PostgreSQL", icono: <SiPostgresql color="#336791" />, url: "https://www.postgresql.org/" },
     { nombre: "MySQL", icono: <SiMysql color="#00758f" />, url: "https://www.mysql.com/" },
     { nombre: "MongoDB", icono: <SiMongodb color="#47A248" />, url: "https://www.mongodb.com/" },
+    { nombre: "Redis", icono: <SiRedis color="#DC382D" />, url: "https://redis.io/" },
   ],
   tools: [
     { nombre: "Docker", icono: <SiDocker color="#2496ed" />, url: "https://www.docker.com/" },
@@ -45,6 +52,10 @@ const tecnologias = {
     { nombre: "Jest", icono: <SiJest color="#C21325" />, url: "https://jestjs.io/" },
     { nombre: "Cypress", icono: <SiCypress color="#17202C" />, url: "https://www.cypress.io/" },
     { nombre: "GitHub Actions", icono: <SiGithubactions color="#2088FF" />, url: "https://github.com/features/actions" },
+    { nombre: "WordPress", icono: <FaWordpress color="#21759B" />, url: "https://wordpress.org/" },
+    { nombre: "PM2", icono: <SiPm2 color="#2B037A" />, url: "https://pm2.keymetrics.io/" },
+    { nombre: "FFmpeg", icono: <SiFfmpeg color="#007808" />, url: "https://ffmpeg.org/" },
+    { nombre: "Dolibarr", icono: <BsGear color="#4a86c8" />, url: "https://www.dolibarr.org/" },
   ]
 };
 
@@ -59,10 +70,10 @@ export { tecnologias };
 
 export default function Tecnologias({ language, translations, isMobile }) {
   const techSections = translations?.techSections || sectionTitles;
-  
+
   return (
-    <section 
-      className="tecnologias w-full my-16 flex flex-col items-center main-section" 
+    <section
+      className="tecnologias w-full my-16 flex flex-col items-center main-section"
       data-aos="fade-up"
       data-aos-offset={isMobile ? "150" : "400"}
     >

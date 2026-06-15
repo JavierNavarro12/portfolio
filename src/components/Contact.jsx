@@ -4,7 +4,7 @@ import { gsap } from '../hooks/useGSAP';
 
 function Contact() {
   const { t, language } = useLanguage();
-  const cvHref = language === 'es' ? '/CV-Javier-Navarro-ES.pdf' : '/CV-Javier-Navarro-EN.pdf';
+  const cvHref = language === 'es' ? '/CV-Javier-Navarro-2026-ES.pdf' : '/CV-Javier-Navarro-2026-EN.pdf';
   
   const sectionRef = useRef(null);
   const titleRef = useRef(null);

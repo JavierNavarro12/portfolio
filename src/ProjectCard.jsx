@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaApple, FaHeartbeat } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql, SiTypescript, SiFirebase, SiTailwindcss, SiSwift, SiSupabase, SiStripe, SiOpenai, SiFramer } from "react-icons/si";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaApple, FaHeartbeat, FaPhp, FaLock, FaWordpress } from "react-icons/fa";
+import { SiNextdotjs, SiPostgresql, SiMysql, SiTypescript, SiFirebase, SiTailwindcss, SiSwift, SiSupabase, SiStripe, SiOpenai, SiFramer, SiRedis, SiFfmpeg, SiPm2, SiGoogletagmanager } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
-import { BsCodeSlash } from "react-icons/bs";
+import { BsCodeSlash, BsDatabase, BsRobot } from "react-icons/bs";
 
 const iconMap = {
   HTML: <FaHtml5 color="#e34c26" />,
@@ -14,6 +14,7 @@ const iconMap = {
   "Next.js": <SiNextdotjs color="#000" />,
   Java: <FaJava color="#007396" />,
   Python: <FaPython color="#306998" />,
+  PHP: <FaPhp color="#777BB4" />,
   Figma: <FaFigma color="#a259ff" />,
   GitHub: <FaGithub color="#333" />,
   Git: <FaGitAlt color="#f34f29" />,
@@ -32,6 +33,14 @@ const iconMap = {
   Stripe: <SiStripe color="#635bff" />,
   OpenAI: <SiOpenai color="#111" />,
   "Framer Motion": <SiFramer color="#111" />,
+  "Drizzle ORM": <BsDatabase color="#C5F74F" />,
+  "NextAuth v5": <FaLock color="#8B5CF6" />,
+  "Anthropic SDK": <BsRobot color="#d97706" />,
+  FFmpeg: <SiFfmpeg color="#007808" />,
+  Redis: <SiRedis color="#DC382D" />,
+  PM2: <SiPm2 color="#2B037A" />,
+  WordPress: <FaWordpress color="#21759B" />,
+  "GTM Consent Mode v2": <SiGoogletagmanager color="#246FDB" />,
 };
 
 const colorPalette = [
@@ -48,34 +57,44 @@ const colorPalette = [
 ];
 
 const techBgColor = {
-  HTML: '#fff3e0', // naranja claro
-  CSS: '#e3f0ff', // azul claro
-  JavaScript: '#fffde7', // amarillo claro
-  TypeScript: '#e0f2ff', // azul claro
-  React: '#e0f7fa', // celeste claro
-  'Next.js': '#f3f4f6', // gris claro
-  Java: '#e0ecff', // azul muy claro
-  Python: '#e0f2f1', // verde agua claro
-  Figma: '#f3e8ff', // violeta claro
-  GitHub: '#f4f4f4', // gris claro
-  Git: '#ffe8e6', // rojo claro
-  Firebase: '#fff8e1', // amarillo claro
-  APIs: '#e8f5e8', // verde claro
-  PostgreSQL: '#e8f0fe', // azul claro
-  MySQL: '#e0f7fa', // celeste claro
-  Trello: '#e3f2fd', // azul claro
-  "Tailwind CSS": '#e0f2fe', // celeste claro
-  Swift: '#fff5f0', // naranja muy claro
-  SwiftUI: '#fff5f0', // naranja muy claro
-  iOS: '#f3f4f6', // gris claro
-  watchOS: '#f3f4f6', // gris claro
-  HealthKit: '#fee2e2', // rojo claro
-  Supabase: '#ecfdf5', // verde claro
-  "Firebase Analytics": '#fff8e1', // amarillo claro
-  Stripe: '#eef2ff', // azul claro
-  OpenAI: '#f3f4f6', // gris claro
-  "Framer Motion": '#f3f4f6', // gris claro
+  HTML: '#fff3e0',
+  CSS: '#e3f0ff',
+  JavaScript: '#fffde7',
+  TypeScript: '#e0f2ff',
+  React: '#e0f7fa',
+  'Next.js': '#f3f4f6',
+  Java: '#e0ecff',
+  Python: '#e0f2f1',
+  PHP: '#eee8f5',
+  Figma: '#f3e8ff',
+  GitHub: '#f4f4f4',
+  Git: '#ffe8e6',
+  Firebase: '#fff8e1',
+  APIs: '#e8f5e8',
+  PostgreSQL: '#e8f0fe',
+  MySQL: '#e0f7fa',
+  Trello: '#e3f2fd',
+  "Tailwind CSS": '#e0f2fe',
+  Swift: '#fff5f0',
+  SwiftUI: '#fff5f0',
+  iOS: '#f3f4f6',
+  watchOS: '#f3f4f6',
+  HealthKit: '#fee2e2',
+  Supabase: '#ecfdf5',
+  "Firebase Analytics": '#fff8e1',
+  Stripe: '#eef2ff',
+  OpenAI: '#f3f4f6',
+  "Framer Motion": '#f3f4f6',
+  "Drizzle ORM": '#f5fce8',
+  "NextAuth v5": '#f3e8ff',
+  "Anthropic SDK": '#fef3c7',
+  FFmpeg: '#e8f5e8',
+  Redis: '#fee2e2',
+  PM2: '#eee8f5',
+  WordPress: '#e3f2fd',
+  "GTM Consent Mode v2": '#e8f0fe',
 };
+
 const techTextColor = {
   HTML: '#e34c26',
   CSS: '#264de4',
@@ -86,6 +105,7 @@ const techTextColor = {
   'Next.js': '#222',
   Java: '#007396',
   Python: '#306998',
+  PHP: '#777BB4',
   Figma: '#a259ff',
   GitHub: '#333',
   Git: '#f34f29',
@@ -104,6 +124,14 @@ const techTextColor = {
   Stripe: '#635bff',
   OpenAI: '#111',
   "Framer Motion": '#111',
+  "Drizzle ORM": '#82a816',
+  "NextAuth v5": '#8B5CF6',
+  "Anthropic SDK": '#d97706',
+  FFmpeg: '#007808',
+  Redis: '#DC382D',
+  PM2: '#2B037A',
+  WordPress: '#21759B',
+  "GTM Consent Mode v2": '#246FDB',
 };
 
 function ProjectCard({
@@ -118,7 +146,7 @@ function ProjectCard({
   const cardStyle = {
     '--index': index,
     '--color-card': colorPalette[index % colorPalette.length],
-    zIndex: isSelected ? 200 : 'auto', // Asegura que la tarjeta seleccionada esté al frente
+    zIndex: isSelected ? 200 : 'auto',
   };
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeError, setIframeError] = useState(false);
@@ -137,7 +165,6 @@ function ProjectCard({
       clearTimeout(iframeTimeoutRef.current);
     }
 
-    // Fallback por timeout si el iframe no carga
     iframeTimeoutRef.current = setTimeout(() => {
       setIframeError(true);
     }, 1200);
@@ -151,14 +178,13 @@ function ProjectCard({
 
   return (
     <div
-      key={proyecto.id || index} // Usar un ID único si está disponible, si no, el índice
+      key={proyecto.id || index}
       className={`card ${isSelected ? 'selected' : ''}`}
       style={cardStyle}
       onClick={() => !isSelected && onCardClick(index)}
     >
       {isSelected ? (
         <div className="card-content compact-project-card" onClick={(e) => e.stopPropagation()}>
-          {/* Botón de cerrar tipo Uiverse */}
           <button
             className="close-btn"
             onClick={(e) => { e.stopPropagation(); onCloseCard(); }}
@@ -239,15 +265,15 @@ function ProjectCard({
           </div>
           <div className="action-buttons compact-action-buttons">
             {proyecto.codigoUrl && (
-              <a
-                href={proyecto.codigoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-action-btn"
-              >
-                <FaGithub className="w-6 h-6 mr-2" />
-                {translations.viewCode || 'Ver código'}
-              </a>
+            <a
+              href={proyecto.codigoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-action-btn"
+            >
+              <FaGithub className="w-6 h-6 mr-2" />
+              {translations.viewCode || 'Ver código'}
+            </a>
             )}
             <a
               href={proyecto.url}
@@ -275,4 +301,4 @@ function ProjectCard({
   );
 }
 
-export default ProjectCard; 
+export default ProjectCard;

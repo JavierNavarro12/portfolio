@@ -1,13 +1,39 @@
-import flyingPolitics from "./img/flying-politics.png";
-import fitnessApp from "./img/fitness-app.png";
-import portfolio from "./img/portfolio.png";
-import scapeRoom from "./img/scape-room.png";
-import aifinder from "./img/aifinder.png";
 import socialRunPreview from "./img/socialrun-preview.png";
 import cancelaYaPreview from "./img/cancela-ya-preview.png";
 import secureScanPreview from "./img/securescan-preview.png";
+import aifinder from "./img/aifinder.png";
+import taidlixPreview from "./img/taidlix-preview.png";
+import cookieboyPreview from "./img/cookieboy-preview.png";
 
 const proyectos = [
+    {
+      id: 10,
+      titulo: { es: "Taidlix", en: "Taidlix" },
+      descripcion: {
+        es: "Plataforma SaaS de gestión y analítica de redes sociales. Programación de posts, inbox unificado, generación de contenido con IA, informes PDF y análisis de competencia para Facebook, Instagram, TikTok y LinkedIn.",
+        en: "SaaS platform for social media management and analytics. Post scheduling, unified inbox, AI content generation, PDF reports, and competitor analysis for Facebook, Instagram, TikTok, and LinkedIn."
+      },
+      url: "https://taidlix.com",
+      previewUrl: "https://taidlix.com",
+      codigoUrl: "",
+      tecnologias: ["Next.js", "React", "TypeScript", "PostgreSQL", "Drizzle ORM", "NextAuth v5", "Anthropic SDK", "FFmpeg", "Stripe", "Redis", "PM2"],
+      imagenPreview: taidlixPreview,
+      imageFit: "contain"
+    },
+    {
+      id: 11,
+      titulo: { es: "CookieBoy", en: "CookieBoy" },
+      descripcion: {
+        es: "Solución SaaS GDPR para WordPress compuesta por plugin premium, API propia y portal de clientes. Detección automática de cookies, banner en 7 idiomas, Google Consent Mode v2 y sistema propio de licencias con Stripe.",
+        en: "GDPR SaaS solution for WordPress featuring a premium plugin, custom API, and client portal. Automatic cookie detection, banner in 7 languages, Google Consent Mode v2, and custom licensing system with Stripe."
+      },
+      url: "https://cookieboy.es",
+      previewUrl: "https://cookieboy.es",
+      codigoUrl: "",
+      tecnologias: ["PHP", "JavaScript", "MySQL", "Stripe", "WordPress", "GTM Consent Mode v2"],
+      imagenPreview: cookieboyPreview,
+      imageFit: "contain"
+    },
     {
       id: 7,
       titulo: { es: "SocialRun", en: "SocialRun" },
@@ -20,20 +46,6 @@ const proyectos = [
       codigoUrl: "",
       tecnologias: ["Swift", "SwiftUI", "iOS", "watchOS", "HealthKit", "Supabase", "Firebase Analytics"],
       imagenPreview: socialRunPreview,
-      imageFit: "contain"
-    },
-    {
-      id: 8,
-      titulo: { es: "CancelaYa", en: "CancelaYa" },
-      descripcion: {
-        es: "Web app que detecta suscripciones olvidadas desde tu extracto y te da el enlace directo para cancelarlas.",
-        en: "Web app that detects forgotten subscriptions from your statement and provides direct cancel links."
-      },
-      url: "https://cancela-ya.vercel.app",
-      previewUrl: "https://cancela-ya.vercel.app",
-      codigoUrl: "https://github.com/JavierNavarro12/cancelaya",
-      tecnologias: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase", "Stripe", "OpenAI"],
-      imagenPreview: cancelaYaPreview,
       imageFit: "contain"
     },
     {
@@ -51,6 +63,20 @@ const proyectos = [
       imageFit: "contain"
     },
     {
+      id: 8,
+      titulo: { es: "CancelaYa", en: "CancelaYa" },
+      descripcion: {
+        es: "Web app que detecta suscripciones olvidadas desde tu extracto y te da el enlace directo para cancelarlas.",
+        en: "Web app that detects forgotten subscriptions from your statement and provides direct cancel links."
+      },
+      url: "https://cancela-ya.vercel.app",
+      previewUrl: "https://cancela-ya.vercel.app",
+      codigoUrl: "https://github.com/JavierNavarro12/cancelaya",
+      tecnologias: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase", "Stripe", "OpenAI"],
+      imagenPreview: cancelaYaPreview,
+      imageFit: "contain"
+    },
+    {
       id: 6,
       titulo: { es: "AIFinder", en: "AIFinder" },
       descripcion: {
@@ -63,54 +89,7 @@ const proyectos = [
       tecnologias: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase"],
       imagenPreview: aifinder,
       forceImagePreview: true
-    },
-    {
-      id: 1,
-      titulo: { es: "Juego de Pájaros", en: "Bird Game" },
-      descripcion: { es: "Un juego interactivo donde tienes que superar obstáculos.", en: "An interactive game where you have to overcome obstacles." },
-      url: "https://flyingpolitics.netlify.app/",
-      previewUrl: "https://flyingpolitics.netlify.app/",
-      codigoUrl: "https://github.com/JavierNavarro12/Curso/tree/master/JuegoPajaros",
-      tecnologias: ["HTML", "CSS", "JavaScript"],
-      imagenPreview: flyingPolitics
-    },
-    {
-      id: 3,
-      titulo: { es: "Fitness App", en: "Fitness App" },
-      descripcion: { 
-        es: "Aplicación fullstack que, usando IA, genera informes personalizados sobre los suplementos que debes tomar.", 
-        en: "A fullstack app that uses AI to generate personalized reports on the supplements you should take." 
-      },
-      url: "https://endlessgoalsnutrition.com",
-      previewUrl: "https://endlessgoalsnutrition.com",
-      codigoUrl: "https://github.com/JavierNavarro12/Fitness",
-      tecnologias: ["React", "TypeScript", "Firebase", "APIs", "Tailwind CSS"],
-      imagenPreview: fitnessApp,
-      forceImagePreview: true
-    },
-    {
-      id: 4,
-      titulo: { es: "Portfolio", en: "Portfolio" },
-      descripcion: { es: "Portfolio con mis proyectos", en: "Portfolio with my projects" },
-      url: "https://portfoliojaviernavarro.netlify.app/",
-      previewUrl: "https://portfoliojaviernavarro.netlify.app/",
-      codigoUrl: "https://github.com/JavierNavarro12/portfolio",
-      tecnologias: ["React", "JavaScript", "CSS"],
-      imagenPreview: portfolio,
-      forceImagePreview: true
-    },
-    {
-      id: 5,
-      titulo: { es: "Juego de Programación", en: "Programming Game" },
-      descripcion: { es: "Un escape room virtual de programación.", en: "A virtual programming escape room." },
-      url: "https://scape-room.netlify.app",
-      previewUrl: "https://scape-room.netlify.app",
-      codigoUrl: "",
-      tecnologias: ["React", "JavaScript", "CSS"],
-      imagenPreview: scapeRoom,
-      forceImagePreview: true
     }
   ];
 
   export default proyectos;
-  
