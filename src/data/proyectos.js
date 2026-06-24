@@ -10,8 +10,8 @@ const proyectos = [
       id: 10,
       titulo: { es: "Taidlix", en: "Taidlix" },
       descripcion: {
-        es: "Plataforma SaaS de gestión y analítica de redes sociales. Programación de posts, inbox unificado, generación de contenido con IA, informes PDF y análisis de competencia para Facebook, Instagram, TikTok y LinkedIn.",
-        en: "SaaS platform for social media management and analytics. Post scheduling, unified inbox, AI content generation, PDF reports, and competitor analysis for Facebook, Instagram, TikTok, and LinkedIn."
+        es: "Plataforma SaaS de gestión y analítica de redes sociales. Conexión de cuentas vía OAuth, publicación programada, inbox unificado, generación de contenido con IA, informes PDF y análisis de competencia para Facebook, Instagram, TikTok y LinkedIn, sobre infraestructura propia.",
+        en: "SaaS platform for social media management and analytics. OAuth account connection, scheduled publishing, unified inbox, AI content generation, PDF reports, and competitor analysis for Facebook, Instagram, TikTok, and LinkedIn, running on custom infrastructure."
       },
       url: "https://taidlix.com",
       previewUrl: "https://taidlix.com",
@@ -24,8 +24,8 @@ const proyectos = [
       id: 11,
       titulo: { es: "CookieBoy", en: "CookieBoy" },
       descripcion: {
-        es: "Solución SaaS GDPR para WordPress compuesta por plugin premium, API propia y portal de clientes. Detección automática de cookies, banner en 7 idiomas, Google Consent Mode v2 y sistema propio de licencias con Stripe.",
-        en: "GDPR SaaS solution for WordPress featuring a premium plugin, custom API, and client portal. Automatic cookie detection, banner in 7 languages, Google Consent Mode v2, and custom licensing system with Stripe."
+        es: "Solución SaaS GDPR para WordPress compuesta por plugin premium, API propia y portal de clientes. Detección automática de cookies, banner en 7 idiomas, Google Consent Mode v2 y sistema propio de licencias con Stripe Billing.",
+        en: "GDPR SaaS solution for WordPress featuring a premium plugin, custom API, and client portal. Automatic cookie detection, banner in 7 languages, Google Consent Mode v2, and custom licensing system with Stripe Billing."
       },
       url: "https://cookieboy.es",
       previewUrl: "https://cookieboy.es",
