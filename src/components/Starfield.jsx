@@ -37,6 +37,8 @@ const Starfield = () => {
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
+      ctx.shadowColor = '#fff';
+      ctx.shadowBlur = 8;
       for (let star of starsRef.current) {
         // Parpadeo
         star.alpha += star.alphaChange;
@@ -50,11 +52,9 @@ const Starfield = () => {
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
         ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
-        ctx.shadowColor = '#fff';
-        ctx.shadowBlur = 8;
         ctx.fill();
-        ctx.shadowBlur = 0;
       }
+      ctx.shadowBlur = 0;
       animationRef.current = requestAnimationFrame(animate);
     }
     animate();

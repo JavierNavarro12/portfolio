@@ -1,9 +1,9 @@
 import React from 'react';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaPhp, FaNodeJs, FaWhatsapp, FaFacebook, FaLinkedin, FaWordpress } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiVisualstudiocode, SiFirebase, SiPnpm, SiNetlify, SiJest, SiCypress, SiGithubactions, SiStripe, SiRedis, SiFfmpeg, SiTiktok, SiMeta, SiPm2 } from "react-icons/si";
-import { BsCodeSlash, BsRobot, BsGear } from "react-icons/bs";
-import cursorLogo from './img/cursor-logo.svg';
-import intellijLogo from './img/intellij-logo.svg';
+import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiVisualstudiocode, SiFirebase, SiPnpm, SiNetlify, SiJest, SiCypress, SiGithubactions, SiStripe, SiRedis, SiFfmpeg, SiTiktok, SiMeta, SiPm2, SiSupabase, SiSwift, SiFramer } from "react-icons/si";
+import { BsCodeSlash, BsRobot, BsGear, BsShieldLock, BsDatabase } from "react-icons/bs";
+import cursorLogo from '../img/cursor-logo.svg';
+import intellijLogo from '../img/intellij-logo.svg';
 
 const tecnologias = {
   frontend: [
@@ -15,6 +15,7 @@ const tecnologias = {
     { nombre: "Next.js", icono: <SiNextdotjs color="#000" />, url: "https://nextjs.org/" },
     { nombre: "Tailwind", icono: <SiTailwindcss color="#38bdf8" />, url: "https://tailwindcss.com/" },
     { nombre: "Bootstrap", icono: <SiBootstrap color="#7952b3" />, url: "https://getbootstrap.com/" },
+    { nombre: "Framer Motion", icono: <SiFramer color="#0055FF" />, url: "https://www.framer.com/motion/" },
   ],
   backend: [
     { nombre: "Node.js", icono: <FaNodeJs color="#339933" />, url: "https://nodejs.org/" },
@@ -24,6 +25,9 @@ const tecnologias = {
     { nombre: "Python", icono: <FaPython color="#306998" />, url: "https://www.python.org/" },
     { nombre: "PHP", icono: <FaPhp color="#777BB4" />, url: "https://www.php.net/" },
     { nombre: "Firebase", icono: <SiFirebase color="#FFCA28" />, url: "https://firebase.google.com/" },
+    { nombre: "Supabase", icono: <SiSupabase color="#3FCF8E" />, url: "https://supabase.com/" },
+    { nombre: "Swift", icono: <SiSwift color="#F05138" />, url: "https://www.swift.org/" },
+    { nombre: "NextAuth", icono: <BsShieldLock color="#7C3AED" />, url: "https://authjs.dev/" },
     { nombre: "APIs", icono: <BsCodeSlash color="#4CAF50" />, url: "https://developer.mozilla.org/docs/Web/API" },
     { nombre: "Stripe", icono: <SiStripe color="#635bff" />, url: "https://stripe.com/" },
     { nombre: "Anthropic", icono: <BsRobot color="#d97706" />, url: "https://www.anthropic.com/" },
@@ -37,6 +41,7 @@ const tecnologias = {
     { nombre: "MySQL", icono: <SiMysql color="#00758f" />, url: "https://www.mysql.com/" },
     { nombre: "MongoDB", icono: <SiMongodb color="#47A248" />, url: "https://www.mongodb.com/" },
     { nombre: "Redis", icono: <SiRedis color="#DC382D" />, url: "https://redis.io/" },
+    { nombre: "Drizzle ORM", icono: <BsDatabase color="#C5F74F" />, url: "https://orm.drizzle.team/" },
   ],
   tools: [
     { nombre: "Docker", icono: <SiDocker color="#2496ed" />, url: "https://www.docker.com/" },

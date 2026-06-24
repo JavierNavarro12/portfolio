@@ -1,6 +1,7 @@
 import React, { useRef, useLayoutEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { gsap } from '../hooks/useGSAP';
+import { SOCIAL } from '../data/socialLinks';
 
 function Contact() {
   const { t, language } = useLanguage();
@@ -12,7 +13,7 @@ function Contact() {
 
   const contactLinks = [
     {
-      href: "https://wa.me/34693744798",
+      href: SOCIAL.whatsapp,
       label: "WhatsApp",
       icon: (
         <svg className="w-8 h-8 text-green-500 relative z-10" fill="currentColor" viewBox="0 0 24 24">
@@ -23,7 +24,7 @@ function Contact() {
       bgColor: "#22c55e"
     },
     {
-      href: "https://github.com/JavierNavarro12",
+      href: SOCIAL.github,
       label: "GitHub",
       icon: (
         <svg className="w-8 h-8 text-gray-700 dark:text-gray-300 relative z-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -34,7 +35,7 @@ function Contact() {
       bgColor: "#374151"
     },
     {
-      href: "https://www.linkedin.com/in/javier-navarro-rodr%C3%ADguez-056023331/",
+      href: SOCIAL.linkedin,
       label: "LinkedIn",
       icon: (
         <svg className="w-8 h-8 text-blue-600 relative z-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -45,7 +46,7 @@ function Contact() {
       bgColor: "#2563eb"
     },
     {
-      href: "mailto:navarrojavi107@gmail.com",
+      href: SOCIAL.email,
       label: "Gmail",
       icon: (
         <svg className="w-8 h-8 text-red-500 relative z-10" fill="currentColor" viewBox="0 0 24 24">
@@ -57,7 +58,7 @@ function Contact() {
     },
     {
       href: cvHref,
-      label: "Currículum",
+      label: t.resume,
       icon: (
         <svg className="w-8 h-8 text-blue-800 dark:text-blue-300 relative z-10" fill="currentColor" viewBox="0 0 24 24">
           <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v4h4v12H6z" />

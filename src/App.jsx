@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, Suspense, useCallback } from "react";
-import TechCarousel from "./TechCarousel";
-import ProjectCarousel from "./ProjectCarousel";
+import React, { useState, useEffect, useRef, Suspense, useCallback, lazy } from "react";
+import TechCarousel from "./components/TechCarousel";
+const ProjectCarousel = lazy(() => import("./components/ProjectCarousel"));
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import About from "./components/About";
