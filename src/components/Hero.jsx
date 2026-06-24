@@ -171,7 +171,7 @@ function Hero({ isMobile, scrollTargetRef }) {
               color: '#333',
               zIndex: 5
             }}>
-              Cargando Robot...
+              {t.loadingRobot}
             </div>
           )}
 

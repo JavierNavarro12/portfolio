@@ -1,6 +1,7 @@
 import React, { useRef, useLayoutEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { gsap } from '../hooks/useGSAP';
+import { SOCIAL } from '../data/socialLinks';
 
 function Footer() {
   const { t } = useLanguage();
@@ -9,7 +10,7 @@ function Footer() {
 
   const socialLinks = [
     {
-      href: "https://github.com/JavierNavarro12",
+      href: SOCIAL.github,
       label: "GitHub",
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -19,7 +20,7 @@ function Footer() {
       hoverClass: "hover:text-black dark:hover:text-white"
     },
     {
-      href: "https://wa.me/34693744798",
+      href: SOCIAL.whatsapp,
       label: "WhatsApp",
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -29,7 +30,7 @@ function Footer() {
       hoverClass: "hover:text-green-600"
     },
     {
-      href: "https://www.linkedin.com/in/javier-navarro-rodr%C3%ADguez-056023331/",
+      href: SOCIAL.linkedin,
       label: "LinkedIn",
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

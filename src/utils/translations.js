@@ -22,6 +22,8 @@ export const translations = {
     projectsClick: "Haz clic para ver los proyectos",
     projectsClickMobile: "Pulsa para ver los proyectos",
     contact: "Contacto",
+    resume: "Currículum",
+    loadingRobot: "Cargando Robot...",
     copyright: `© ${new Date().getFullYear()} Javier Navarro. Todos los derechos reservados.`,
     menu: {
       intro: "Introducción",
@@ -65,6 +67,8 @@ export const translations = {
     projectsClick: "Click to see the projects",
     projectsClickMobile: "Tap to see the projects",
     contact: "Contact",
+    resume: "Resume",
+    loadingRobot: "Loading Robot...",
     copyright: `© ${new Date().getFullYear()} Javier Navarro. All rights reserved.`,
     menu: {
       intro: "Introduction",

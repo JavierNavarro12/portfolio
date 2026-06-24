@@ -1,7 +1,7 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
-import proyectos from './proyectos';
+import proyectos from '../data/proyectos';
 import ProjectCard from './ProjectCard';
-import { gsap } from './hooks/useGSAP';
+import { gsap } from '../hooks/useGSAP';
 
 function ProjectCarousel({ onClose, language, translations }) {
   const [selectedCard, setSelectedCard] = useState(null);

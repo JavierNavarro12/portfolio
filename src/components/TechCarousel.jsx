@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo, useLayoutEffect } from 'react';
-import { tecnologias } from './Tecnologias';
-import { gsap } from './hooks/useGSAP';
+import { tecnologias } from '../data/Tecnologias';
+import { gsap } from '../hooks/useGSAP';
 
 // Unimos todas las tecnologías en un solo array y eliminamos duplicados por nombre
 const allTechsRaw = [

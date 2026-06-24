@@ -1,9 +1,9 @@
-import socialRunPreview from "./img/socialrun-preview.png";
-import cancelaYaPreview from "./img/cancela-ya-preview.png";
-import secureScanPreview from "./img/securescan-preview.png";
-import aifinder from "./img/aifinder.png";
-import taidlixPreview from "./img/taidlix-preview.png";
-import cookieboyPreview from "./img/cookieboy-preview.png";
+import socialRunPreview from "../img/socialrun-preview.webp";
+import cancelaYaPreview from "../img/cancela-ya-preview.webp";
+import secureScanPreview from "../img/securescan-preview.webp";
+import aifinder from "../img/aifinder.webp";
+import taidlixPreview from "../img/taidlix-preview.webp";
+import cookieboyPreview from "../img/cookieboy-preview.webp";
 
 const proyectos = [
     {
