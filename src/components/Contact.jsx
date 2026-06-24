@@ -81,7 +81,7 @@ function Contact() {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 55%',
+          start: 'top 85%',
           toggleActions: 'play none none reverse',
         },
       });
@@ -99,7 +99,7 @@ function Contact() {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 50%',
+            start: 'top 80%',
             toggleActions: 'play none none reverse',
           },
         });
