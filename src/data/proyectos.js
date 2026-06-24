@@ -18,7 +18,8 @@ const proyectos = [
       codigoUrl: "",
       tecnologias: ["Next.js", "React", "TypeScript", "PostgreSQL", "Drizzle ORM", "NextAuth v5", "Anthropic SDK", "FFmpeg", "Stripe", "Redis", "PM2"],
       imagenPreview: taidlixPreview,
-      imageFit: "contain"
+      imageFit: "contain",
+      forceImagePreview: true
     },
     {
       id: 11,
@@ -32,7 +33,8 @@ const proyectos = [
       codigoUrl: "",
       tecnologias: ["PHP", "JavaScript", "MySQL", "Stripe", "WordPress", "GTM Consent Mode v2"],
       imagenPreview: cookieboyPreview,
-      imageFit: "contain"
+      imageFit: "contain",
+      forceImagePreview: true
     },
     {
       id: 7,
