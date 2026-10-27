@@ -10,13 +10,13 @@ const proyectos = [
       id: 10,
       titulo: { es: "Taidlix", en: "Taidlix" },
       descripcion: {
-        es: "Plataforma SaaS de gestión y analítica de redes sociales. Conexión de cuentas vía OAuth, publicación programada, inbox unificado, generación de contenido con IA, informes PDF y análisis de competencia para Facebook, Instagram, TikTok y LinkedIn, sobre infraestructura propia.",
-        en: "SaaS platform for social media management and analytics. OAuth account connection, scheduled publishing, unified inbox, AI content generation, PDF reports, and competitor analysis for Facebook, Instagram, TikTok, and LinkedIn, running on custom infrastructure."
+        es: "Plataforma SaaS de gestión y analítica de redes sociales. Conexión de cuentas vía OAuth, publicación programada con vídeo hasta 4K, inbox unificado, generación de contenido con IA, informes PDF con análisis redactado por IA y análisis de competencia para Facebook, Instagram, TikTok y LinkedIn, sobre infraestructura propia con backups externos y cumplimiento RGPD.",
+        en: "SaaS platform for social media management and analytics. OAuth account connection, scheduled publishing with up to 4K video, unified inbox, AI content generation, PDF reports with AI-written insights, and competitor analysis for Facebook, Instagram, TikTok, and LinkedIn, running on custom infrastructure with off-site backups and GDPR compliance."
       },
       url: "https://taidlix.com",
       previewUrl: "https://taidlix.com",
       codigoUrl: "",
-      tecnologias: ["Next.js", "React", "TypeScript", "PostgreSQL", "Drizzle ORM", "NextAuth v5", "Anthropic SDK", "FFmpeg", "Stripe", "Redis", "PM2"],
+      tecnologias: ["Next.js", "React", "TypeScript", "PostgreSQL", "Drizzle ORM", "NextAuth v5", "Anthropic SDK", "FFmpeg", "Puppeteer", "Stripe", "Redis", "PM2"],
       imagenPreview: taidlixPreview,
       imageFit: "contain",
       forceImagePreview: true
