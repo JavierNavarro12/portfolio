@@ -1,11 +1,10 @@
 import React, { useRef, useLayoutEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { gsap } from '../hooks/useGSAP';
-import { SOCIAL } from '../data/socialLinks';
+import { SOCIAL, CV } from '../data/socialLinks';
 
 function Contact() {
   const { t, language } = useLanguage();
-  const cvHref = language === 'es' ? '/CV-Javier-Navarro-2026-ES.pdf' : '/CV-Javier-Navarro-2026-EN.pdf';
   
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
@@ -55,17 +54,6 @@ function Contact() {
       ),
       color: "red-500",
       bgColor: "#ef4444"
-    },
-    {
-      href: cvHref,
-      label: t.resume,
-      icon: (
-        <svg className="w-8 h-8 text-blue-800 dark:text-blue-300 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v4h4v12H6z" />
-        </svg>
-      ),
-      color: "blue-800",
-      bgColor: "#1e40af"
     }
   ];
 
@@ -125,7 +113,7 @@ function Contact() {
         </h2>
       </div>
       
-      <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-4 mb-16 w-full max-w-2xl">
+      <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-4 mb-10 w-full max-w-2xl">
         {contactLinks.map((link, index) => (
           <a
             key={link.label}
@@ -148,6 +136,13 @@ function Contact() {
           </a>
         ))}
       </div>
+      <a
+        href={CV[language]}
+        download
+        className="inline-flex items-center justify-center min-h-[44px] px-6 py-3 mb-16 rounded-full bg-gray-900 text-white dark:bg-white dark:text-gray-900 font-semibold hover:opacity-90 transition"
+      >
+        {t.ctaCv}
+      </a>
     </section>
   );
 }

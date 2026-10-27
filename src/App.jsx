@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Passions from "./components/Passions";
+import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -19,10 +20,11 @@ import { ScrollTrigger } from "./hooks/useGSAP";
 function AppContent() {
   const [showCarousel, setShowCarousel] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [initialProject, setInitialProject] = useState(null);
   const isMobile = useScreenSize(768);
   const comoAyudarteRef = useRef(null);
   const mainRef = useRef(null);
-  const projectsCardRef = useRef(null);
+  const originRef = useRef(null);
   const transitionRef = useRef(null);
   const { language, t } = useLanguage();
 
@@ -43,10 +45,12 @@ function AppContent() {
   }, [t]);
 
   // Función para abrir el carrusel con transición
-  const handleOpenCarousel = useCallback(async () => {
+  const handleOpenCarousel = useCallback(async (index, originEl) => {
     if (isTransitioning) return;
+    originRef.current = originEl;
+    setInitialProject(index);
     
-    if (!projectsCardRef.current || !transitionRef.current) {
+    if (!originRef.current || !transitionRef.current) {
       setShowCarousel(true);
       document.body.style.overflow = 'hidden';
       return;
@@ -55,7 +59,7 @@ function AppContent() {
     setIsTransitioning(true);
     document.body.style.overflow = 'hidden';
 
-    const cardRect = projectsCardRef.current.getBoundingClientRect();
+    const cardRect = originRef.current.getBoundingClientRect();
 
     // Animar: expande desde la tarjeta hasta pantalla completa
     await transitionRef.current.enter(cardRect);
@@ -78,7 +82,7 @@ function AppContent() {
   const handleCloseCarousel = useCallback(async () => {
     if (isTransitioning) return;
     
-    if (!projectsCardRef.current || !transitionRef.current) {
+    if (!originRef.current || !transitionRef.current) {
       setShowCarousel(false);
       document.body.style.overflow = '';
       return;
@@ -86,7 +90,7 @@ function AppContent() {
 
     setIsTransitioning(true);
 
-    const cardRect = projectsCardRef.current.getBoundingClientRect();
+    const cardRect = originRef.current.getBoundingClientRect();
 
     // Ocultar carrusel primero
     setShowCarousel(false);
@@ -121,6 +125,12 @@ function AppContent() {
         {/* About: ¿Cómo puedo ayudarte? */}
         <About ref={comoAyudarteRef} isMobile={isMobile} />
 
+        {/* Experiencia */}
+        <Experience />
+
+        {/* Proyectos */}
+        <Projects onOpenProject={handleOpenCarousel} />
+
         {/* Passions */}
         <Passions />
 
@@ -128,13 +138,6 @@ function AppContent() {
         <div className="mt-2 sm:mt-5">
           <TechCarousel language={language} translations={t} />
         </div>
-
-        {/* Proyectos */}
-        <Projects 
-          onShowCarousel={handleOpenCarousel} 
-          isMobile={isMobile}
-          cardRef={projectsCardRef}
-        />
 
         {/* Contacto */}
         <Contact />
@@ -153,6 +156,7 @@ function AppContent() {
             onClose={handleCloseCarousel} 
             language={language} 
             translations={t.carousel} 
+            initialSelected={initialProject}
           />
         </Suspense>
       )}

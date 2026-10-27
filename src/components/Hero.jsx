@@ -3,6 +3,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useSpline } from '../hooks/useSpline';
 import { useScrollVisibility } from '../hooks/useScrollVisibility';
 import { gsap } from '../hooks/useGSAP';
+import { CV } from '../data/socialLinks';
 
 function Hero({ isMobile, scrollTargetRef }) {
   const { t, language } = useLanguage();
@@ -17,6 +18,7 @@ function Hero({ isMobile, scrollTargetRef }) {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const portfolioRef = useRef(null);
+  const ctaRef = useRef(null);
   const robotContainerRef = useRef(null);
   const speechBubbleRef = useRef(null);
   
@@ -26,20 +28,9 @@ function Hero({ isMobile, scrollTargetRef }) {
 
   // Preparar las letras del título
   useEffect(() => {
-    if (!t.title) return;
-
-    if (isMobile) {
-      const parts = t.title.split('|').map((part) => part.trim()).filter(Boolean);
-      setTitleLines(parts.length >= 2 ? parts.slice(0, 2) : [t.title]);
-      return;
-    }
-
-    setTitleLines([t.title]);
-  }, [t.title, isMobile]);
-
-  useEffect(() => {
-    hasAnimated.current = false;
-  }, [language, isMobile]);
+    if (!t.heroRole) return;
+    setTitleLines([t.heroRole]);
+  }, [t.heroRole]);
 
   // Animaciones GSAP - solo se ejecuta UNA vez cuando las letras están listas
   useLayoutEffect(() => {
@@ -78,6 +69,15 @@ function Hero({ isMobile, scrollTargetRef }) {
         }, 0.6);
       }
 
+      // Frase y botones
+      if (ctaRef.current) {
+        tl.to(ctaRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+        }, 0.9);
+      }
+
       // Animación del robot - "aterrizaje" desde arriba
       if (robotContainerRef.current) {
         tl.to(robotContainerRef.current, {
@@ -95,15 +95,31 @@ function Hero({ isMobile, scrollTargetRef }) {
           opacity: 1,
           scale: 1,
           duration: 0.5,
-          x: '0%',
+          x: 0,
+          xPercent: -50,
           ease: 'back.out(2)',
         }, 1);
       }
 
     }, heroRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      hasAnimated.current = false;
+    };
   }, [titleLines, language, isMobile]);
+
+  const scrollToProjects = (e) => {
+    e.preventDefault();
+    const targetElement = document.getElementById('proyectos');
+    if (targetElement) {
+      const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <div ref={heroRef}>
@@ -115,36 +131,68 @@ function Hero({ isMobile, scrollTargetRef }) {
         >
           {titleLines.map((line, lineIndex) => (
             <span key={lineIndex} className="block">
-              {line.split('').map((char, index) => (
-                <span 
-                  key={`${lineIndex}-${index}`} 
-                  className="title-char"
-                  style={{ 
-                    display: 'inline-block',
-                    opacity: 0,
-                    transform: 'translateY(30px) rotateX(90deg)',
-                  }}
-                >
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
+              {line.split(' ').map((word, wordIndex) => (
+                <React.Fragment key={`${lineIndex}-${wordIndex}`}>
+                  {wordIndex > 0 && ' '}
+                  <span className="inline-block whitespace-nowrap">
+                    {word.split('').map((char, index) => (
+                      <span
+                        key={index}
+                        className="title-char"
+                        style={{
+                          display: 'inline-block',
+                          opacity: 0,
+                          transform: 'translateY(30px) rotateX(90deg)',
+                        }}
+                      >
+                        {char}
+                      </span>
+                    ))}
+                  </span>
+                </React.Fragment>
               ))}
             </span>
           ))}
         </span>
         <div>
-          <h1 
+          <h1
             ref={portfolioRef}
-            className="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2 wiggle-on-hover hero-portfolio"
+            className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-none mb-2 wiggle-on-hover hero-portfolio"
             style={{ opacity: 0, transform: 'scale(0.3) rotateY(-15deg)' }}
           >
-            {t.portfolio}
+            {t.heroName}
           </h1>
+        </div>
+        <div
+          ref={ctaRef}
+          className="flex flex-col items-center gap-6 mt-4"
+          style={{ opacity: 0, transform: 'translateY(20px)' }}
+        >
+          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl">
+            {t.heroTagline}
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="#proyectos"
+              onClick={scrollToProjects}
+              className="inline-flex items-center justify-center min-h-[44px] px-6 py-3 rounded-full bg-gray-900 text-white dark:bg-white dark:text-gray-900 font-semibold hover:opacity-90 transition"
+            >
+              {t.ctaProjects}
+            </a>
+            <a
+              href={CV[language]}
+              download
+              className="inline-flex items-center justify-center min-h-[44px] px-6 py-3 rounded-full border-2 border-gray-900 text-gray-900 dark:border-white dark:text-white font-semibold hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition"
+            >
+              {t.ctaCv}
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Sección: Robot de bienvenida */}
-      <section 
-        className="w-full flex flex-col items-center justify-center min-h-[30vh] mb-20"
+      <section
+        className="w-full flex flex-col items-center justify-center min-h-[30vh] mb-12"
       >
         <div 
           ref={robotContainerRef}
@@ -203,7 +251,7 @@ function Hero({ isMobile, scrollTargetRef }) {
             className="flex flex-col items-center justify-center gap-6"
             style={{
               position: 'absolute',
-              bottom: isMobile ? '5%' : '-10%',
+              bottom: '-10%',
               left: '50%',
               transform: 'translateX(-50%) scale(0)',
               opacity: 0,

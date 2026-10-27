@@ -2,9 +2,13 @@
 export const translations = {
   es: {
     title: "JAVIER NAVARRO | FULL STACK DEVELOPER",
-    portfolio: "PORTFOLIO",
-    welcome: "BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!",
-    welcomeMobile: "BIENVENIDO A MI PORTFOLIO! DESLIZA PARA VERLO!",
+    heroRole: "FULL STACK DEVELOPER",
+    heroName: "JAVIER NAVARRO",
+    heroTagline: "Construyo productos SaaS e integro IA en aplicaciones de negocio, desde la interfaz hasta el servidor.",
+    ctaProjects: "Ver proyectos",
+    ctaCv: "Descargar CV",
+    welcome: "¡BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!",
+    welcomeMobile: "¡BIENVENIDO A MI PORTFOLIO! DESLIZA PARA VERLO!",
     howCanIHelp: "¿CÓMO PUEDO AYUDARTE?",
     description: "Soy un desarrollador full stack con experiencia en la creación de productos SaaS, integración de IA en aplicaciones de negocio, integraciones de APIs y automatización de procesos. Mi objetivo es construir soluciones completas, desde la interfaz hasta la infraestructura, aportando valor real a cada proyecto.",
     passion: "PASIÓN",
@@ -18,15 +22,29 @@ export const translations = {
       'IA generativa'
     ],
     technologies: "TECNOLOGÍAS",
-    projects: "Proyectos",
-    projectsClick: "Haz clic para ver los proyectos",
-    projectsClickMobile: "Pulsa para ver los proyectos",
+    experience: {
+      title: "EXPERIENCIA",
+      role: "Desarrollador ERP / Full Stack",
+      company: "Nubium Solutions",
+      period: "Nov 2025 — Actualidad",
+      items: [
+        "Asistente de IA con la API de Claude integrado en Dolibarr: rellena registros a partir de documentos y fotos. En producción en 8 ERPs de clientes.",
+        "Más de 25 módulos a medida: facturación electrónica, control horario con PWA y geofencing, WhatsApp Business con IA y tickets con análisis por IA.",
+        "Soluciones sectoriales: libro registro de instalaciones frigoríficas, portal de trámites con firma sobre PDF y trazabilidad alimentaria con QR.",
+        "Despliegue automatizado en 30 instancias de producción, administración de servidores VPS y resolución de un incidente de malware con unas 100 webs limpiadas."
+      ],
+      education: "Técnico Superior en DAW (nota final 9,25) · DAM en curso"
+    },
+    projects: "PROYECTOS",
+    viewAllProjects: "Ver todos los proyectos",
     contact: "Contacto",
-    resume: "Currículum",
     loadingRobot: "Cargando Robot...",
     copyright: `© ${new Date().getFullYear()} Javier Navarro. Todos los derechos reservados.`,
     menu: {
+      home: "Inicio",
+      goTo: "Ir a",
       intro: "Introducción",
+      experience: "Experiencia",
       projects: "Proyectos",
       contact: "Contacto",
       mainPage: "PÁGINA PRINCIPAL"
@@ -47,7 +65,11 @@ export const translations = {
   },
   en: {
     title: "JAVIER NAVARRO | FULL STACK DEVELOPER",
-    portfolio: "PORTFOLIO",
+    heroRole: "FULL STACK DEVELOPER",
+    heroName: "JAVIER NAVARRO",
+    heroTagline: "I build SaaS products and integrate AI into business applications, from the interface to the server.",
+    ctaProjects: "View projects",
+    ctaCv: "Download CV",
     welcome: "WELCOME TO MY PORTFOLIO! SCROLL TO SEE IT!",
     welcomeMobile: "WELCOME TO MY PORTFOLIO! SWIPE TO SEE IT!",
     howCanIHelp: "HOW CAN I HELP YOU?",
@@ -63,15 +85,29 @@ export const translations = {
       'Generative AI'
     ],
     technologies: "TECHNOLOGIES",
-    projects: "Projects",
-    projectsClick: "Click to see the projects",
-    projectsClickMobile: "Tap to see the projects",
+    experience: {
+      title: "EXPERIENCE",
+      role: "ERP / Full Stack Developer",
+      company: "Nubium Solutions",
+      period: "Nov 2025 — Present",
+      items: [
+        "AI assistant built on the Claude API inside Dolibarr: fills in records from documents and photos. In production in 8 client ERPs.",
+        "25+ custom modules: e-invoicing, time tracking with PWA and geofencing, WhatsApp Business with AI, and tickets with AI analysis.",
+        "Industry solutions: refrigeration installation logbook, procedures portal with signatures on PDF, and food traceability with QR codes.",
+        "Automated deployment to 30 production instances, VPS administration, and resolution of a malware incident with around 100 websites cleaned."
+      ],
+      education: "Higher Certificate in Web Application Development (final grade 9.25/10) · Multiplatform Application Development in progress"
+    },
+    projects: "PROJECTS",
+    viewAllProjects: "View all projects",
     contact: "Contact",
-    resume: "Resume",
     loadingRobot: "Loading Robot...",
     copyright: `© ${new Date().getFullYear()} Javier Navarro. All rights reserved.`,
     menu: {
+      home: "Home",
+      goTo: "Go to",
       intro: "Introduction",
+      experience: "Experience",
       projects: "Projects",
       contact: "Contact",
       mainPage: "MAIN PAGE"
