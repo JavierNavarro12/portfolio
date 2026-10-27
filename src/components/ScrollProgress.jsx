@@ -1,12 +1,14 @@
 import React, { useRef, useLayoutEffect, useState } from 'react';
 import { gsap, ScrollTrigger } from '../hooks/useGSAP';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Definido fuera del componente para evitar re-creación
 const SECTIONS = [
-  { id: 'hero', label: 'Inicio' },
-  { id: 'como-ayudarte', label: 'Sobre mí' },
-  { id: 'proyectos', label: 'Proyectos' },
-  { id: 'contacto', label: 'Contacto' },
+  { id: 'hero', label: 'home' },
+  { id: 'como-ayudarte', label: 'intro' },
+  { id: 'experiencia', label: 'experience' },
+  { id: 'proyectos', label: 'projects' },
+  { id: 'contacto', label: 'contact' },
 ];
 
 /**
@@ -14,6 +16,7 @@ const SECTIONS = [
  * Aparece como una línea vertical con puntos en el lateral derecho.
  */
 function ScrollProgress() {
+  const { t } = useLanguage();
   const progressRef = useRef(null);
   const lineRef = useRef(null);
   const dotsRef = useRef([]);
@@ -135,11 +138,11 @@ function ScrollProgress() {
             onClick={() => scrollToSection(section.id)}
             className="group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-colors cursor-pointer hover:scale-125"
             style={{ zIndex: 10 }}
-            aria-label={`Ir a ${section.label}`}
+            aria-label={`${t.menu.goTo} ${t.menu[section.label]}`}
           >
             {/* Tooltip */}
             <span className="absolute right-6 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-              {section.label}
+              {t.menu[section.label]}
             </span>
           </button>
         ))}

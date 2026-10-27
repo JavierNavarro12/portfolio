@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaApple, FaHeartbeat, FaPhp, FaLock, FaWordpress } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql, SiTypescript, SiFirebase, SiTailwindcss, SiSwift, SiSupabase, SiStripe, SiOpenai, SiFramer, SiRedis, SiFfmpeg, SiPm2, SiGoogletagmanager } from "react-icons/si";
+import { SiNextdotjs, SiPostgresql, SiMysql, SiTypescript, SiFirebase, SiTailwindcss, SiSwift, SiSupabase, SiStripe, SiOpenai, SiFramer, SiRedis, SiFfmpeg, SiPuppeteer, SiPm2, SiGoogletagmanager } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
 import { BsCodeSlash, BsDatabase, BsRobot } from "react-icons/bs";
 
@@ -37,6 +37,7 @@ const iconMap = {
   "NextAuth v5": <FaLock color="#8B5CF6" />,
   "Anthropic SDK": <BsRobot color="#d97706" />,
   FFmpeg: <SiFfmpeg color="#007808" />,
+  Puppeteer: <SiPuppeteer color="#40B5A4" />,
   Redis: <SiRedis color="#DC382D" />,
   PM2: <SiPm2 color="#2B037A" />,
   WordPress: <FaWordpress color="#21759B" />,
@@ -89,6 +90,7 @@ const techBgColor = {
   "NextAuth v5": '#f3e8ff',
   "Anthropic SDK": '#fef3c7',
   FFmpeg: '#e8f5e8',
+  Puppeteer: '#e6f6f4',
   Redis: '#fee2e2',
   PM2: '#eee8f5',
   WordPress: '#e3f2fd',
@@ -128,6 +130,7 @@ const techTextColor = {
   "NextAuth v5": '#8B5CF6',
   "Anthropic SDK": '#d97706',
   FFmpeg: '#007808',
+  Puppeteer: '#2f8a7d',
   Redis: '#DC382D',
   PM2: '#2B037A',
   WordPress: '#21759B',

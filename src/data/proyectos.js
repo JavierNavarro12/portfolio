@@ -1,6 +1,5 @@
 import socialRunPreview from "../img/socialrun-preview.webp";
 import cancelaYaPreview from "../img/cancela-ya-preview.webp";
-import secureScanPreview from "../img/securescan-preview.webp";
 import aifinder from "../img/aifinder.webp";
 import taidlixPreview from "../img/taidlix-preview.webp";
 import cookieboyPreview from "../img/cookieboy-preview.webp";
@@ -51,20 +50,6 @@ const proyectos = [
       imageFit: "contain"
     },
     {
-      id: 9,
-      titulo: { es: "SecureScan", en: "SecureScan" },
-      descripcion: {
-        es: "Escáner de seguridad web que detecta API keys expuestas, archivos sensibles y configuraciones inseguras.",
-        en: "Web security scanner that detects exposed API keys, sensitive files, and insecure configurations."
-      },
-      url: "https://securescan-eight.vercel.app",
-      previewUrl: "https://securescan-eight.vercel.app",
-      codigoUrl: "",
-      tecnologias: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "Stripe", "Framer Motion", "OpenAI"],
-      imagenPreview: secureScanPreview,
-      imageFit: "contain"
-    },
-    {
       id: 8,
       titulo: { es: "CancelaYa", en: "CancelaYa" },
       descripcion: {
@@ -76,7 +61,8 @@ const proyectos = [
       codigoUrl: "https://github.com/JavierNavarro12/cancelaya",
       tecnologias: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase", "Stripe", "OpenAI"],
       imagenPreview: cancelaYaPreview,
-      imageFit: "contain"
+      imageFit: "contain",
+      forceImagePreview: true
     },
     {
       id: 6,

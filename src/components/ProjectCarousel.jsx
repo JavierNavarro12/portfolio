@@ -3,9 +3,9 @@ import proyectos from '../data/proyectos';
 import ProjectCard from './ProjectCard';
 import { gsap } from '../hooks/useGSAP';
 
-function ProjectCarousel({ onClose, language, translations }) {
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [paused, setPaused] = useState(false);
+function ProjectCarousel({ onClose, language, translations, initialSelected = null }) {
+  const [selectedCard, setSelectedCard] = useState(initialSelected);
+  const [paused, setPaused] = useState(initialSelected !== null);
   
   const containerRef = useRef(null);
   const backButtonRef = useRef(null);

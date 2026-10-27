@@ -62,7 +62,7 @@ function Navigation() {
     <>
       {/* Menú minimalista */}
       <nav ref={navRef} className="w-full max-w-5xl flex justify-center mb-8 pr-0 pl-0">
-        <ul className="flex space-x-10 text-gray-700 dark:text-gray-300 text-base font-medium tracking-wide w-full justify-center items-center text-center">
+        <ul className="flex space-x-3 min-[360px]:space-x-5 sm:space-x-10 text-gray-700 dark:text-gray-300 text-xs min-[360px]:text-sm sm:text-base font-medium tracking-wide w-full justify-center items-center text-center">
           <li ref={el => linksRef.current[0] = el}>
             <a 
               href="#como-ayudarte" 
@@ -75,6 +75,16 @@ function Navigation() {
           </li>
           <li ref={el => linksRef.current[1] = el}>
             <a 
+              href="#experiencia" 
+              onClick={(e) => handleNavClick(e, 'experiencia')} 
+              className="relative group hover:text-black dark:hover:text-white transition-colors duration-200"
+            >
+              <span className="relative z-10">{t.menu.experience}</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </li>
+          <li ref={el => linksRef.current[2] = el}>
+            <a 
               href="#proyectos" 
               onClick={(e) => handleNavClick(e, 'proyectos')} 
               className="relative group hover:text-black dark:hover:text-white transition-colors duration-200"
@@ -83,7 +93,7 @@ function Navigation() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
             </a>
           </li>
-          <li ref={el => linksRef.current[2] = el}>
+          <li ref={el => linksRef.current[3] = el}>
             <a 
               href="#contacto" 
               onClick={(e) => handleNavClick(e, 'contacto')} 

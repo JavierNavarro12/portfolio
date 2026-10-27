@@ -1,9 +1,7 @@
 import React from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaTrello, FaGitAlt, FaPhp, FaNodeJs, FaWhatsapp, FaFacebook, FaLinkedin, FaWordpress } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiVisualstudiocode, SiFirebase, SiPnpm, SiNetlify, SiJest, SiCypress, SiGithubactions, SiStripe, SiRedis, SiFfmpeg, SiTiktok, SiMeta, SiPm2, SiSupabase, SiSwift, SiFramer } from "react-icons/si";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaJava, FaPython, FaFigma, FaGithub, FaGitAlt, FaPhp, FaNodeJs, FaWhatsapp, FaFacebook, FaLinkedin, FaWordpress } from "react-icons/fa";
+import { SiNextdotjs, SiPostgresql, SiMysql, SiMongodb, SiTypescript, SiTailwindcss, SiBootstrap, SiDocker, SiFirebase, SiJest, SiCypress, SiGithubactions, SiStripe, SiRedis, SiFfmpeg, SiTiktok, SiMeta, SiPm2, SiSupabase, SiSwift, SiFramer } from "react-icons/si";
 import { BsCodeSlash, BsRobot, BsGear, BsShieldLock, BsDatabase } from "react-icons/bs";
-import cursorLogo from '../img/cursor-logo.svg';
-import intellijLogo from '../img/intellij-logo.svg';
 
 const tecnologias = {
   frontend: [
@@ -45,15 +43,9 @@ const tecnologias = {
   ],
   tools: [
     { nombre: "Docker", icono: <SiDocker color="#2496ed" />, url: "https://www.docker.com/" },
-    { nombre: "Visual Studio Code", icono: <SiVisualstudiocode color="#0078d4" />, url: "https://code.visualstudio.com/" },
-    { nombre: "IntelliJ IDEA", icono: <img src={intellijLogo} alt="IntelliJ IDEA" style={{width:24, height:24, borderRadius:6}} />, url: "https://www.jetbrains.com/idea/" },
     { nombre: "Figma", icono: <FaFigma color="#a259ff" />, url: "https://www.figma.com/" },
     { nombre: "Git", icono: <FaGitAlt color="#f34f29" />, url: "https://git-scm.com/" },
     { nombre: "GitHub", icono: <FaGithub color="#333" />, url: "https://github.com/" },
-    { nombre: "Trello", icono: <FaTrello color="#0079bf" />, url: "https://trello.com/" },
-    { nombre: "Cursor", icono: <img src={cursorLogo} alt="Cursor" style={{width:24, height:24, borderRadius:6}} />, url: "https://www.cursor.so/" },
-    { nombre: "pnpm", icono: <SiPnpm color="#F69220" />, url: "https://pnpm.io/" },
-    { nombre: "Netlify", icono: <SiNetlify color="#00AD9F" />, url: "https://www.netlify.com/" },
     { nombre: "Jest", icono: <SiJest color="#C21325" />, url: "https://jestjs.io/" },
     { nombre: "Cypress", icono: <SiCypress color="#17202C" />, url: "https://www.cypress.io/" },
     { nombre: "GitHub Actions", icono: <SiGithubactions color="#2088FF" />, url: "https://github.com/features/actions" },

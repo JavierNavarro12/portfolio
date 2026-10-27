@@ -408,6 +408,7 @@
 @media (max-width: 640px) {
   .speech-bubble {
     font-size: 0.7rem;
+    letter-spacing: 0;
     padding: 8px 12px;
     white-space: nowrap;
     min-width: unset;
@@ -419,6 +420,12 @@
      animation: typing 4s steps(40, end) forwards;
      width: 0;
      opacity: 1;
+  }
+}
+
+@media (max-width: 360px) {
+  .speech-bubble {
+    font-size: 0.6rem;
   }
 }
 
