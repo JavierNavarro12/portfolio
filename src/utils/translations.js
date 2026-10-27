@@ -6,7 +6,7 @@ export const translations = {
     welcome: "BIENVENIDO A MI PORTFOLIO! HAZ SCROLL PARA VERLO!",
     welcomeMobile: "BIENVENIDO A MI PORTFOLIO! DESLIZA PARA VERLO!",
     howCanIHelp: "¿CÓMO PUEDO AYUDARTE?",
-    description: "Soy un desarrollador full stack con experiencia en la creación de productos SaaS, integraciones de APIs y automatización de procesos. Mi objetivo es construir soluciones completas, desde la interfaz hasta la infraestructura, aportando valor real a cada proyecto.",
+    description: "Soy un desarrollador full stack con experiencia en la creación de productos SaaS, integración de IA en aplicaciones de negocio, integraciones de APIs y automatización de procesos. Mi objetivo es construir soluciones completas, desde la interfaz hasta la infraestructura, aportando valor real a cada proyecto.",
     passion: "PASIÓN",
     passions: [
       'Productos SaaS',
@@ -51,7 +51,7 @@ export const translations = {
     welcome: "WELCOME TO MY PORTFOLIO! SCROLL TO SEE IT!",
     welcomeMobile: "WELCOME TO MY PORTFOLIO! SWIPE TO SEE IT!",
     howCanIHelp: "HOW CAN I HELP YOU?",
-    description: "I am a full stack developer with experience building SaaS products, API integrations, and process automation. My goal is to build complete solutions, from the interface to the infrastructure, bringing real value to every project.",
+    description: "I am a full stack developer with experience building SaaS products, AI integration into business applications, API integrations, and process automation. My goal is to build complete solutions, from the interface to the infrastructure, bringing real value to every project.",
     passion: "PASSION",
     passions: [
       'SaaS Products',
